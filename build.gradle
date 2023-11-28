@@ -1,0 +1,85 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+}
+
+group = 'com.moim'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '18'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir "src/main/resources"
+            srcDir "src/main/java"
+            includes = ["**/*.properties"
+                        ,"**/*.yml"
+                        ,"**/*.xls"
+                        ,"**/*.xlsx"
+                        ,"**/*.doc"
+                        ,"**/*.docx"
+                        ,"**/*.xml"
+                        ,"**/*.js"
+                        ,"**/*.css"
+                        ,"**/*.glb"
+                        ,"**/*.wasm"
+                        ,"**/*.svg"
+                        ,"**/*.js"
+                        ,"**/*.png"
+                        ,"**/*.jpg"
+                        ,"**/*.woff"
+                        ,"**/*.woff2"
+                        ,"**/*.ttf"
+            ]
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // tiles
+    implementation 'org.apache.tiles:tiles-jsp:3.0.8'
+    implementation 'org.apache.tiles:tiles-core:3.0.8'
+    implementation 'org.apache.tiles:tiles-servlet:3.0.8'
+
+    // JSP
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+    // JSTL
+    implementation 'javax.servlet:jstl'
+    implementation 'org.springframework.security:spring-security-taglibs:5.7.0'
+
+    // MySql
+    implementation 'mysql:mysql-connector-java:8.0.29'
+
+    // Mybatis
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+
+    // log4jdbc
+    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+
+    // devtools
+    implementation 'org.springframework.boot:spring-boot-devtools:2.7.4'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks {
+    processResources {
+        duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.INCLUDE
+    }
+}

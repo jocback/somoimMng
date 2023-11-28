@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moim.somoimmng.mem.mapper.MemMapper">
+
+    <insert id="insertMemMng" parameterType="paramMap">
+        INSERT
+        INTO
+            MEM_MNG
+        (
+          SMI_SEQ
+        , USER_ID
+        , USER_NM
+        , AGE
+        , REG_DATE
+        , GENDER
+        , LOC
+        , RMRK
+        )
+        VALUES(
+                1
+              , #{userNm}
+              , #{userNm}
+              , #{age}
+              , #{regDate}
+              , #{gender}
+              , #{loc}
+              , #{rmrk}
+              )
+    </insert>
+
+    <select id="selectMemMng" parameterType="paramMap" resultType="camelMap">
+        SELECT
+            MEM_SEQ
+             , USER_ID
+             , USER_NM
+             , AGE
+             , REG_DATE
+             , GENDER
+             , LOC
+             , RMRK
+             , FRST_WRT_DTIM
+             , LAST_CHNG_DTIM
+        FROM
+            MEM_MNG
+    </select>
+
+    <select id="getMemList" parameterType="paramMap" resultType="camelMap">
+        SELECT
+            MEM_SEQ
+             , USER_ID
+             , USER_NM
+             , AGE
+             , REG_DATE
+             , GENDER
+             , LOC
+             , RMRK
+             , FRST_WRT_DTIM
+             , LAST_CHNG_DTIM
+        FROM
+            MEM_MNG
+       WHERE SMI_SEQ = 1
+    </select>
+</mapper>

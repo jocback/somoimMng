@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moim.somoimmng.sch.mapper.SchMapper">
+
+    <select id="selectSmiSche" parameterType="paramMap" resultType="camelMap">
+        SELECT SCH_NM
+             , CONCAT(SCH_DATE, SCH_TIME) SCH_DATE
+             , SCH_CNT
+             , SCH_LOC
+        FROM SMI_SCHE ss
+        ORDER BY FRST_WRT_DTIM DESC
+    </select>
+
+    <insert id="insertSmiSche" parameterType="paramMap" useGeneratedKeys="true" keyProperty="schSeq" keyColumn="SCH_SEQ">
+        INSERT
+        INTO
+            SMI_SCHE
+        (
+          SMI_SEQ
+        , SCH_NM
+        , SCH_DATE
+        , SCH_TIME
+        , SCH_CNT
+        , SCH_LOC
+        )
+        VALUES(
+                #{smiSeq}
+              , #{schNm}
+              , #{schDate}
+              , #{schTime}
+              , #{schCnt}
+              , #{schLoc}
+              )
+    </insert>
+
+    <insert id="insertSmiAtnMng" parameterType="paramMap">
+        INSERT
+        INTO
+            somoim.SMI_ATN_MNG
+        (
+          MEM_SEQ
+        , SCH_SEQ
+        )
+        VALUES
+        <foreach collection="memList" item="item" separator=",">
+            (
+            #{item.seq}
+            , #{schSeq}
+            )
+        </foreach>
+
+    </insert>
+</mapper>
