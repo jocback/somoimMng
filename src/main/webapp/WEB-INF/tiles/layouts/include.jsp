@@ -22,8 +22,15 @@ Scripts
 <script src="/lib/bootstrap/js/gleek.js"></script>
 <script src="/lib/bootstrap/js/styleSwitcher.js"></script>
 
+<%--<script src="/lib/jquery/js/jquery-3.6.0.min.js"></script>--%>
+<script src="/lib/jquery/js/jquery-ui-1.12.1.js"></script>
+
 <!-- User Custom Script -->
 <script src="/js/common/common.js"></script>
 
-<script src="/lib/jquery/js/jquery-3.6.0.min.js"></script>
-<script src="/lib/jquery/js/jquery-ui-1.12.1.js"></script>
+<script>
+    $(function() {
+        // memRegister.init();
+        $("body").show();
+    });
+</script>

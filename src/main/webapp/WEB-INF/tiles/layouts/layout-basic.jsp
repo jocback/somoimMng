@@ -27,7 +27,7 @@
 
 
 </head>
-<body id="page-top">
+<body id="page-top" style="display: none;">
 
 
 <div id="main-wrapper">
