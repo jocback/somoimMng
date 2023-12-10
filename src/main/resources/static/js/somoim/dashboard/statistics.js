@@ -9,6 +9,9 @@ var statistics = {
 
         // 자주 못 본 멤버
         statistics.selectLstAtnDate();
+
+        // 참여횟수 조회
+        statistics.selectMemAtnCnt();
     },
     bind: function() {
 
@@ -94,6 +97,27 @@ var statistics = {
         });
         $("#tbody_oftList").html(oftHtml);
     },
+    // 참여횟수 조회
+    selectMemAtnCnt: function() {
+        var param = {};
+
+        common.ajax('/dashboard/selectMemAtnCnt', param, function(res) {
+            console.log(res);
+            statistics.drawMemAtnCnt(res.atnCntList);
+        });
+    },
+    // 참여횟수 출력
+    drawMemAtnCnt: function(atnCntList) {
+        var atnCntHtml = '';
+        $.each(atnCntList, function(i ,v) {
+            atnCntHtml += '';
+            atnCntHtml += '<tr>';
+            atnCntHtml += '    <td>'+v.userNm+'</td>';
+            atnCntHtml += '    <td>'+v.cnt+'</td>';
+            atnCntHtml += '</tr>';
+        });
+        $("#tbody_atnCntList").html(atnCntHtml);
+    }
 }
 
 

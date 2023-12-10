@@ -37,7 +37,7 @@ var memList = {
             memHtml += '    <td><a href="javascript:memList.memDetail(\''+v.memSeq+'\');">'+v.userId+'</a></td>';
             memHtml += '    <td>'+v.userNm+'</td>';
             memHtml += '    <td>'+v.age+'</td>';
-            memHtml += '    <td>'+v.regDate+'</td>';
+            memHtml += '    <td>'+dateUtil.getFormat(v.regDate, 'yyyy-MM-dd')+'</td>';
             memHtml += '    <td>'+v.gender+'</td>';
             memHtml += '    <td>'+v.loc+'</td>';
             memHtml += '</tr>';

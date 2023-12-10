@@ -32,12 +32,11 @@ var schList = {
         $.each(schList, function(i, v){
             schHtml += '<tr>';
             schHtml += '    <td class="text-center"><a href="javascript:schList.schDetail(\''+v.schSeq+'\');">'+v.schNm+'</a></td>';
-            schHtml += '    <td class="text-center">'+v.schDate+'</td>';
+            schHtml += '    <td class="text-center">'+dateUtil.getFormat(v.schDate, 'yyyy-MM-dd HH:mm')+'</td>';
             schHtml += '    <td class="text-center">'+v.schCnt+'</td>';
             schHtml += '    <td class="text-center">'+v.schLoc+'</td>';
             schHtml += '</tr>';
         });
-
         $("#tbody_schList").html(schHtml);
     }
 

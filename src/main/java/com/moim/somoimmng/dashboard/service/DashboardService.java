@@ -39,4 +39,13 @@ public class DashboardService {
         return dashboardMapper.selectLstAtnDate(paramMap);
     }
 
+    /**
+     * @title  참여횟수 조회
+     * @param  Map<String, Object>
+     * @return int
+     */
+    public List<Map<String,Object>> selectMemAtnCnt(Map<String, Object> paramMap) {
+        return dashboardMapper.selectMemAtnCnt(paramMap);
+    }
+
 }

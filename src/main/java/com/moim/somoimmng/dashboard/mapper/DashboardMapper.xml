@@ -49,4 +49,17 @@
             LIMIT 10
     </select>
 
+    <!-- 참여횟수 조회 -->
+    <select id="selectMemAtnCnt" parameterType="paramMap" resultType="camelMap">
+        SELECT mm.USER_NM
+             , sam.CNT
+        FROM (SELECT MEM_SEQ
+                   , count(*) AS CNT
+              FROM SMI_ATN_MNG
+              GROUP BY MEM_SEQ) sam
+                 LEFT OUTER JOIN MEM_MNG mm ON sam.MEM_SEQ = mm.MEM_SEQ
+        WHERE mm.SMI_SEQ = 1
+        ORDER BY sam.CNT DESC
+    </select>
+
 </mapper>

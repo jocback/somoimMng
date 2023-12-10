@@ -33,13 +33,13 @@
         UPDATE
             MEM_MNG
         SET
-            USER_ID = ''
-          , USER_NM = ''
-          , AGE = ''
-          , REG_DATE = ''
-          , GENDER = ''
-          , LOC = ''
-          , RMRK = ''
+            USER_ID = #{userId}
+          , USER_NM = #{userNm}
+          , AGE = #{age}
+          , REG_DATE = #{regDate}
+          , GENDER = #{gender}
+          , LOC = #{loc}
+          , RMRK = #{rmrk}
         WHERE
             MEM_SEQ = #{memSeq}
     </update>
@@ -64,6 +64,8 @@
              , LAST_CHNG_DTIM
         FROM
             MEM_MNG
+        WHERE SMI_SEQ = 1
+          AND DEL_YN = 'N'
     </select>
 
     <select id="getMemList" parameterType="paramMap" resultType="camelMap">
@@ -81,6 +83,7 @@
         FROM
             MEM_MNG
        WHERE SMI_SEQ = 1
+         AND DEL_YN = 'N'
     </select>
 
     <select id="selectMemMngDetail" parameterType="paramMap" resultType="camelMap">
@@ -98,5 +101,7 @@
         FROM
             MEM_MNG
         WHERE MEM_SEQ = #{memSeq}
+          AND SMI_SEQ = 1
+          AND DEL_YN = 'N'
     </select>
 </mapper>

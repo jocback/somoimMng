@@ -38,7 +38,7 @@ public class MemController {
     }
 
     // 일정 수정하기
-    @RequestMapping(value="sch/modifyMemMng", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value="mem/modifyMemMng", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView modifyMemMng(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
         memService.modifyMemMng(paramMap);
@@ -47,7 +47,7 @@ public class MemController {
     }
 
     // 일정 삭제하기
-    @RequestMapping(value="sch/deleteMemMng", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value="mem/deleteMemMng", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView deleteMemMng(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
         memService.deleteMemMng(paramMap);

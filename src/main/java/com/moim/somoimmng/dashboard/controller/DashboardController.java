@@ -65,4 +65,16 @@ public class DashboardController {
         mv.setViewName("jsonView");
         return mv;
     }
+
+    // 참여횟수 조회
+    @RequestMapping(value="dashboard/selectMemAtnCnt", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView selectMemAtnCnt(@RequestParam Map<String, Object> paramMap) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        List<Map<String, Object>> lstList = dashboardService.selectMemAtnCnt(paramMap);
+
+        mv.addObject("atnCntList", lstList);
+        mv.setViewName("jsonView");
+        return mv;
+    }
 }

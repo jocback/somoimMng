@@ -16,4 +16,7 @@ public interface DashboardMapper {
     // 최종 참석일
     List<Map<String, Object>> selectLstAtnDate(Map<String, Object> paramMap);
 
+    // 참여횟수 조회
+    List<Map<String, Object>> selectMemAtnCnt(Map<String, Object> paramMap);
+
 }

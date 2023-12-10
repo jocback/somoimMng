@@ -93,6 +93,26 @@ Content body start
                 </div>
             </div>
 
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">참여 횟수</h4>
+                        <div class="table-responsive">
+                            <table class="table header-border">
+                                <thead>
+                                <tr>
+                                    <th scope="col">이름</th>
+                                    <th scope="col">참석횟수</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbody_atnCntList">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <!-- #/ container -->
