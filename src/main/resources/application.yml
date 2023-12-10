@@ -5,7 +5,7 @@ spring:
       suffix: .jsp
   datasource:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:mysql://3.35.134.51:3306/somoim?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
+    url: jdbc:log4jdbc:mysql://localhost:3306/somoim?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
     username: somoim
     password: Admin1234!
 
