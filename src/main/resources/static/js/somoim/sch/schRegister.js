@@ -5,6 +5,9 @@ var schRegister = {
     init: function() {
         schRegister.selectMemList();
         schRegister.bind();
+        if($("#type").val()=='modify') {
+            schRegister.selectDetail();
+        }
     },
     bind: function() {
         $("#auto_member").autocomplete({
@@ -25,11 +28,6 @@ var schRegister = {
     // 회원추가
     addMember: function(dat) {
       var memHtml = '';
-      // memHtml += '<div class="form-group">';
-      // memHtml += '<input type="hidden" name="memSeq" value="'+dat.value+'" />';
-      // memHtml += '    <span style="vertical-align:middle;">'+dat.label+'</span>';
-      // memHtml += '    <button type="button" class="btn btn-danger btn-sm" onclick="schRegister.register()">삭제</button>';
-      // memHtml += '</div>';
 
       memHtml += '<div class="radio mb-3">';
       memHtml += '<input type="hidden" name="memSeq" value="'+dat.value+'" />';
@@ -69,6 +67,69 @@ var schRegister = {
             location.reload()
         });
     },
+    // 일정 수정
+    modify: function() {
+        var memSeq = '';
+        $.each($("[name=memSeq]"), function(i, v) {
+            if(i ==0) {
+                memSeq = $(v).val();
+            } else{
+                memSeq += '|'+$(v).val();
+            }
+        });
+        var param = {
+            schNm : $("#schNm").val(),
+            schDate : $("#schDate").val(),
+            schTime : $("#schTime").val(),
+            schCnt : $("#schCnt").val(),
+            schLoc : $("#schLoc").val(),
+            schSeq: $("#modSeq").val(),
+            memSeq: memSeq
+        }
+
+        console.log(param);
+
+        common.ajax('/sch/modifySmiSche', param, function(res) {
+            // location.reload()
+            common.goPage('/sch/schList');
+        });
+    },
+    // 일정 삭제
+    delete: function() {
+        var param = {
+            schSeq: $("#modSeq").val(),
+        }
+        common.ajax('/sch/deleteSmiSche', param, function(res) {
+           schRegister.goSchList();
+        });
+    },
+    // 상세조회
+    selectDetail: function() {
+        var param = {
+            schSeq: $("#modSeq").val()
+        }
+        common.ajax('/sch/selectSchDetail', param, function(res) {
+            var schDetail = res.schDetail;
+            $("#schNm").val(schDetail.schNm);
+            $("#schDate").val(schDetail.schDate);
+            $("#schTime").val(schDetail.schTime);
+            $("#schCnt").val(schDetail.schCnt);
+            $("#schLoc").val(schDetail.schLoc);
+
+            var memHtml = '';
+            $.each(schDetail.memlist, function(i, v){
+                memHtml += '<div class="radio mb-3">';
+                memHtml += '<input type="hidden" name="memSeq" value="'+v.memSeq+'" />';
+                memHtml += '    <label>'+v.userNm+'/'+v.age+'/'+v.loc+'</label>';
+                memHtml += '    <button type="button" class="btn btn-danger btn-sm" onclick="schRegister.remove(this)">삭제</button>';
+                memHtml += '</div>';
+
+            });
+            $("#memList").append(memHtml);
+
+
+        });
+    },
     // 회원 목록조회
     selectMemList: function() {
         var param = {};
@@ -82,7 +143,11 @@ var schRegister = {
                 memList.push(row);
             });
         })
-
+    },
+    // 목록페이지 이동
+    goSchList: function() {
+        var param = {};
+        common.goPage('/sch/schList');
     },
 
 }

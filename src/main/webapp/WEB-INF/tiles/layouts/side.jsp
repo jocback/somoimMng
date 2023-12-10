@@ -12,7 +12,7 @@ Sidebar start
                     <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="./index.html">통계</a></li>
+                    <li><a href="/dashboard/statistics">통계</a></li>
                 </ul>
             </li>
             <li class="mega-menu mega-menu-sm">

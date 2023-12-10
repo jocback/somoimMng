@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moim.somoimmng.dashboard.mapper.DashboardMapper">
+
+    <!-- 자주보는 사람 -->
+    <select id="selectOftMem" parameterType="paramMap" resultType="camelMap">
+        SELECT a.MEM_SEQ
+             , a.cnt AS CNT
+             , mm.USER_NM
+        FROM (SELECT sam2.MEM_SEQ, count(*) cnt
+              FROM SMI_ATN_MNG sam LEFT OUTER JOIN SMI_ATN_MNG sam2
+                                                   ON sam.SCH_SEQ = sam2.SCH_SEQ
+              WHERE sam.MEM_SEQ = #{memSeq}
+                AND sam.MEM_SEQ != sam2.MEM_SEQ
+              GROUP BY MEM_SEQ) a
+                 LEFT OUTER JOIN MEM_MNG mm ON a.MEM_SEQ = mm.MEM_SEQ
+        ORDER BY cnt desc
+        LIMIT 10
+    </select>
+
+    <!-- 최근 모임 일정 -->
+    <select id="selectRcntSch" parameterType="paramMap" resultType="camelMap">
+        SELECT concat(SCH_DATE, SCH_TIME) SCH_DATE
+             , SCH_NM
+             , SCH_CNT
+             , SCH_LOC
+        FROM SMI_SCHE ss
+        ORDER BY SCH_DATE desc, SCH_TIME desc
+        LIMIT 10
+    </select>
+
+    <!-- 최종 참석일 -->
+    <select id="selectLstAtnDate" parameterType="paramMap" resultType="camelMap">
+        SELECT mm.USER_NM
+             , aa.RCNT_DATE
+             , aa.diff
+        FROM (SELECT a.MEM_SEQ
+                   , a.RCNT_DATE
+                   , DATEDIFF(now(), a.RCNT_DATE) diff
+              FROM (SELECT sam.MEM_SEQ
+                         , MAX(ss.SCH_DATE) AS RCNT_DATE
+                    FROM SMI_ATN_MNG sam
+                             LEFT OUTER JOIN SMI_SCHE ss ON sam.SCH_SEQ = ss.SCH_SEQ
+                    WHERE ss.SMI_SEQ = 1
+                    GROUP BY sam.MEM_SEQ) a) aa
+                 LEFT OUTER JOIN MEM_MNG mm ON aa.MEM_SEQ = mm.MEM_SEQ
+        ORDER BY diff DESC
+            LIMIT 10
+    </select>
+
+</mapper>

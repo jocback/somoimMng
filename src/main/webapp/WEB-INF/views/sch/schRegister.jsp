@@ -1,8 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--**********************************
 Content body start
 ***********************************-->
 <div class="content-body">
+
+    <input type="hidden" id="type" value="${type}"/>
+    <input type="hidden" id="modSeq" value="${schSeq}"/>
 
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
@@ -31,13 +35,13 @@ Content body start
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">날짜</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="날짜" id="schDate">
+                                        <input type="text" class="form-control" placeholder="날짜" id="schDate" value="2023">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">시간</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="시간" id="schTime">
+                                        <input type="text" class="form-control" placeholder="시간" id="schTime" value="1900">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -72,16 +76,16 @@ Content body start
 
                         <div class="basic-form">
                             <form>
-
                                 <div class="form-group row">
                                     <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-info" onclick="memRegister.register()">목록</button>
-                                        <button type="submit" class="btn btn-primary" onclick="schRegister.register()">저장</button>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-
+                                        <button type="button" class="btn btn-info" onclick="schRegister.goSchList()">목록</button>
+                                        <c:if test="${type=='modify'}">
+                                            <button type="button" class="btn btn-danger" onclick="schRegister.delete()">삭제</button>
+                                            <button type="button" class="btn btn-primary" onclick="schRegister.modify()">수정</button>
+                                        </c:if>
+                                        <c:if test="${type!='modify'}">
+                                            <button type="button" class="btn btn-primary" onclick="schRegister.register()">저장</button>
+                                        </c:if>
                                     </div>
                                 </div>
                             </form>
@@ -89,27 +93,6 @@ Content body start
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Radio Buttons</h4>
-                        <div class="basic-form">
-                            <div class="form-group">
-                                <div class="radio mb-3">
-                                    <label>
-                                        <input type="radio" name="optradio">Option 1</label>
-                                </div>
-                                <div class="radio mb-3">
-                                    <label>
-                                        <input type="radio" name="optradio">Option 2</label>
-                                </div>
-                                <div class="radio disabled">
-                                    <label>
-                                        <input type="radio" name="optradio" disabled="disabled">Option 3</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

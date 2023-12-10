@@ -29,6 +29,27 @@
               )
     </insert>
 
+    <update id="updateMemMng" parameterType="paramMap">
+        UPDATE
+            MEM_MNG
+        SET
+            USER_ID = ''
+          , USER_NM = ''
+          , AGE = ''
+          , REG_DATE = ''
+          , GENDER = ''
+          , LOC = ''
+          , RMRK = ''
+        WHERE
+            MEM_SEQ = #{memSeq}
+    </update>
+
+    <delete id="deleteMemMng" parameterType="paramMap">
+        UPDATE MEM_MNG SET
+            DEL_YN = 'Y'
+        WHERE MEM_SEQ = #{memSeq}
+    </delete>
+
     <select id="selectMemMng" parameterType="paramMap" resultType="camelMap">
         SELECT
             MEM_SEQ
@@ -60,5 +81,22 @@
         FROM
             MEM_MNG
        WHERE SMI_SEQ = 1
+    </select>
+
+    <select id="selectMemMngDetail" parameterType="paramMap" resultType="camelMap">
+        SELECT
+            MEM_SEQ
+             , SMI_SEQ
+             , USER_ID
+             , USER_NM
+             , AGE
+             , REG_DATE
+             , GENDER
+             , LOC
+             , RMRK
+             , DEL_YN
+        FROM
+            MEM_MNG
+        WHERE MEM_SEQ = #{memSeq}
     </select>
 </mapper>

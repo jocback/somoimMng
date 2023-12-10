@@ -1,8 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--**********************************
 Content body start
 ***********************************-->
 <div class="content-body">
+
+    <input type="hidden" id="type" value="${type}"/>
+    <input type="hidden" id="modSeq" value="${memSeq}"/>
 
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
@@ -57,20 +61,18 @@ Content body start
                         </div>
 
                         <div class="basic-form">
-                            <form>
-
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-info" onclick="memRegister.register()">목록</button>
-                                        <button type="submit" class="btn btn-primary" onclick="memRegister.register()">저장</button>
-                                    </div>
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="button" class="btn btn-info" onclick="memRegister.goMemList()">목록</button>
+                                    <c:if test="${type=='modify'}">
+                                        <button type="button" class="btn btn-danger" onclick="memRegister.delete()">삭제</button>
+                                        <button type="button" class="btn btn-primary" onclick="memRegister.modify()">수정</button>
+                                    </c:if>
+                                    <c:if test="${type!='modify'}">
+                                        <button type="button" class="btn btn-primary" onclick="memRegister.register()">저장</button>
+                                    </c:if>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-
-                                    </div>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,6 +81,7 @@ Content body start
     </div>
     <!-- #/ container -->
 </div>
+
 <!--**********************************
 Content body end
 ***********************************-->

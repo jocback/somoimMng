@@ -18,8 +18,10 @@ public class MemController {
 
     // 회원 등록 페이지
     @RequestMapping(value="mem/memRegister", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView register() {
+    public ModelAndView register(@RequestParam Map<String, Object> paramMap) {
         ModelAndView mv = new ModelAndView();
+        mv.addObject("type", paramMap.get("type"));
+        mv.addObject("memSeq", paramMap.get("memSeq"));
         mv.setViewName("mem/memRegister");
         return mv;
     }
@@ -31,6 +33,24 @@ public class MemController {
 
         memService.insertMemMng(paramMap);
 
+        mv.setViewName("jsonView");
+        return mv;
+    }
+
+    // 일정 수정하기
+    @RequestMapping(value="sch/modifyMemMng", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView modifyMemMng(@RequestParam Map<String, Object> paramMap) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        memService.modifyMemMng(paramMap);
+        mv.setViewName("jsonView");
+        return mv;
+    }
+
+    // 일정 삭제하기
+    @RequestMapping(value="sch/deleteMemMng", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView deleteMemMng(@RequestParam Map<String, Object> paramMap) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        memService.deleteMemMng(paramMap);
         mv.setViewName("jsonView");
         return mv;
     }
@@ -61,6 +81,18 @@ public class MemController {
         ModelAndView mv = new ModelAndView();
         List<Map<String, Object>> memList = memService.getMemList(paramMap);
         mv.addObject("memList", memList);
+        mv.setViewName("jsonView");
+        return mv;
+    }
+
+    // 회원 상세조회
+    @RequestMapping(value="mem/selectMemDetail", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView selectMemDetail(@RequestParam Map<String, Object> paramMap) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        Map<String, Object> resultMap = memService.selectMemDetail(paramMap);
+        mv.addObject("memDetail", resultMap);
+
         mv.setViewName("jsonView");
         return mv;
     }

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="content-body">
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
@@ -11,20 +11,20 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">멤버 목록</h4>
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered zero-configuration">
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>아이디</th>
-                                    <th>이름</th>
-                                    <th>나이</th>
-                                    <th>가입일</th>
-                                    <th>성별</th>
-                                    <th>사는지역</th>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>RegDate</th>
+                                    <th>Gender</th>
+                                    <th>Location</th>
                                 </tr>
                                 </thead>
                                 <tbody id="tbody_memList">

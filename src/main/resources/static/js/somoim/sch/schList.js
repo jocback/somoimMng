@@ -6,6 +6,16 @@ var schList = {
     bind: function() {
 
     },
+    // 일정 상세보기
+    schDetail: function(schSeq) {
+        var param = {
+            schSeq: schSeq,
+            type: 'modify'
+        }
+
+        common.goPage('/sch/schRegister', param);
+    },
+    // 일정 목록 조회
     selectSchList: function() {
         var param = {
         }
@@ -13,16 +23,15 @@ var schList = {
         console.log(param);
 
         common.ajax('/sch/selectSmiSche', param, function(res) {
-            console.log(res);
             schList.drawSchList(res.schList);
         });
     },
+    // 일정 목록 출력
     drawSchList: function(schList) {
         var schHtml = '';
         $.each(schList, function(i, v){
-            console.log(v);
             schHtml += '<tr>';
-            schHtml += '    <td class="text-center">'+v.schNm+'</td>';
+            schHtml += '    <td class="text-center"><a href="javascript:schList.schDetail(\''+v.schSeq+'\');">'+v.schNm+'</a></td>';
             schHtml += '    <td class="text-center">'+v.schDate+'</td>';
             schHtml += '    <td class="text-center">'+v.schCnt+'</td>';
             schHtml += '    <td class="text-center">'+v.schLoc+'</td>';

@@ -71,11 +71,12 @@ var common = {
      **************************************************************************/
 
     isEmpty: function (obj) {
-        if (obj === null || obj === undefined)
+        if (obj === null || obj === undefined || obj.trim == '') {
             return true
-        if (obj instanceof Array) {
+        } else if (obj instanceof Array) {
             return obj.length === 0
+        } else {
+            return false
         }
-        return Object.keys(obj).length === 0
     },
 }

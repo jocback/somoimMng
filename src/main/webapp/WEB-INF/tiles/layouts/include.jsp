@@ -14,14 +14,19 @@ CSS
 <!--**********************************
 Scripts
 ***********************************-->
-<%--<script src="/bootstrap/vendor/jquery/jquery-3.6.0.min.js"></script>--%>
-<%--<script src="/bootstrap/vendor/jquery/jquery-ui-1.12.1.js"></script>--%>
+
+<!--bootstrap -->
 <script src="/lib/bootstrap/plugins/common/common.min.js"></script>
 <script src="/lib/bootstrap/js/custom.min.js"></script>
 <script src="/lib/bootstrap/js/settings.js"></script>
 <script src="/lib/bootstrap/js/gleek.js"></script>
 <script src="/lib/bootstrap/js/styleSwitcher.js"></script>
 
+<!-- custom -->
+<script src="/js/common/dateUtil.js"></script>
+<script src="/js/common/stringUtil.js"></script>
+
+<!-- jQuery -->
 <%--<script src="/lib/jquery/js/jquery-3.6.0.min.js"></script>--%>
 <script src="/lib/jquery/js/jquery-ui-1.12.1.js"></script>
 
@@ -33,4 +38,9 @@ Scripts
         // memRegister.init();
         $("body").show();
     });
+    var jsonParam = '${jsonStr}';
+    if(jsonParam!='') {
+        jsonParam = JSON.parse('${jsonStr}');
+    }
+
 </script>
