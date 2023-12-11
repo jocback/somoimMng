@@ -9,7 +9,7 @@ Nav header start
             <b class="logo-abbr"><img src="/lib/bootstrap/images/logo.png" alt=""> </b>
             <span class="logo-compact"><img src="/lib/bootstrap/images/logo-compact.png" alt=""></span>
             <span class="brand-title">
-                        <img src="/lib/bootstrap/images/logo-text.png" alt="">
+<%--                        <img src="/lib/bootstrap/images/logo-text.png" alt="">--%>
                     </span>
         </a>
     </div>
