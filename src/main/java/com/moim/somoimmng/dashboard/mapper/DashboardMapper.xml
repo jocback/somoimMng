@@ -30,6 +30,19 @@
         LIMIT 10
     </select>
 
+    <!-- 참석한 일정 -->
+    <select id="selectAtnSch" parameterType="paramMap" resultType="camelMap">
+        SELECT concat(ss.SCH_DATE, ss.SCH_TIME) SCH_DATE
+             , ss.SCH_NM
+             , ss.SCH_CNT
+             , ss.SCH_LOC
+        FROM SMI_ATN_MNG sam
+                 LEFT OUTER JOIN SMI_SCHE ss ON sam.SCH_SEQ = ss.SCH_SEQ
+        WHERE MEM_SEQ = #{memSeq}
+        ORDER BY ss.SCH_DATE desc, ss.SCH_TIME desc
+        limit 10
+    </select>
+
     <!-- 최종 참석일 -->
     <select id="selectLstAtnDate" parameterType="paramMap" resultType="camelMap">
         SELECT mm.USER_NM

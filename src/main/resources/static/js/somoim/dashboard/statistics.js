@@ -5,6 +5,7 @@ var statistics = {
         statistics.selectRcntSch();
 
         // 자주 본 멤버
+        // 참석한 일정
         statistics.selectMemList();
 
         // 자주 못 본 멤버
@@ -16,6 +17,70 @@ var statistics = {
     bind: function() {
 
     },
+    // 회원 목록조회
+    selectMemList: function() {
+        var param = {};
+        common.ajax('/mem/getMemList', param, function(res) {
+            var selHtml = '';
+            $.each(res.memList, function(i, v){
+                selHtml += '<option value="'+v.memSeq+'">'+v.userNm+'</option>';
+            });
+            $("#sel_memSeq").html(selHtml);
+            $("#sel_atnMemSeq").html(selHtml);
+            statistics.selectOftMem();
+            statistics.selectAtnSch();
+        });
+    },
+    // 참석한 일정 조회
+    selectAtnSch: function() {
+        var param = {
+            memSeq: $("#sel_atnMemSeq").val()
+        }
+        common.ajax('/dashboard/selectAtnSch', param, function(res) {
+            console.log(res);
+            statistics.drawAtnSch(res.atnSchList);
+        });
+    },
+    // 참석한 일정 출력
+    drawAtnSch: function(atnSchList) {
+        var atnSchHtml = '';
+        $.each(atnSchList, function(i, v){
+            atnSchHtml += '<tr>';
+            atnSchHtml += '    <td>'+dateUtil.getFormat(v.schDate, 'yyyy-MM-dd HH:mm')+'</td>';
+            atnSchHtml += '    <td>'+v.schNm+'</td>';
+            atnSchHtml += '    <td>'+v.schCnt+'</td>';
+            atnSchHtml += '    <td>'+v.schLoc+'</td>';
+            atnSchHtml += '</tr>';
+        });
+
+        $("#tbody_atnSchList").html(atnSchHtml);
+    },
+
+
+    // 자주 본 멤버 조회
+    selectOftMem: function() {
+        var param = {
+            memSeq: $("#sel_memSeq").val()
+        }
+        common.ajax('/dashboard/selectOftMem', param, function(res) {
+            console.log(res);
+            statistics.drawOftMem(res.oftList);
+        });
+    },
+    // 자주 본 멤버 출력
+    drawOftMem: function(oftList) {
+        var oftHtml = '';
+        $.each(oftList, function(i ,v) {
+            oftHtml += '';
+            oftHtml += '<tr>';
+            oftHtml += '    <td>'+v.userNm+'</td>';
+            oftHtml += '    <td>'+v.cnt+'</td>';
+            oftHtml += '</tr>';
+        });
+        $("#tbody_oftList").html(oftHtml);
+    },
+
+
     // 자주 못 본 멤버 조회
     selectLstAtnDate: function() {
         var param = {};
@@ -38,18 +103,8 @@ var statistics = {
 
         $("#tbody_lstList").html(lstHtml);
     },
-    // 회원 목록조회
-    selectMemList: function() {
-        var param = {};
-        common.ajax('/mem/getMemList', param, function(res) {
-            var selHtml = '';
-            $.each(res.memList, function(i, v){
-                selHtml += '<option value="'+v.memSeq+'">'+v.userNm+'</option>';
-            });
-            $("#sel_memSeq").html(selHtml);
-            statistics.selectOftMem();
-        });
-    },
+
+
     // 최근 모임 조회
     selectRcntSch: function() {
         var param = {};
@@ -75,28 +130,8 @@ var statistics = {
 
         $("#tbody_sttList").html(sttHtml);
     },
-    // 자주 본 멤버 조회
-    selectOftMem: function() {
-        var param = {
-            memSeq: $("#sel_memSeq").val()
-        }
-        common.ajax('/dashboard/selectOftMem', param, function(res) {
-            console.log(res);
-            statistics.drawOftMem(res.oftList);
-        });
-    },
-    // 자주 본 멤버 출력
-    drawOftMem: function(oftList) {
-        var oftHtml = '';
-        $.each(oftList, function(i ,v) {
-            oftHtml += '';
-            oftHtml += '<tr>';
-            oftHtml += '    <td>'+v.userNm+'</td>';
-            oftHtml += '    <td>'+v.cnt+'</td>';
-            oftHtml += '</tr>';
-        });
-        $("#tbody_oftList").html(oftHtml);
-    },
+
+
     // 참여횟수 조회
     selectMemAtnCnt: function() {
         var param = {};

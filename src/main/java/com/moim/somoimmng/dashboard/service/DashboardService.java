@@ -31,6 +31,15 @@ public class DashboardService {
     }
 
     /**
+     * @title  참석한 일정
+     * @param  Map<String, Object>
+     * @return int
+     */
+    public List<Map<String,Object>> selectAtnSch(Map<String, Object> paramMap) {
+        return dashboardMapper.selectAtnSch(paramMap);
+    }
+
+    /**
      * @title  자주 보는 멤버
      * @param  Map<String, Object>
      * @return int

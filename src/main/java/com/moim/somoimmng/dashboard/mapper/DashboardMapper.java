@@ -13,6 +13,9 @@ public interface DashboardMapper {
     // 최근 모임 일정
     List<Map<String, Object>> selectRcntSch(Map<String, Object> paramMap);
 
+    // 참석한 일정
+    List<Map<String, Object>> selectAtnSch(Map<String, Object> paramMap);
+
     // 최종 참석일
     List<Map<String, Object>> selectLstAtnDate(Map<String, Object> paramMap);
 

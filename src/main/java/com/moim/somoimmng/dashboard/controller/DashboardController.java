@@ -54,7 +54,19 @@ public class DashboardController {
         return mv;
     }
 
-    // 최근 일정 조회
+    // 참석한 일정 조회
+    @RequestMapping(value="dashboard/selectAtnSch", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView selectAtnSch(@RequestParam Map<String, Object> paramMap) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        List<Map<String, Object>> atnSchList = dashboardService.selectAtnSch(paramMap);
+
+        mv.addObject("atnSchList", atnSchList);
+        mv.setViewName("jsonView");
+        return mv;
+    }
+
+    // 자주 보는 멤버
     @RequestMapping(value="dashboard/selectLstAtnDate", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView selectLstAtnDate(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();

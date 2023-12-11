@@ -13,6 +13,7 @@ Sidebar start
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="/dashboard/statistics">통계</a></li>
+                    <li><a href="/dashboard/statistics">통계</a></li>
                 </ul>
             </li>
             <li class="mega-menu mega-menu-sm">
@@ -31,6 +32,14 @@ Sidebar start
                 <ul aria-expanded="false">
                     <li><a href="/mem/memList">회원목록</a></li>
                     <li><a href="/mem/memRegister">회원등록</a></li>
+                </ul>
+            </li>
+            <li class="mega-menu mega-menu-sm">
+                <a class="has-arrow" href="javascript:void();" aria-expanded="false">
+                    <i class="icon-grid menu-icon"></i><span class="nav-text">모임장소</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="/loc/map">지도보기</a></li>
                 </ul>
             </li>
         </ul>

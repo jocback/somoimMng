@@ -75,6 +75,36 @@ Content body start
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
+                        <h4 class="card-title">참석한 일정</h4>
+                        <div class="basic-form">
+                            <form>
+                                <div class="form-group">
+                                    <select class="form-control" id="sel_atnMemSeq" onchange="statistics.selectAtnSch();">
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table header-border">
+                                <thead>
+                                <tr>
+                                    <th scope="col">일자</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">인원 수</th>
+                                    <th scope="col">장소</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbody_atnSchList">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
                         <h4 class="card-title">자주 못 본 멤버</h4>
                         <div class="table-responsive">
                             <table class="table header-border">
