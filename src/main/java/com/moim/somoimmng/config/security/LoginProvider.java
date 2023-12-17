@@ -1,11 +1,9 @@
 package com.moim.somoimmng.config.security;
 
-import com.gradle.gradletemplate.login.service.LoginService;
-import com.gradle.gradletemplate.login.vo.UserVO;
+import com.moim.somoimmng.login.vo.UserVO;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,8 +17,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoginProvider implements AuthenticationProvider {
 
-    @Autowired
-    private LoginService loginService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -36,7 +32,7 @@ public class LoginProvider implements AuthenticationProvider {
         param.setUserId(userId);
         param.setUserPw(userPw);
 
-        UserVO userInfo = loginService.selectUser(param);
+        UserVO userInfo = new UserVO();
 
         // 사용자 존재여부
         if(userInfo==null) {

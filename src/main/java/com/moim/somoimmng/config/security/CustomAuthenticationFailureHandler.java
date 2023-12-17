@@ -1,7 +1,7 @@
 package com.moim.somoimmng.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gradle.gradletemplate.common.constant.ResponseDataCode;
+import com.moim.somoimmng.common.constant.ResponseDataCode;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
