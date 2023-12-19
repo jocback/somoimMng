@@ -15,6 +15,7 @@
                 AND sam.MEM_SEQ != sam2.MEM_SEQ
               GROUP BY MEM_SEQ) a
                  LEFT OUTER JOIN MEM_MNG mm ON a.MEM_SEQ = mm.MEM_SEQ
+        WHERE mm.DEL_YN = 'N'
         ORDER BY cnt desc
         LIMIT 10
     </select>
@@ -58,6 +59,7 @@
                     WHERE ss.SMI_SEQ = 1
                     GROUP BY sam.MEM_SEQ) a) aa
                  LEFT OUTER JOIN MEM_MNG mm ON aa.MEM_SEQ = mm.MEM_SEQ
+        WHERE mm.DEL_YN = 'N'
         ORDER BY diff DESC
             LIMIT 10
     </select>
@@ -72,6 +74,7 @@
               GROUP BY MEM_SEQ) sam
                  LEFT OUTER JOIN MEM_MNG mm ON sam.MEM_SEQ = mm.MEM_SEQ
         WHERE mm.SMI_SEQ = 1
+          AND mm.DEL_YN = 'N'
         ORDER BY sam.CNT DESC
     </select>
 

@@ -33,7 +33,7 @@
              , mm.LOC
         FROM SMI_ATN_MNG sam
                  LEFT OUTER JOIN MEM_MNG mm ON sam.MEM_SEQ = mm.MEM_SEQ
-        WHERE SCH_SEQ = #{schSeq}
+        WHERE sam.SCH_SEQ = #{schSeq}
         ORDER BY mm.MEM_SEQ
     </select>
 
