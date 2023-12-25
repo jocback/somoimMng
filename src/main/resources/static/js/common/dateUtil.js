@@ -26,7 +26,10 @@ var dateUtil = {
 	// 날짜포맷 변경
 	// ex) dateUtil.getFormat('20210101', 'yyyyMMdd')
 	getFormat : function(d, format){
+		if(common.isEmpty(d)) return "";
+
 		d = dateUtil.parseDate(d);
+
 		if(common.isEmpty(d)) return false;
 
 		if(common.isEmpty(format)){

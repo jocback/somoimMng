@@ -25,7 +25,7 @@ var memList = {
 
         common.ajax('/mem/selectMemMng', param, function(res) {
             console.log(res);
-            memList.drawMemList(res.memList);
+            memList.drawMemList(res.page);
         });
     },
     // 멤버리스트 출력
@@ -38,6 +38,7 @@ var memList = {
             memHtml += '    <td>'+v.userNm+'</td>';
             memHtml += '    <td>'+v.age+'</td>';
             memHtml += '    <td>'+dateUtil.getFormat(v.regDate, 'yyyy-MM-dd')+'</td>';
+            memHtml += '    <td>'+dateUtil.getFormat(v.extdTerm, 'yyyy-MM-dd')+'</td>';
             memHtml += '    <td>'+v.gender+'</td>';
             memHtml += '    <td>'+v.loc+'</td>';
             memHtml += '</tr>';

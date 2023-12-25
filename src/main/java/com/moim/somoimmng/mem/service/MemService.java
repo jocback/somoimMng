@@ -1,5 +1,6 @@
 package com.moim.somoimmng.mem.service;
 
+import com.github.pagehelper.Page;
 import com.moim.somoimmng.mem.mapper.MemMapper;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +50,7 @@ public class MemService {
      * @param  Map<String, Object>
      * @return List
      */
-    public List<Map<String, Object>> selectMemMng(Map<String, Object> paramMap) {
+    public Page<Map<String, Object>> selectMemMng(Map<String, Object> paramMap) {
         return memMapper.selectMemMng(paramMap);
     }
 

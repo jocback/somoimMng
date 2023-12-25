@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -34,18 +35,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/lib/**");
+        web.ignoring().antMatchers("/lib/**", "/js/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .authenticationProvider(loginProvider)
                 .authorizeRequests()
-//                .antMatchers("/sch/schRegister", "/mem/memRegister")
-//                .authenticated()
+                .antMatchers("/sch/schRegister", "/mem/memRegister")
+                .authenticated()
                 .anyRequest()
-                .permitAll();
+                .permitAll()
+
+                .and()
+                .formLogin()
+                .loginPage("/login/loginForm")
+                .loginProcessingUrl("/login")
+                .usernameParameter("userId")
+                .passwordParameter("userPw")
+                .successHandler(customAuthenticationSuccessHandler)
+                .failureHandler(customAuthenticationFailureHandler)
+                .permitAll()
+
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true).deleteCookies("JSESSIONID")
+
+                .and()
+                .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                ;
 
     }
 

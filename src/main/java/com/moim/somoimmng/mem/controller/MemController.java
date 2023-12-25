@@ -1,5 +1,7 @@
 package com.moim.somoimmng.mem.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.moim.somoimmng.mem.service.MemService;
 import java.util.List;
 import java.util.Map;
@@ -60,16 +62,25 @@ public class MemController {
     @RequestMapping(value="mem/memList", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView memList() throws Exception {
         ModelAndView mv = new ModelAndView();
-
         mv.setViewName("mem/memList");
         return mv;
     }
 
     // 회원 조회하기
     @RequestMapping(value="mem/selectMemMng", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView selectMemMng(@RequestParam Map<String, Object> paramMap) throws Exception {
+    public ModelAndView selectMemMng(@RequestParam Map<String, Object> paramMap
+            , @RequestParam(value = "pageNum", defaultValue = "1") int pageNum
+            , @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
+            , @RequestParam(value = "orderBy", defaultValue = "DEFAULT") String orderBy) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<Map<String, Object>> memList = memService.selectMemMng(paramMap);
+
+        orderBy = "MEM_SEQ ASC";
+        PageHelper.startPage(pageNum, pageSize, orderBy);
+        Page<Map<String, Object>> page = memService.selectMemMng(paramMap);
+
+        mv.addObject("page", page);
+        mv.addObject("total", page.getTotal());
         mv.addObject("memList", memList);
         mv.setViewName("jsonView");
         return mv;

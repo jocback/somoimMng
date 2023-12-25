@@ -71,7 +71,7 @@ var common = {
      **************************************************************************/
 
     isEmpty: function (obj) {
-        if (obj === null || obj === undefined || obj.trim == '') {
+        if (obj === null || obj === undefined || obj == "") {
             return true
         } else if (obj instanceof Array) {
             return obj.length === 0

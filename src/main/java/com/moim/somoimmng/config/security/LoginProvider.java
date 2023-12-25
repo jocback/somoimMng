@@ -35,18 +35,19 @@ public class LoginProvider implements AuthenticationProvider {
         UserVO userInfo = new UserVO();
 
         // 사용자 존재여부
-        if(userInfo==null) {
-            throw new BadCredentialsException("아이디가 존재하지 않습니다.");
-        } else {
-            resultUserPw = userInfo.getUserPw();
-            userInfo.setUserPw(null);
-            resultObj = userInfo;
-        }
+//        if(userInfo==null) {
+//            throw new BadCredentialsException("아이디가 존재하지 않습니다.");
+//        } else {
+//            resultUserPw = userInfo.getUserPw();
+//            userInfo.setUserPw(null);
+//            resultObj = userInfo;
+//        }
 
         // 비밀번호 체크
-        if(!userPw.equals(resultUserPw)){
-            throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
-        }
+//        if(!userPw.equals(resultUserPw)){
+//            throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
+//        }
+
 
         // 권한 리스트
         List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();

@@ -46,6 +46,10 @@ Content body start
                                     <input type="text" class="form-control" placeholder="가입일" id="regDate" name="regDate">
                                 </div>
                                 <div class="input-group mb-3">
+                                    <label class="col-sm-2 col-form-label">연장기간</label>
+                                    <input type="text" class="form-control" placeholder="연장기간" id="extdTerm" name="extdTerm">
+                                </div>
+                                <div class="input-group mb-3">
                                     <label class="col-sm-2 col-form-label">성별</label>
                                     <input type="text" class="form-control" placeholder="성별" id="gender" name="gender">
                                 </div>

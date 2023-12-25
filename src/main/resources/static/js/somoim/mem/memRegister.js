@@ -33,6 +33,7 @@ var memRegister = {
             userNm: $("#userNm").val(),
             age: $("#age").val(),
             regDate: $("#regDate").val(),
+            extdTerm: $("#extdTerm").val(),
             gender: $("#gender").val(),
             loc: $("#loc").val(),
             rmrk: $("#rmrk").val()
@@ -51,6 +52,7 @@ var memRegister = {
             userNm: $("#userNm").val(),
             age: $("#age").val(),
             regDate: $("#regDate").val(),
+            extdTerm: $("#extdTerm").val(),
             gender: $("#gender").val(),
             loc: $("#loc").val(),
             rmrk: $("#rmrk").val(),
@@ -58,7 +60,7 @@ var memRegister = {
         }
 
         common.ajax('/mem/modifyMemMng', param, function(res) {
-            location.reload()
+            // location.reload();
         });
     },
     // 회원 삭제
