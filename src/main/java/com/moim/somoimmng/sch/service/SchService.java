@@ -1,5 +1,6 @@
 package com.moim.somoimmng.sch.service;
 
+import com.github.pagehelper.Page;
 import com.moim.somoimmng.sch.mapper.SchMapper;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class SchService {
      * @param  Map<String, Object>
      * @return List
      */
-    public List<Map<String, Object>> selectSmiSche(Map<String, Object> paramMap) {
+    public Page<Map<String, Object>> selectSmiSche(Map<String, Object> paramMap) {
         return schMapper.selectSmiSche(paramMap);
     }
 

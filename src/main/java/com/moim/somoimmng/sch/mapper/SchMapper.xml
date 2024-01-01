@@ -11,7 +11,6 @@
              , SCH_CNT
              , SCH_LOC
         FROM SMI_SCHE ss
-        ORDER BY SCH_DATE DESC, SCH_TIME DESC
     </select>
 
     <!-- 일정 조회 -->

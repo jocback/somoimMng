@@ -17,8 +17,10 @@ var memList = {
         common.goPage('/mem/memRegister', param);
     },
     // 멤버리스트 조회
-    selectMemList: function() {
+    selectMemList: function(pageNo) {
         var param = {
+            pageNum: pageNo,
+            pageSize: 10,
         }
 
         console.log(param);
@@ -26,6 +28,7 @@ var memList = {
         common.ajax('/mem/selectMemMng', param, function(res) {
             console.log(res);
             memList.drawMemList(res.page);
+            paging.drawPage("memPaging", "memList.selectMemList", res.totalInfo);
         });
     },
     // 멤버리스트 출력

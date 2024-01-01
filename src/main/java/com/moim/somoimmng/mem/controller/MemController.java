@@ -3,6 +3,7 @@ package com.moim.somoimmng.mem.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.moim.somoimmng.mem.service.MemService;
+import com.moim.somoimmng.util.PageUtil;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,15 +74,13 @@ public class MemController {
             , @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
             , @RequestParam(value = "orderBy", defaultValue = "DEFAULT") String orderBy) throws Exception {
         ModelAndView mv = new ModelAndView();
-        List<Map<String, Object>> memList = memService.selectMemMng(paramMap);
 
         orderBy = "MEM_SEQ ASC";
         PageHelper.startPage(pageNum, pageSize, orderBy);
         Page<Map<String, Object>> page = memService.selectMemMng(paramMap);
 
         mv.addObject("page", page);
-        mv.addObject("total", page.getTotal());
-        mv.addObject("memList", memList);
+        mv.addObject("totalInfo", PageUtil.getPageInfo(page));
         mv.setViewName("jsonView");
         return mv;
     }

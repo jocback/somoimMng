@@ -61,7 +61,6 @@
                  LEFT OUTER JOIN MEM_MNG mm ON aa.MEM_SEQ = mm.MEM_SEQ
         WHERE mm.DEL_YN = 'N'
         ORDER BY diff DESC
-            LIMIT 10
     </select>
 
     <!-- 참여횟수 조회 -->

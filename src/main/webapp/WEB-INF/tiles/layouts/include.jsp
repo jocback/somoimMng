@@ -25,6 +25,7 @@ Scripts
 <!-- custom -->
 <script src="/js/common/dateUtil.js"></script>
 <script src="/js/common/stringUtil.js"></script>
+<script src="/js/common/paging.js"></script>
 
 <!-- jQuery -->
 <%--<script src="/lib/jquery/js/jquery-3.6.0.min.js"></script>--%>

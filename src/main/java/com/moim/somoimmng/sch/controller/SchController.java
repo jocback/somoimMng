@@ -1,6 +1,9 @@
 package com.moim.somoimmng.sch.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.moim.somoimmng.sch.service.SchService;
+import com.moim.somoimmng.util.PageUtil;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,11 +31,19 @@ public class SchController {
 
     // 일정 조회하기
     @RequestMapping(value = "/sch/selectSmiSche", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView selectSmiSche(@RequestParam Map<String, Object> paramMap) throws Exception {
+    public ModelAndView selectSmiSche(@RequestParam Map<String, Object> paramMap
+            , @RequestParam(value = "pageNum", defaultValue = "1") int pageNum
+            , @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
+            , @RequestParam(value = "orderBy", defaultValue = "DEFAULT") String orderBy) throws Exception {
         ModelAndView mv = new ModelAndView();
 
-        List<Map<String,Object>> schList = schService.selectSmiSche(paramMap);
-        mv.addObject("schList", schList);
+        orderBy = "SCH_DATE DESC, SCH_TIME DESC";
+
+        PageHelper.startPage(pageNum, pageSize, orderBy);
+        Page<Map<String, Object>> page = schService.selectSmiSche(paramMap);
+
+        mv.addObject("page", page);
+        mv.addObject("totalInfo", PageUtil.getPageInfo(page));
 
         mv.setViewName("jsonView");
         return mv;

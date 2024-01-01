@@ -16,14 +16,17 @@ var schList = {
         common.goPage('/sch/schRegister', param);
     },
     // 일정 목록 조회
-    selectSchList: function() {
+    selectSchList: function(pageNo) {
         var param = {
+            pageNum: pageNo,
+            pagesize: 10,
         }
 
         console.log(param);
 
         common.ajax('/sch/selectSmiSche', param, function(res) {
-            schList.drawSchList(res.schList);
+            schList.drawSchList(res.page);
+            paging.drawPage("schPaging", "schList.selectSchList", res.totalInfo);
         });
     },
     // 일정 목록 출력

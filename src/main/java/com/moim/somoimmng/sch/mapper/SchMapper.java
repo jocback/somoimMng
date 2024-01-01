@@ -1,5 +1,6 @@
 package com.moim.somoimmng.sch.mapper;
 
+import com.github.pagehelper.Page;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,7 +23,7 @@ public interface SchMapper {
     int deleteSmiAtnMng(Map<String, Object> paramMap);
 
     // 일정 목록 조회
-    List<Map<String, Object>> selectSmiSche(Map<String, Object> paramMap);
+    Page<Map<String, Object>> selectSmiSche(Map<String, Object> paramMap);
 
     // 일정 조회
     Map<String, Object> selectSmiScheDetail(Map<String, Object> paramMap);
