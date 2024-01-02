@@ -41,7 +41,7 @@
     </div>
     <!-- #/ container -->
     <!-- Modal -->
-    <div class="modal fade" id="modalGrid">
+    <div class="modal fade" id="schModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -53,29 +53,21 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-3">제목</div>
-                            <div class="col-9">서울대입구 신기루곱창</div>
+                            <div class="col-9" id="schNm"></div>
                         </div>
                         <div class="row">
                             <div class="col-3">날짜</div>
-                            <div class="col-9">서울대입구 신기루곱창</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">시간</div>
-                            <div class="col-9">서울대입구 신기루곱창</div>
+                            <div class="col-9" id="schDate"></div>
                         </div>
                         <div class="row">
                             <div class="col-3">인원</div>
-                            <div class="col-9">서울대입구 신기루곱창</div>
+                            <div class="col-9" id="schCnt"></div>
                         </div>
                         <div class="row">
                             <div class="col-3">장소</div>
-                            <div class="col-9">서울대입구 신기루곱창</div>
+                            <div class="col-9" id="schLoc"></div>
                         </div>
-                        <div class="row">
-                            <div class="col-3">장소</div>
-                            <div class="col-9">서울대입구 신기루곱창</div>
-                        </div>
-                        <div class="row">
+                        <div class="row" id="memList">
                             <div class="col-3">참여인원</div>
                             <div class="col-9"></div>
                             <div class="col-3"></div>
@@ -91,7 +83,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+<%--                    <button type="button" class="btn btn-primary">Save changes</button>--%>
                 </div>
             </div>
         </div>

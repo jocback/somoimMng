@@ -9,12 +9,31 @@ var memList = {
     },
     // 멤버 상세보기
     memDetail: function(memSeq) {
+        // var param = {
+        //     memSeq: memSeq,
+        //     type: 'modify'
+        // }
+        //
+        // common.goPage('/mem/memRegister', param);
+
+
         var param = {
-            memSeq: memSeq,
-            type: 'modify'
+            memSeq: memSeq
         }
 
-        common.goPage('/mem/memRegister', param);
+        common.ajax('/mem/selectMemDetail', param, function(res) {
+            console.log(res);
+            var memDetail = res.memDetail;
+            $("#userId").text(memDetail.userId);
+            $("#userNm").text(memDetail.userNm);
+            $("#age").text(memDetail.age);
+            $("#regDate").text(dateUtil.getFormat(memDetail.regDate, 'yyyy-MM-dd'));
+            $("#extdTerm").text(dateUtil.getFormat(memDetail.extdTerm, 'yyyy-MM-dd'));
+            $("#gender").text(memDetail.gender);
+            $("#loc").text(memDetail.loc);
+            $("#rmrk").text(memDetail.rmrk);
+            $("#memModal").modal('show');
+        });
     },
     // 멤버리스트 조회
     selectMemList: function(pageNo) {

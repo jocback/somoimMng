@@ -8,12 +8,43 @@ var schList = {
     },
     // 일정 상세보기
     schDetail: function(schSeq) {
-        var param = {
-            schSeq: schSeq,
-            type: 'modify'
-        }
+        // var param = {
+        //     schSeq: schSeq,
+        //     type: 'modify'
+        // }
+        //
+        // common.goPage('/sch/schRegister', param);
 
-        common.goPage('/sch/schRegister', param);
+
+        var param = {
+            schSeq: schSeq
+        }
+        common.ajax('/sch/selectSchDetail', param, function(res) {
+            var schDetail = res.schDetail;
+            $("#schNm").text(schDetail.schNm);
+            $("#schDate").text(dateUtil.getFormat(schDetail.schDate+''+schDetail.schTime, 'yyyy-MM-dd HH:mm'));
+            $("#schCnt").text(schDetail.schCnt);
+            $("#schLoc").text(schDetail.schLoc);
+
+            var memHtml = '';
+
+            memHtml += '<div class="col-3">참여인원</div>';
+            // memHtml += '<div class="col-9"></div>';
+
+
+            $.each(schDetail.memlist, function(i, v){
+                if(i>0) {
+                    memHtml += '<div class="col-3"></div>';
+                }
+                memHtml += '<div class="col-9">'+v.userNm+'/'+v.age+'/'+v.loc+'</div>';
+            });
+            $("#memList").html(memHtml);
+            $("#schModal").modal('show');
+
+        });
+
+
+
     },
     // 일정 목록 조회
     selectSchList: function(pageNo) {
