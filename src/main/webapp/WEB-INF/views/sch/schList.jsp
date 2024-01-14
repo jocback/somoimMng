@@ -49,6 +49,7 @@
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
+                <input type="hidden" id="schSeq" name="schSeq" value=""/>
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
@@ -68,21 +69,12 @@
                             <div class="col-9" id="schLoc"></div>
                         </div>
                         <div class="row" id="memList">
-                            <div class="col-3">참여인원</div>
-                            <div class="col-9"></div>
-                            <div class="col-3"></div>
-                            <div class="col-9">윤재훈/86/서울대입구</div>
-                            <div class="col-3"></div>
-                            <div class="col-9">윤재훈/86/서울대입구</div>
-                            <div class="col-3"></div>
-                            <div class="col-9">윤재훈/86/서울대입구</div>
-                            <div class="col-3"></div>
-                            <div class="col-9">윤재훈/86/서울대입구</div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="schList.schModify();">수정</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 <%--                    <button type="button" class="btn btn-primary">Save changes</button>--%>
                 </div>
             </div>

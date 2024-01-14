@@ -1,9 +1,13 @@
 package com.moim.somoimmng.config.security;
 
+import com.moim.somoimmng.login.service.LoginService;
 import com.moim.somoimmng.login.vo.UserVO;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +21,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoginProvider implements AuthenticationProvider {
 
+    @Autowired
+    private LoginService loginService;
+
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -25,14 +32,36 @@ public class LoginProvider implements AuthenticationProvider {
         String userId = authentication.getName();
         String userPw = (String) authentication.getCredentials();
 
-        String resultUserPw = "";
+
         Object resultObj = null;
+        String resultUserPw = "";
 
         UserVO param = new UserVO();
         param.setUserId(userId);
         param.setUserPw(userPw);
 
         UserVO userInfo = new UserVO();
+
+
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("userId", userId);
+        paramMap.put("userPw", userPw);
+
+        Map<String, Object> userMap = loginService.getUserMng(paramMap);
+
+        // 사용자 존재여부
+        if(userMap==null) {
+            throw new BadCredentialsException("아이디가 존재하지 않습니다.");
+        } else {
+            resultUserPw = (String) userMap.get("userPw");
+            userMap.put("userPw", "");
+            resultObj = userMap;
+        }
+
+        // 비밀번호 체크
+        if(!userPw.equals(resultUserPw)) {
+            throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
+        }
 
         // 사용자 존재여부
 //        if(userInfo==null) {

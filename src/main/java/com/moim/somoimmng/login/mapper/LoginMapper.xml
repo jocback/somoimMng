@@ -2,4 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.moim.somoimmng.login.mapper.LoginMapper">
+    <insert id="insertUserMng" parameterType="paramMap">
+        INSERT
+        INTO
+            somoim.USER_MNG
+        (
+          USER_ID
+        , USER_PW
+        , USER_NM
+        , AGE
+        , GENDER
+        , LOC
+        , PHONE
+        , EMAIL
+        , DEL_YN
+        )
+        VALUES(
+                #{userId}
+              , #{userPw}
+              , #{userNm}
+              , #{age}
+              , #{gender}
+              , #{loc}
+              , #{phone}
+              , #{email}
+              , 'N'
+              );
+    </insert>
+
+    <select id="getUserMng" parameterType="paramMap" resultType="camelMap">
+        SELECT
+            USER_SEQ
+             , USER_ID
+             , USER_PW
+             , USER_NM
+             , AGE
+             , GENDER
+             , LOC
+             , PHONE
+             , EMAIL
+             , SMI_SEQ
+             , DEL_YN
+             , FRST_WRT_DTIM
+             , LAST_CHNG_DTIM
+        FROM
+            USER_MNG
+        WHERE
+            USER_ID = #{userId}
+    </select>
 </mapper>

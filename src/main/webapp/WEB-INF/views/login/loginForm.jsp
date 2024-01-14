@@ -16,9 +16,9 @@
                             <div class="form-group">
                                 <input type="password" class="form-control" placeholder="비밀번호" id="userPw">
                             </div>
-                            <button type="button" class="btn login-form__btn submit w-100"  onclick="loginForm.signin()">Sign In</button>
+                            <button type="button" class="btn login-form__btn submit w-100"  onclick="loginForm.signin();">Sign In</button>
 
-                            <p class="mt-5 login-form__footer">Dont have account? <a href="page-register.html" class="text-primary">Sign Up</a> now</p>
+                            <p class="mt-5 login-form__footer">Dont have account? <a href="javascript:void(0);" class="text-primary" onclick="loginForm.goRegister();">Sign Up</a> now</p>
                         </div>
                     </div>
                 </div>

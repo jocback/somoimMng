@@ -13,8 +13,14 @@ var loginForm = {
             console.log(res);
             // var redirectUrl = $("#redirectUrl").val().replace(window.location.protocol+'//'+window.location.host, '');
             var redirectUrl = $("#redirectUrl").val();
+            if(common.isEmpty(redirectUrl)) {
+                redirectUrl = '/';
+            }
             common.goPage(redirectUrl);
         });
+    },
+    goRegister: function() {
+        common.goPage('/login/register');
     }
 }
 

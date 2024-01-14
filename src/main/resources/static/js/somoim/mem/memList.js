@@ -7,15 +7,17 @@ var memList = {
     bind: function() {
 
     },
+    // 멤버 수정하기
+    memModify: function() {
+        var param = {
+            memSeq: $("#memSeq").val(),
+            type: 'modify'
+        }
+
+        common.goPage('/mem/memRegister', param);
+    },
     // 멤버 상세보기
     memDetail: function(memSeq) {
-        // var param = {
-        //     memSeq: memSeq,
-        //     type: 'modify'
-        // }
-        //
-        // common.goPage('/mem/memRegister', param);
-
 
         var param = {
             memSeq: memSeq
@@ -33,6 +35,7 @@ var memList = {
             $("#loc").text(memDetail.loc);
             $("#rmrk").text(memDetail.rmrk);
             $("#memModal").modal('show');
+            $("#memSeq").val(memDetail.memSeq);
         });
     },
     // 멤버리스트 조회

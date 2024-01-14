@@ -55,6 +55,7 @@
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
+                <input type="hidden" id="memSeq" name="memSeq" value=""/>
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
@@ -92,6 +93,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="memList.memModify();">수정</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <%--                    <button type="button" class="btn btn-primary">Save changes</button>--%>
                 </div>

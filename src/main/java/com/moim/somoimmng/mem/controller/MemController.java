@@ -19,7 +19,7 @@ public class MemController {
     @Autowired
     private MemService memService;
 
-    // 회원 등록 페이지
+    // 멤버 등록 페이지
     @RequestMapping(value="mem/memRegister", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView register(@RequestParam Map<String, Object> paramMap) {
         ModelAndView mv = new ModelAndView();
@@ -29,7 +29,7 @@ public class MemController {
         return mv;
     }
 
-    // 회원 등록하기
+    // 멤버 등록하기
     @RequestMapping(value="mem/join", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView join(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -59,7 +59,7 @@ public class MemController {
     }
 
 
-    // 회원 조회 페이지
+    // 멤버 조회 페이지
     @RequestMapping(value="mem/memList", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView memList() throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -67,7 +67,7 @@ public class MemController {
         return mv;
     }
 
-    // 회원 조회하기
+    // 멤버 조회하기
     @RequestMapping(value="mem/selectMemMng", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView selectMemMng(@RequestParam Map<String, Object> paramMap
             , @RequestParam(value = "pageNum", defaultValue = "1") int pageNum
@@ -85,7 +85,7 @@ public class MemController {
         return mv;
     }
 
-    // 회원 목록 가져오기
+    // 멤버 목록 가져오기
     @RequestMapping(value="mem/getMemList", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView getMemList(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -95,7 +95,7 @@ public class MemController {
         return mv;
     }
 
-    // 회원 상세조회
+    // 멤버 상세조회
     @RequestMapping(value="mem/selectMemDetail", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView selectMemDetail(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();

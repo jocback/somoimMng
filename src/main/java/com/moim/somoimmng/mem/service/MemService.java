@@ -2,8 +2,6 @@ package com.moim.somoimmng.mem.service;
 
 import com.github.pagehelper.Page;
 import com.moim.somoimmng.mem.mapper.MemMapper;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,7 @@ public class MemService {
     private MemMapper memMapper;
 
     /**
-     * @title  회원등록
+     * @title  멤버등록
      * @param  Map<String, Object>
      * @return int
      */
@@ -25,7 +23,7 @@ public class MemService {
     }
 
     /**
-     * @title  회원 수정
+     * @title  멤버 수정
      * @param  Map<String, Object>
      * @return int
      */
@@ -36,7 +34,7 @@ public class MemService {
     }
 
     /**
-     * @title  회원 삭제
+     * @title  멤버 삭제
      * @param  Map<String, Object>
      * @return int
      */
@@ -46,7 +44,7 @@ public class MemService {
     }
 
     /**
-     * @title  회원조회
+     * @title  멤버조회
      * @param  Map<String, Object>
      * @return List
      */
@@ -55,7 +53,7 @@ public class MemService {
     }
 
     /**
-     * @title  회원목록 가져오기
+     * @title  멤버목록 가져오기
      * @param  Map<String, Object>
      * @return List
      */
@@ -64,7 +62,7 @@ public class MemService {
     }
 
     /**
-     * @title  회원 상세 조회
+     * @title  멤버 상세 조회
      * @param  Map<String, Object>
      * @return int
      */

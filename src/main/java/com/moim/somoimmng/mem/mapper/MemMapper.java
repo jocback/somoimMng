@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemMapper {
 
-    // 회원 등록
+    // 멤버 등록
     int insertMemMng(Map<String, Object> paramMap);
 
-    // 회원 수정
+    // 멤버 수정
     int updateMemMng(Map<String, Object> paramMap);
 
-    // 회원 삭제
+    // 멤버 삭제
     int deleteMemMng(Map<String, Object> paramMap);
 
     Page<Map<String, Object>> selectMemMng(Map<String, Object> paramMap);

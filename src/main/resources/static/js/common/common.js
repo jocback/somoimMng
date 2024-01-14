@@ -49,7 +49,13 @@ var common = {
                 // $(".loadingDim").show();
             },
             success: function (dat) {
-                callback(dat);
+                console.log('ajax result');
+                console.log(dat);
+                if(dat.status=='999') {
+                    alert(dat.message);
+                } else {
+                    callback(dat);
+                }
             },
             complete: function () {
                 // $(".loadingDim").hide();

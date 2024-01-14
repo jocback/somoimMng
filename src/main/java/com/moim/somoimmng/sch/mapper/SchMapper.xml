@@ -15,7 +15,8 @@
 
     <!-- 일정 조회 -->
     <select id="selectSmiScheDetail" parameterType="paramMap" resultType="camelMap">
-        SELECT SCH_NM
+        SELECT SCH_SEQ
+             , SCH_NM
              , SCH_DATE
              , SCH_TIME
              , SCH_CNT

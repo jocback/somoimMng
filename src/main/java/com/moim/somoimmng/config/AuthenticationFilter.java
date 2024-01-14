@@ -20,6 +20,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
         String uri = request.getRequestURI();
 
+        // 로그인 페이지 진입 전 url 저장
         if(!"/login/loginForm".equals(uri)) {
             session.setAttribute("redirectUrl", uri);
         }

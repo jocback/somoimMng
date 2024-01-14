@@ -6,25 +6,31 @@ var schList = {
     bind: function() {
 
     },
+    // 일정 수정하기
+    schModify: function() {
+        var param = {
+            schSeq: $("#schSeq").val(),
+            type: 'modify'
+        }
+
+        common.goPage('/sch/schRegister', param);
+    },
     // 일정 상세보기
     schDetail: function(schSeq) {
-        // var param = {
-        //     schSeq: schSeq,
-        //     type: 'modify'
-        // }
-        //
-        // common.goPage('/sch/schRegister', param);
 
 
         var param = {
             schSeq: schSeq
         }
         common.ajax('/sch/selectSchDetail', param, function(res) {
+            console.log(res);
             var schDetail = res.schDetail;
             $("#schNm").text(schDetail.schNm);
             $("#schDate").text(dateUtil.getFormat(schDetail.schDate+''+schDetail.schTime, 'yyyy-MM-dd HH:mm'));
             $("#schCnt").text(schDetail.schCnt);
             $("#schLoc").text(schDetail.schLoc);
+
+            $("#schSeq").val(res.schDetail.schSeq);
 
             var memHtml = '';
 

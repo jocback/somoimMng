@@ -17,15 +17,33 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    // 로그인 페이지
     @RequestMapping(value = "login/loginForm", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView loginForm(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
 
-        System.out.println(request.getHeader("Referer"));
         mv.addObject("redirectUrl", session.getAttribute("redirectUrl"));
 
         mv.setViewName("login/loginForm");
+        return mv;
+    }
+
+    // 회원 등록 페이지
+    @RequestMapping(value = "login/register", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView register() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("login/register");
+        return mv;
+
+    }
+
+    // 회원 등록
+    @RequestMapping(value = "login/joinUser", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView joinUser(@RequestParam Map<String, Object> paramMap) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        loginService.insertUserMng(paramMap);
+        mv.setViewName("jsonView");
         return mv;
     }
 
