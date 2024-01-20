@@ -1,6 +1,7 @@
 package com.moim.somoimmng.dashboard.controller;
 
 import com.moim.somoimmng.dashboard.service.DashboardService;
+import com.moim.somoimmng.util.LoginUtil;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class DashboardController {
     @RequestMapping(value="dashboard/selectRcntSch", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView selectRcntSch(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
+        paramMap.put("smiSeq", LoginUtil.getInfoValue("smiSeq"));
 
         List<Map<String, Object>> schList = dashboardService.selectRcntSch(paramMap);
 
@@ -58,6 +60,7 @@ public class DashboardController {
     @RequestMapping(value="dashboard/selectAtnSch", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView selectAtnSch(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
+        paramMap.put("smiSeq", LoginUtil.getInfoValue("smiSeq"));
 
         List<Map<String, Object>> atnSchList = dashboardService.selectAtnSch(paramMap);
 
@@ -70,6 +73,7 @@ public class DashboardController {
     @RequestMapping(value="dashboard/selectLstAtnDate", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView selectLstAtnDate(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
+        paramMap.put("smiSeq", LoginUtil.getInfoValue("smiSeq"));
 
         List<Map<String, Object>> lstList = dashboardService.selectLstAtnDate(paramMap);
 
@@ -82,6 +86,7 @@ public class DashboardController {
     @RequestMapping(value="dashboard/selectMemAtnCnt", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView selectMemAtnCnt(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
+        paramMap.put("smiSeq", LoginUtil.getInfoValue("smiSeq"));
 
         List<Map<String, Object>> lstList = dashboardService.selectMemAtnCnt(paramMap);
 

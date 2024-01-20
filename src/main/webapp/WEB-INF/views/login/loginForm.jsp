@@ -8,7 +8,7 @@
                 <div class="form-input-content">
                     <div class="card login-form mb-0">
                         <div class="card-body pt-5">
-                            <a class="text-center" href="index.html"> <h4>로그인${redirectUrl}</h4></a>
+                            <a class="text-center" href="javascript:void(0);"> <h4>로그인</h4></a>
 
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="아이디" id="userId">

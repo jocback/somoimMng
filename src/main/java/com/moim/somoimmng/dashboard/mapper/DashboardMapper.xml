@@ -27,6 +27,7 @@
              , SCH_CNT
              , SCH_LOC
         FROM SMI_SCHE ss
+        WHERE ss.SMI_SEQ = IFNULL(#{smiSeq}, 1)
         ORDER BY SCH_DATE desc, SCH_TIME desc
         LIMIT 10
     </select>
@@ -40,6 +41,7 @@
         FROM SMI_ATN_MNG sam
                  LEFT OUTER JOIN SMI_SCHE ss ON sam.SCH_SEQ = ss.SCH_SEQ
         WHERE MEM_SEQ = #{memSeq}
+          AND ss.SMI_SEQ = IFNULL(#{smiSeq}, 1)
         ORDER BY ss.SCH_DATE desc, ss.SCH_TIME desc
         limit 10
     </select>
@@ -60,6 +62,7 @@
                     GROUP BY sam.MEM_SEQ) a) aa
                  LEFT OUTER JOIN MEM_MNG mm ON aa.MEM_SEQ = mm.MEM_SEQ
         WHERE mm.DEL_YN = 'N'
+          AND mm.SMI_SEQ = IFNULL(#{smiSeq}, 1)
         ORDER BY diff DESC
     </select>
 
@@ -72,7 +75,7 @@
               FROM SMI_ATN_MNG
               GROUP BY MEM_SEQ) sam
                  LEFT OUTER JOIN MEM_MNG mm ON sam.MEM_SEQ = mm.MEM_SEQ
-        WHERE mm.SMI_SEQ = 1
+        WHERE mm.SMI_SEQ = IFNULL(#{smiSeq}, 1)
           AND mm.DEL_YN = 'N'
         ORDER BY sam.CNT DESC
     </select>

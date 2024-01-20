@@ -16,6 +16,7 @@ var loginForm = {
             if(common.isEmpty(redirectUrl)) {
                 redirectUrl = '/';
             }
+            redirectUrl = '/login/workspace';
             common.goPage(redirectUrl);
         });
     },

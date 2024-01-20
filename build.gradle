@@ -70,7 +70,6 @@ dependencies {
     // Pagehelper
     implementation group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '2.0.0'
 
-
     // log4jdbc
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 
@@ -81,6 +80,10 @@ dependencies {
 
     // spring-security
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // common-lang3
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.13.0'
+
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

@@ -47,7 +47,7 @@ Content body start
                         <div class="basic-form">
                             <form>
                                 <div class="form-group">
-                                    <select class="form-control" id="sel_memSeq" onchange="statistics.selectOftMem();">
+                                    <select class="custom-select mr-sm-2" id="sel_memSeq" onchange="statistics.selectOftMem();">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -79,7 +79,7 @@ Content body start
                         <div class="basic-form">
                             <form>
                                 <div class="form-group">
-                                    <select class="form-control" id="sel_atnMemSeq" onchange="statistics.selectAtnSch();">
+                                    <select class="custom-select mr-sm-2" id="sel_atnMemSeq" onchange="statistics.selectAtnSch();">
                                     </select>
                                 </div>
                             </form>

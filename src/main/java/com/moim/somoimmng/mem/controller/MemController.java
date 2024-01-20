@@ -3,6 +3,7 @@ package com.moim.somoimmng.mem.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.moim.somoimmng.mem.service.MemService;
+import com.moim.somoimmng.util.LoginUtil;
 import com.moim.somoimmng.util.PageUtil;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,7 @@ public class MemController {
     @RequestMapping(value="mem/join", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView join(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
+        paramMap.put("smiSeq", LoginUtil.getInfoValue("smiSeq"));
 
         memService.insertMemMng(paramMap);
 
@@ -44,7 +46,9 @@ public class MemController {
     @RequestMapping(value="mem/modifyMemMng", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView modifyMemMng(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
+
         memService.modifyMemMng(paramMap);
+
         mv.setViewName("jsonView");
         return mv;
     }
@@ -74,7 +78,7 @@ public class MemController {
             , @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
             , @RequestParam(value = "orderBy", defaultValue = "DEFAULT") String orderBy) throws Exception {
         ModelAndView mv = new ModelAndView();
-
+        paramMap.put("smiSeq", LoginUtil.getInfoValue("smiSeq"));
         orderBy = "MEM_SEQ ASC";
         PageHelper.startPage(pageNum, pageSize, orderBy);
         Page<Map<String, Object>> page = memService.selectMemMng(paramMap);
@@ -89,6 +93,7 @@ public class MemController {
     @RequestMapping(value="mem/getMemList", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView getMemList(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
+        paramMap.put("smiSeq", LoginUtil.getInfoValue("smiSeq"));
         List<Map<String, Object>> memList = memService.getMemList(paramMap);
         mv.addObject("memList", memList);
         mv.setViewName("jsonView");
@@ -99,7 +104,7 @@ public class MemController {
     @RequestMapping(value="mem/selectMemDetail", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView selectMemDetail(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
-
+        paramMap.put("smiSeq", LoginUtil.getInfoValue("smiSeq"));
         Map<String, Object> resultMap = memService.selectMemDetail(paramMap);
         mv.addObject("memDetail", resultMap);
 

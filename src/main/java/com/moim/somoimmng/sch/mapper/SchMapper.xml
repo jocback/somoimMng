@@ -11,6 +11,7 @@
              , SCH_CNT
              , SCH_LOC
         FROM SMI_SCHE ss
+        WHERE SMI_SEQ = IFNULL(#{smiSeq}, 1)
     </select>
 
     <!-- 일정 조회 -->
@@ -51,7 +52,7 @@
         , SCH_LOC
         )
         VALUES(
-                  #{smiSeq}
+                  IFNULL(#{smiSeq}, 1)
               , #{schNm}
               , #{schDate}
               , #{schTime}

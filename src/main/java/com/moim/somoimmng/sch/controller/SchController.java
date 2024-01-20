@@ -3,6 +3,7 @@ package com.moim.somoimmng.sch.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.moim.somoimmng.sch.service.SchService;
+import com.moim.somoimmng.util.LoginUtil;
 import com.moim.somoimmng.util.PageUtil;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,7 @@ public class SchController {
             , @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
             , @RequestParam(value = "orderBy", defaultValue = "DEFAULT") String orderBy) throws Exception {
         ModelAndView mv = new ModelAndView();
-
+        paramMap.put("smiSeq", LoginUtil.getInfoValue("smiSeq"));
         orderBy = "SCH_DATE DESC, SCH_TIME DESC";
 
         PageHelper.startPage(pageNum, pageSize, orderBy);
@@ -65,10 +66,9 @@ public class SchController {
     @RequestMapping(value="sch/insertSmiSche", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView insertSmiSche(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
-
+        paramMap.put("smiSeq", LoginUtil.getInfoValue("smiSeq"));
         Object obj = paramMap.get("seqArr");
         List<String> strList = (List<String>) obj;
-
         paramMap.put("smiSeq", "1");
         schService.insertSmiSche(paramMap);
 
@@ -80,7 +80,6 @@ public class SchController {
     @RequestMapping(value="sch/selectSchDetail", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView selectSchDetail(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
-
         Map<String, Object> resultMap = schService.selectSchDetail(paramMap);
         mv.addObject("schDetail", resultMap);
 

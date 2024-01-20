@@ -1,16 +1,20 @@
 package com.moim.somoimmng.config;
 
 import java.io.IOException;
+import java.util.Arrays;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @RequiredArgsConstructor
 public class AuthenticationFilter extends OncePerRequestFilter {
+
+    private static final String[] excludeEndpoints = new String[] {"/lib/**", "/js/**"};
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -29,6 +33,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return super.shouldNotFilter(request);
+//        return super.shouldNotFilter(request);
+        return Arrays.stream(excludeEndpoints).anyMatch(e -> new AntPathMatcher().match(e, request.getServletPath()));
     }
 }

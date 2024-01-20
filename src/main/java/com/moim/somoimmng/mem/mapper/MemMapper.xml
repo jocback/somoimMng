@@ -19,7 +19,7 @@
         , RMRK
         )
         VALUES(
-                1
+                #{smiSeq}
               , #{userNm}
               , #{userNm}
               , #{age}
@@ -68,7 +68,7 @@
              , LAST_CHNG_DTIM
         FROM
             MEM_MNG
-        WHERE SMI_SEQ = 1
+        WHERE SMI_SEQ = IFNULL(#{smiSeq}, 1)
           AND DEL_YN = 'N'
     </select>
 
@@ -87,7 +87,7 @@
              , LAST_CHNG_DTIM
         FROM
             MEM_MNG
-       WHERE SMI_SEQ = 1
+       WHERE SMI_SEQ = IFNULL(#{smiSeq}, 1)
          AND DEL_YN = 'N'
     </select>
 
@@ -107,7 +107,7 @@
         FROM
             MEM_MNG
         WHERE MEM_SEQ = #{memSeq}
-          AND SMI_SEQ = 1
+          AND SMI_SEQ = IFNULL(#{smiSeq}, 1)
           AND DEL_YN = 'N'
     </select>
 </mapper>
