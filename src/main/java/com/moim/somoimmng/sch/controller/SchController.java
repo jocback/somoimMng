@@ -5,6 +5,8 @@ import com.github.pagehelper.PageHelper;
 import com.moim.somoimmng.sch.service.SchService;
 import com.moim.somoimmng.util.LoginUtil;
 import com.moim.somoimmng.util.PageUtil;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,14 @@ public class SchController {
     public ModelAndView schList() throws Exception {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("sch/schList");
+        return mv;
+    }
+
+    // 일정 조회 페이지
+    @RequestMapping(value="sch/schCalendar", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView schCalendar() throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sch/schCalendar");
         return mv;
     }
 
@@ -113,6 +123,36 @@ public class SchController {
         paramMap.put("smiSeq", "1");
         schService.deleteSmiSche(paramMap);
 
+        mv.setViewName("jsonView");
+        return mv;
+    }
+
+    // 일정 조회 페이지(월)
+    @RequestMapping(value="sch/schCalendarMonth", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView schCalendarMonth() throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sch/schCalendarMonth");
+        return mv;
+    }
+
+    // 캘린더 날짜 조회
+    @RequestMapping(value = "sch/selectMonthList", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView selectMonthList(@RequestParam Map<String, Object> paramMap) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        Date today = new Date();
+        String dateStr = format.format(today);
+        if(paramMap.get("year") == null || paramMap.get("month") == null) {
+            paramMap.put("year", dateStr.substring(0,4));
+            paramMap.put("month", dateStr.substring(4,6));
+        }
+
+        List<Map<String, Object>> calList = schService.selectMonthList(paramMap);
+        List<Map<String, Object>> schList = schService.selectCalSchList(paramMap);
+
+        mv.addObject("calList", calList);
+        mv.addObject("schList", schList);
         mv.setViewName("jsonView");
         return mv;
     }

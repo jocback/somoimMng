@@ -6,6 +6,7 @@
 <!--**********************************
 CSS
 ***********************************-->
+<link href="/lib/bootstrap/plugins/fullcalendar/css/fullcalendar.min.css" rel="stylesheet">
 <link href="/lib/bootstrap/css/style.css" rel="stylesheet">
 <link href="/lib/jquery/css/jquery-ui-1.12.1.css" rel="stylesheet">
 
@@ -21,6 +22,8 @@ Scripts
 <script src="/lib/bootstrap/js/settings.js"></script>
 <script src="/lib/bootstrap/js/gleek.js"></script>
 <script src="/lib/bootstrap/js/styleSwitcher.js"></script>
+<script src="/lib/bootstrap/plugins/moment/moment.min.js"></script>
+<script src="/lib/bootstrap/plugins/fullcalendar/js/fullcalendar.min.js"></script>
 
 <!-- custom -->
 <script src="/js/common/dateUtil.js"></script>

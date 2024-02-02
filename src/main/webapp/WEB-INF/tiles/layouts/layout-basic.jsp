@@ -47,8 +47,10 @@
     <!-- End of Content Wrapper -->
 </div>
 
-
 <tiles:insertAttribute name="include"/>
+<%--<script src="/lib/bootstrap/plugins/moment/moment.min.js"></script>--%>
+<%--<script src="/lib/bootstrap/plugins/fullcalendar/js/fullcalendar.min.js"></script>--%>
+<%--<script src="/lib/bootstrap/js/plugins-init/fullcalendar-init.js"></script>--%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/somoim<tiles:getAsString name="includeJs" />.js"></script>
 </body>
 </html>

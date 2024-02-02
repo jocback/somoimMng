@@ -31,4 +31,10 @@ public interface SchMapper {
     // 일정 멤버 조회
     List<Map<String, Object>> selectAtnMemList(Map<String, Object> paramMap);
 
+    // 캘린더 날짜 조회
+    List<Map<String, Object>> selectMonthList(Map<String, Object> paramMap);
+
+    // 캘린더 일정 조회
+    List<Map<String, Object>> selectCalSchList(Map<String, Object> paramMap);
+
 }

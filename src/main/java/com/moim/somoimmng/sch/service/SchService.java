@@ -2,7 +2,9 @@ package com.moim.somoimmng.sch.service;
 
 import com.github.pagehelper.Page;
 import com.moim.somoimmng.sch.mapper.SchMapper;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +96,26 @@ public class SchService {
         schMapper.deleteSmiSche(paramMap);
         schMapper.deleteSmiAtnMng(paramMap);
         return 0;
+    }
+
+    /**
+     * @title  캘린더 날짜 조회
+     * @param  Map<String, Object>
+     * @return int
+     */
+    public List<Map<String, Object>> selectMonthList(Map<String, Object> paramMap) {
+        List<Map<String, Object>> calList = schMapper.selectMonthList(paramMap);
+        return calList;
+    }
+
+    /**
+     * @title  캘린더 일정 조회
+     * @param  Map<String, Object>
+     * @return int
+     */
+    public List<Map<String, Object>> selectCalSchList(Map<String, Object> paramMap) {
+        List<Map<String, Object>> schList = schMapper.selectCalSchList(paramMap);
+        return schList;
     }
 
 }

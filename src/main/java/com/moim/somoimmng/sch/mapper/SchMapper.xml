@@ -111,4 +111,46 @@
         FROM SMI_ATN_MNG
         WHERE SCH_SEQ = #{schSeq}
     </delete>
+
+    <!-- 캘린더 날짜 조회 -->
+    <select id="selectMonthList" parameterType="paramMap" resultType="camelMap">
+        SELECT D.DATE_YMD AS CAL_DATE
+             , CAST(SUBSTR(D.DATE_YMD, 7,8) AS UNSIGNED) AS CAL_DAY
+             , DAYS
+        FROM (SELECT A.DATE_YMD
+                   , DAYOFWEEK(A.DATE_YMD) AS DAYS
+              FROM (SELECT DATE_FORMAT(STR_TO_DATE(CONCAT(#{year},'-', LPAD(#{month},2,'0'),'-','01'),'%Y-%m-%d') + INTERVAL (A.A + (10 * B.A)) DAY, '%Y%m%d') AS DATE_YMD
+                    FROM (SELECT 0 AS A
+                          UNION ALL SELECT 1
+                          UNION ALL SELECT 2
+                          UNION ALL SELECT 3
+                          UNION ALL SELECT 4
+                          UNION ALL SELECT 5
+                          UNION ALL SELECT 6
+                          UNION ALL SELECT 7
+                          UNION ALL SELECT 8
+                          UNION ALL SELECT 9) AS A
+                             CROSS JOIN (SELECT 0 AS A
+                                         UNION ALL SELECT 1
+                                         UNION ALL SELECT 2
+                                         UNION ALL SELECT 3) AS B) A
+              WHERE A.DATE_YMD LIKE CONCAT(#{year}, LPAD(#{month},2,'0'), '%')) D
+        GROUP BY D.DATE_YMD
+        ORDER BY D.DATE_YMD
+    </select>
+
+    <!-- 캘린더 일정 조회 -->
+    <select id="selectCalSchList" parameterType="paramMap" resultType="camelMap">
+        SELECT SCH_DATE
+             , count(*) AS SCH_CNT
+             , GROUP_CONCAT(SCH_NM ORDER BY SCH_TIME ASC SEPARATOR '|') AS SCH_NM
+             , GROUP_CONCAT(SCH_SEQ ORDER BY SCH_TIME ASC SEPARATOR '|') AS SCH_SEQ
+             , GROUP_CONCAT(SCH_TIME ORDER BY SCH_TIME ASC SEPARATOR '|') AS SCH_TIME
+        FROM SMI_SCHE ss
+        WHERE sch_date BETWEEN CONCAT(#{year}, #{month}, '01') AND REPLACE(LAST_DAY(CONCAT(#{year}, #{month}, '01')), '-', '')
+        GROUP BY SCH_DATE
+        ORDER BY SCH_DATE
+    </select>
+
+
 </mapper>
