@@ -21,7 +21,7 @@ Sidebar start
                     <i class="icon-grid menu-icon"></i><span class="nav-text">일정관리</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="/sch/schCalendar">일정캘린더</a></li>
+                    <li><a href="/sch/schCalendarMonth">일정캘린더</a></li>
                     <li><a href="/sch/schList">일정목록</a></li>
                     <li><a href="/sch/schRegister">일정등록</a></li>
                 </ul>

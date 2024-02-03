@@ -29,42 +29,27 @@
                                         <div class="fc-toolbar fc-header-toolbar">
                                             <div class="fc-left">
                                                 <div class="btn-group">
-                                                    <button type="button"
-                                                            class="fc-prev-button btn btn-primary"
-                                                            aria-label="prev"><span
-                                                      class="fa fa-chevron-left"></span></button>
-                                                    <button type="button"
-                                                            class="fc-next-button btn btn-primary"
-                                                            aria-label="next"><span
-                                                      class="fa fa-chevron-right"></span></button>
+                                                    <button type="button" class="fc-prev-button btn btn-primary" aria-label="prev">
+                                                        <span class="fa fa-chevron-left"></span>
+                                                    </button>
+                                                    <button type="button" class="fc-next-button btn btn-primary" aria-label="next">
+                                                        <span class="fa fa-chevron-right"></span>
+                                                    </button>
                                                 </div>
-                                                <button type="button"
-                                                        class="fc-today-button btn btn-primary disabled"
-                                                        disabled="">today
-                                                </button>
+                                                <button type="button" class="fc-today-button btn btn-primary" >today</button>
                                             </div>
                                             <div class="fc-right">
                                                 <div class="btn-group">
-                                                    <button type="button"
-                                                            class="fc-month-button btn btn-primary active">
-                                                        month
-                                                    </button>
-                                                    <button type="button"
-                                                            class="fc-agendaWeek-button btn btn-primary ">
-                                                        week
-                                                    </button>
-                                                    <button type="button"
-                                                            class="fc-listMonth-button btn btn-primary ">
-                                                        list
-                                                    </button>
+                                                    <button type="button" class="fc-month-button btn btn-primary active">month</button>
+                                                    <button type="button" class="fc-agendaWeek-button btn btn-primary ">week</button>
+                                                    <button type="button" class="fc-listMonth-button btn btn-primary ">list</button>
                                                 </div>
                                             </div>
-                                            <div class="fc-center"><h2>January 2024</h2></div>
+                                            <div class="fc-center"><h2 id="h2_dateText">January 2024</h2></div>
                                             <div class="fc-clear"></div>
                                         </div>
                                         <div class="fc-view-container" style="">
-                                            <div class="fc-view fc-month-view fc-basic-view"
-                                                 style="">
+                                            <div class="fc-view fc-month-view fc-basic-view">
                                                 <table class="table-bordered">
                                                     <thead class="fc-head">
                                                     <tr>
@@ -93,44 +78,6 @@
                                                             <td class="">
                                                                 <div class="fc-scroller fc-day-grid-container" style="overflow: hidden;">
                                                                     <div class="fc-day-grid fc-unselectable" id="div_calGrid">
-                                                                        <div class="fc-row fc-week table-bordered fc-rigid" style="height: 136px;">
-                                                                            <div class="fc-bg">
-                                                                                <table class="table-bordered">
-                                                                                    <tbody>
-                                                                                        <tr>
-                                                                                            <td style="width: 23.5px;"></td>
-                                                                                            <td data-date="2023-12-31"></td>
-                                                                                            <td data-date="2024-01-01"></td>
-                                                                                            <td data-date="2024-01-02"></td>
-                                                                                            <td data-date="2024-01-03"></td>
-                                                                                            <td data-date="2024-01-04"></td>
-                                                                                            <td data-date="2024-01-05"></td>
-                                                                                            <td data-date="2024-01-06"></td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                            <div class="fc-content-skeleton">
-                                                                                <table>
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <td class="fc-week-number" style="width: 23.5px;">
-                                                                                                <span>1</span>
-                                                                                            </td>
-                                                                                            <td class="fc-day-top fc-other-month" data-date="2023-12-31"><span class="fc-day-number">31</span></td>
-                                                                                            <td class="fc-day-top" data-date="2024-01-01"><span class="fc-day-number">1</span></td>
-                                                                                            <td class="fc-day-top" data-date="2024-01-02"><span class="fc-day-number">2</span></td>
-                                                                                            <td class="fc-day-top" data-date="2024-01-03"><span class="fc-day-number">3</span></td>
-                                                                                            <td class="fc-day-top" data-date="2024-01-04"><span class="fc-day-number">4</span></td>
-                                                                                            <td class="fc-day-top" data-date="2024-01-05"><span class="fc-day-number">5</span></td>
-                                                                                            <td class="fc-day-top" data-date="2024-01-06"><span class="fc-day-number">6</span></td>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </td>

@@ -1,17 +1,29 @@
-var schArr;
+var yearMonth = dateUtil.getFormat(new Date(), 'yyyy')+''+dateUtil.getFormat(new Date(), 'MM');
 var schCalendarMonth = {
     // 최조실행
     init: function() {
         schCalendarMonth.selectMonthList();
+        schCalendarMonth.bind();
     },
     bind: function() {
+        // 이전월
+        $(".fc-prev-button").on('click', function() {
+            yearMonth = dateUtil.addDate(yearMonth+'01', 'mm', -1).substring(0,6);
+            schCalendarMonth.selectMonthList();
+        });
+        // 다음월
+        $(".fc-next-button").on('click', function() {
+            yearMonth = dateUtil.addDate(yearMonth+'01', 'mm', 1).substring(0,6);
+            schCalendarMonth.selectMonthList();
+        });
     },
     selectMonthList: function() {
         var param = {
+            year: yearMonth.substring(0,4),
+            month: yearMonth.substring(4,6)
         };
+        $("#h2_dateText").html(param.year+'년 '+param.month+'월');
         common.ajax('/sch/selectMonthList', param, function(res) {
-            schArr = res.schList;
-            console.log(res);
             schCalendarMonth.drawMonthList(res.calList, res.schList);
         });
     },
@@ -127,30 +139,6 @@ var schCalendarMonth = {
 
             }
 
-            // for(var i=0; i<3; i++) {
-            //     // calIdx = lastIdx;
-            //     if(i==0) {
-            //         calHtml += '<tr>';
-            //     }
-            //     for(var j=0; j<8; j++) {
-            //         if(j==0) {
-            //             calHtml += '                <td class="fc-week-number" style="width: 23.5px;"></td>';
-            //         } else {
-            //             calHtml += '                <td rowspan="4"></td>';
-            //             // if(calIdx<totalCnt && j==calList[calIdx].days) {
-            //             //     calHtml += '                <td class="fc-day-top" data-date="'+calList[calIdx].calDate+'"><span class="fc-day-number">'+calList[calIdx].calDay+'</span></td>';
-            //             //     calIdx = calIdx+1;
-            //             // } else {
-            //             //     calHtml += '                <td class="fc-day-top"></td>';
-            //             // }
-            //         }
-            //     }
-            //     if(i==2) {
-            //         calHtml += '</tr>';
-            //     }
-            // }
-
-
             calHtml += '        </tbody>';
             calHtml += '    </table>';
             calHtml += '</div>';
@@ -160,7 +148,6 @@ var schCalendarMonth = {
             if(calIdx>totalCnt-1) break;
             lastIdx = calIdx;
         }
-
 
         $("#div_calGrid").html(calHtml);
 
