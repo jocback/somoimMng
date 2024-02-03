@@ -8,6 +8,8 @@ var engWeekName = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 const serverTime = new Date();
 
 var dateUtil = {
+	korWeekName: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
+	engWeekName: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
 	curDate : function(){
 		return serverTime;
 	},
@@ -141,5 +143,25 @@ var dateUtil = {
 			birth = '19'+rrno.substring(0,6);
 		}
 		return birth;
-	}
+	},
+	// 캘린더 월 가져오기
+	getCalDate: function(calToday) {
+		var d = new Date(calToday.getFullYear(), calToday.getMonth(), 1);
+		var lastDate = new Date(d.getFullYear(), d.getMonth()+1, 0).getDate();
+
+		var calList = new Array();
+
+		for(i=1; i<=lastDate; i++) {
+			var days = d.getDay();
+			var calJson = {
+				calDate: dateUtil.getFormat(d, 'yyyyMMdd'),
+				calDay: i,
+				days: days+1,
+			}
+			calList.push(calJson);
+			dateUtil.addDate(d, 'dd', 1);
+		}
+		return calList;
+	},
+	// 요일 가져오기
 }

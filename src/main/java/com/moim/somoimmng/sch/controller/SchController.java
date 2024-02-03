@@ -135,6 +135,14 @@ public class SchController {
         return mv;
     }
 
+    // 일정 조회 페이지(월)
+    @RequestMapping(value="sch/schCalendarList", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView schCalendarList() throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sch/schCalendarList");
+        return mv;
+    }
+
     // 캘린더 날짜 조회
     @RequestMapping(value = "sch/selectMonthList", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView selectMonthList(@RequestParam Map<String, Object> paramMap) throws Exception {
@@ -148,10 +156,10 @@ public class SchController {
             paramMap.put("month", dateStr.substring(4,6));
         }
 
-        List<Map<String, Object>> calList = schService.selectMonthList(paramMap);
+//        List<Map<String, Object>> calList = schService.selectMonthList(paramMap);
         List<Map<String, Object>> schList = schService.selectCalSchList(paramMap);
 
-        mv.addObject("calList", calList);
+//        mv.addObject("calList", calList);
         mv.addObject("schList", schList);
         mv.setViewName("jsonView");
         return mv;

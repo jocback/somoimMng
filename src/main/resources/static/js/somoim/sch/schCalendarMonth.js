@@ -1,4 +1,6 @@
-var yearMonth = dateUtil.getFormat(new Date(), 'yyyy')+''+dateUtil.getFormat(new Date(), 'MM');
+var calToday = new Date();
+var calArr = new Array();
+
 var schCalendarMonth = {
     // 최조실행
     init: function() {
@@ -8,23 +10,36 @@ var schCalendarMonth = {
     bind: function() {
         // 이전월
         $(".fc-prev-button").on('click', function() {
-            yearMonth = dateUtil.addDate(yearMonth+'01', 'mm', -1).substring(0,6);
+            calToday = dateUtil.addDate(calToday, 'mm', -1);
             schCalendarMonth.selectMonthList();
         });
         // 다음월
         $(".fc-next-button").on('click', function() {
-            yearMonth = dateUtil.addDate(yearMonth+'01', 'mm', 1).substring(0,6);
+            calToday = dateUtil.addDate(calToday, 'mm', 1);
+            schCalendarMonth.selectMonthList();
+        });
+
+        // 캘린더 유형 선택
+        $(".fc-right .btn-group [type=button]").on('click', function() {
+            $(".fc-right .btn-group [type=button]").removeClass('active');
+            $(this).addClass('active');
             schCalendarMonth.selectMonthList();
         });
     },
     selectMonthList: function() {
         var param = {
-            year: yearMonth.substring(0,4),
-            month: yearMonth.substring(4,6)
+            year: dateUtil.getFormat(calToday, 'yyyy'),
+            month: dateUtil.getFormat(calToday, 'MM'),
         };
+        calArr = dateUtil.getCalDate(calToday);
         $("#h2_dateText").html(param.year+'년 '+param.month+'월');
         common.ajax('/sch/selectMonthList', param, function(res) {
-            schCalendarMonth.drawMonthList(res.calList, res.schList);
+            if($(".fc-right .btn-group .active").text()=='month') {
+                schCalendarMonth.drawMonthList(calArr, res.schList);
+            } else if($(".fc-right .btn-group .active").text()=='list') {
+                schCalendarMonth.drawAgendaList(calArr, res.schList);
+            }
+
         });
     },
     parseJson: function(schArr) {
@@ -44,13 +59,44 @@ var schCalendarMonth = {
         var calHtml = '';
         var schJsonList = schCalendarMonth.parseJson(schList);
 
-        var tdCnt = 0;
         var weekCnt = 0;
         var totalCnt = calList.length;
-        var calCnt = 0;
 
         var calIdx = 0;
         var lastIdx = 0;
+
+        calHtml += '<div class="fc-view fc-month-view fc-basic-view">';
+        calHtml += '    <table class="table-bordered">';
+        calHtml += '        <thead class="fc-head">';
+        calHtml += '        <tr>';
+        calHtml += '            <td class="fc-head-container ">';
+        calHtml += '                <div class="fc-row table-bordered">';
+        calHtml += '                    <table class="table-bordered">';
+        calHtml += '                        <thead>';
+        calHtml += '                        <tr>';
+        calHtml += '                            <th class="fc-week-number " style="width: 23.5px;"><span>W</span></th>';
+        calHtml += '                            <th class="fc-sun"><span>Sun</span></th>';
+        calHtml += '                            <th class="fc-mon"><span>Mon</span></th>';
+        calHtml += '                            <th class="fc-tue"><span>Tue</span></th>';
+        calHtml += '                            <th class="fc-wed"><span>Wed</span></th>';
+        calHtml += '                            <th class="fc-thu"><span>Thu</span></th>';
+        calHtml += '                            <th class="fc-fri"><span>Fri</span></th>';
+        calHtml += '                            <th class="fc-sat"><span>Sat</span></th>';
+        calHtml += '                        </tr>';
+        calHtml += '                        </thead>';
+        calHtml += '                    </table>';
+        calHtml += '                </div>';
+        calHtml += '            </td>';
+        calHtml += '        </tr>';
+        calHtml += '        </thead>';
+        calHtml += '        <tbody class="fc-body">';
+        calHtml += '            <tr>';
+        calHtml += '                <td class="">';
+        calHtml += '                    <div class="fc-scroller fc-day-grid-container" style="overflow: hidden;">';
+        calHtml += '                        <div class="fc-day-grid fc-unselectable" id="div_calGrid">';
+
+
+
         while(calIdx<totalCnt) {
 
             weekCnt = weekCnt+1;
@@ -149,8 +195,65 @@ var schCalendarMonth = {
             lastIdx = calIdx;
         }
 
+        calHtml += '                        </div>';
+        calHtml += '                    </div>';
+        calHtml += '                </td>';
+        calHtml += '            </tr>';
+        calHtml += '        </tbody>';
+        calHtml += '    </table>';
+        calHtml += '</div>';
+
         $("#div_calGrid").html(calHtml);
 
+    },
+
+    drawAgendaList: function(calList, schList) {
+        var calHtml = '';
+        var schJsonList = schCalendarMonth.parseJson(schList);
+        tmpCalList = schJsonList;
+
+        calHtml += '<div class="fc-view fc-listMonth-view fc-list-view card card-primary" style="">';
+        calHtml += '    <div class="fc-scroller" style="overflow: hidden auto; height: 842px;">';
+        calHtml += '        <table class="fc-list-table table">';
+        calHtml += '            <tbody>';
+
+        for(var i=0; i<calArr.length; i++) {
+            if(schJsonList[calArr[i].calDate]!=undefined) {
+                var schJson = schJsonList[calArr[i].calDate];
+
+                // 날짜 영역
+                calHtml += '<tr class="fc-list-heading" data-date="2024-01-01">';
+                calHtml += '    <td class="table-active" colspan="3">';
+                calHtml += '        <span class="fc-list-heading-main">'+dateUtil.getFormat(calArr[i].calDate, 'yyyy년 MM월 dd일')+'</span>';
+                calHtml += '        <span class="fc-list-heading-alt">'+dateUtil.korWeekName[calArr[i].days-1]+'</span>';
+                calHtml += '    </td>';
+                calHtml += '</tr>';
+
+                // 일정 영역(반복)
+                for(var j=0; j<schJson.schNm.length; j++) {
+                    calHtml += '<tr class="fc-list-item">';
+                    calHtml += '    <td class="fc-list-item-time ">'+schJson.schTime[j].substring(0,2)+':'+schJson.schTime[j].substring(2,4)+'</td>';
+                    calHtml += '    <td class="fc-list-item-marker "><span class="fc-event-dot"></span></td>';
+                    calHtml += '    <td class="fc-list-item-title "><a>'+schJson.schNm[j]+'</a></td>';
+                    calHtml += '</tr>';
+                }
+
+            }
+        }
+
+        calHtml += '            </tbody>';
+        calHtml += '        </table>';
+        calHtml += '    </div>';
+        calHtml += '</div>';
+
+        $("#div_calGrid").html(calHtml);
+
+        if($(".fc-scroller .fc-list-table tr").length==0) {
+            var emptyHtml;
+            emptyHtml += '<div class="fc-list-empty-wrap2"><div class="fc-list-empty-wrap1"><div class="fc-list-empty">No events to display</div></div></div>';
+            $(".fc-scroller").html(emptyHtml);
+
+        }
     },
 }
 

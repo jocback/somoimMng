@@ -48,7 +48,7 @@
                                             <div class="fc-center"><h2 id="h2_dateText">January 2024</h2></div>
                                             <div class="fc-clear"></div>
                                         </div>
-                                        <div class="fc-view-container" style="">
+                                        <div class="fc-view-container" id="div_calGrid">
                                             <div class="fc-view fc-month-view fc-basic-view">
                                                 <table class="table-bordered">
                                                     <thead class="fc-head">
@@ -77,7 +77,7 @@
                                                         <tr>
                                                             <td class="">
                                                                 <div class="fc-scroller fc-day-grid-container" style="overflow: hidden;">
-                                                                    <div class="fc-day-grid fc-unselectable" id="div_calGrid">
+                                                                    <div class="fc-day-grid fc-unselectable">
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -85,6 +85,7 @@
                                                     </tbody>
                                                 </table>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
