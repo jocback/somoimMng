@@ -5,13 +5,10 @@ Nav header start
 ***********************************-->
 <div class="nav-header">
     <div class="brand-logo">
-        <a href="index.html">
-            <b class="logo-abbr"><img src="/lib/bootstrap/images/logo.png" alt=""> </b>
-            <span class="logo-compact"><img src="/lib/bootstrap/images/logo-compact.png" alt=""></span>
-            <span class="brand-title">
-<%--                        <img src="/lib/bootstrap/images/logo-text.png" alt="">--%>
-                    </span>
-        </a>
+<%--        <a href="index.html">--%>
+<%--            <b class="logo-abbr"><img src="/lib/bootstrap/images/logo.png" alt=""> </b>--%>
+<%--            <span class="logo-compact"><img src="/lib/bootstrap/images/logo-compact.png" alt=""></span>--%>
+<%--            <span class="brand-title"><img src="/lib/bootstrap/images/logo-text.png" alt=""></span>--%>
     </div>
 </div>
 <!--**********************************

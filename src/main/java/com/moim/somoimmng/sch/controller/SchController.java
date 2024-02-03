@@ -32,14 +32,6 @@ public class SchController {
         return mv;
     }
 
-    // 일정 조회 페이지
-    @RequestMapping(value="sch/schCalendar", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView schCalendar() throws Exception {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("sch/schCalendar");
-        return mv;
-    }
-
     // 일정 조회하기
     @RequestMapping(value = "/sch/selectSmiSche", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView selectSmiSche(@RequestParam Map<String, Object> paramMap
@@ -127,19 +119,20 @@ public class SchController {
         return mv;
     }
 
-    // 일정 조회 페이지(월)
-    @RequestMapping(value="sch/schCalendarMonth", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView schCalendarMonth() throws Exception {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("sch/schCalendarMonth");
-        return mv;
-    }
 
     // 일정 조회 페이지(월)
     @RequestMapping(value="sch/schCalendarList", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView schCalendarList() throws Exception {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("sch/schCalendarList");
+        return mv;
+    }
+
+    // 일정 조회 페이지
+    @RequestMapping(value="sch/schCalendar", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView schCalendar() throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sch/schCalendar");
         return mv;
     }
 
