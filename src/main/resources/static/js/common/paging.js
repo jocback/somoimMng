@@ -3,7 +3,7 @@ var paging = {
         // var totalCnt;		// 총데이터수
         // var perPage;	// 한페이지 글수
         var pageHtml = '';
-        var pageCount = 10;		// 페이징에 노출되는 페이지 수
+        var pageCount = 5;		// 페이징에 노출되는 페이지 수
         // var currentPage;	// 현재 페이지
         var totalPage;
         let pageGroup;
@@ -51,7 +51,7 @@ var paging = {
         prev = first - 1;										// 10
 
         pageHtml += '<div class="col-sm-12 col-md-7">';
-        pageHtml += '    <div class="paging_simple_numbers">';
+        pageHtml += '    <div class="dataTables_paginate paging_simple_numbers">';
 
         pageHtml += '<ul class="pagination">';
 
