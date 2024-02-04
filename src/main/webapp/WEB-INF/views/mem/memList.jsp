@@ -22,7 +22,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                        <h3 class="card-title">회원목록</h3>
                     </div>
 
                     <div class="card-body table-responsive p-0">
@@ -34,10 +34,13 @@
                                     <table class="table table-bordered table-hover dataTable dtr-inline text-nowrap">
                                         <thead>
                                         <tr>
-                                            <th class="text-center">제목</th>
-                                            <th class="text-center">날짜</th>
-                                            <th class="text-center">인원</th>
-                                            <th class="text-center">장소</th>
+                                            <th>아이디</th>
+                                            <th>이름</th>
+                                            <th>나이</th>
+                                            <th>등록일</th>
+                                            <th>연장일</th>
+                                            <th>성별</th>
+                                            <th>지역</th>
                                         </tr>
                                         </thead>
                                         <tbody id="tbody_memList">

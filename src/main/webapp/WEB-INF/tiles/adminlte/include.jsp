@@ -23,6 +23,7 @@ Scripts
 <!--bootstrap -->
 
 <script src="/lib/adminlte/plugins/jquery/jquery.min.js"></script>
+<script src="/lib/jquery/js/jquery-ui-1.12.1.js"></script>
 
 <script src="/lib/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/lib/adminlte/dist/js/adminlte.min.js"></script>

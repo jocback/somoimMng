@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-    <definition name="layout-tiles" template="/WEB-INF/tiles/layouts/layout-basic.jsp">
+    <definition name="layout-sample" template="/WEB-INF/tiles/layouts/layout-basic.jsp">
         <put-attribute name="include" value="/WEB-INF/tiles/layouts/include.jsp"/>
         <put-attribute name="header" value="/WEB-INF/tiles/layouts/header.jsp"/>
         <put-attribute name="side" value="/WEB-INF/tiles/layouts/side.jsp"/>
@@ -14,12 +14,12 @@
         <put-attribute name="body" value=""/>
     </definition>
 
-    <definition name="layout-sample" template="/WEB-INF/tiles/sample/layout-basic.jsp">
-        <put-attribute name="include" value="/WEB-INF/tiles/sample/include.jsp"/>
-        <put-attribute name="header" value="/WEB-INF/tiles/sample/header.jsp"/>
-        <put-attribute name="side" value="/WEB-INF/tiles/sample/side.jsp"/>
+    <definition name="layout-tiles" template="/WEB-INF/tiles/adminlte/layout-basic.jsp">
+        <put-attribute name="include" value="/WEB-INF/tiles/adminlte/include.jsp"/>
+        <put-attribute name="header" value="/WEB-INF/tiles/adminlte/header.jsp"/>
+        <put-attribute name="side" value="/WEB-INF/tiles/adminlte/side.jsp"/>
         <put-attribute name="body" value=""/>
-        <put-attribute name="footer" value="/WEB-INF/tiles/sample/footer.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/tiles/adminlte/footer.jsp"/>
     </definition>
 
     <definition name="login/*" extends="layout-login">
