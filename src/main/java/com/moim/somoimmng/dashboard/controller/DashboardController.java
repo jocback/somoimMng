@@ -32,6 +32,15 @@ public class DashboardController {
         return mv;
     }
 
+    // 통계 페이지
+    @RequestMapping(value="dashboard/statistics2", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView statistics2(@RequestParam Map<String, Object> paramMap) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        mv.setViewName("dashboard/statistics2");
+        return mv;
+    }
+
     // 친한 멤버 조회
     @RequestMapping(value="dashboard/selectOftMem", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView join(@RequestParam Map<String, Object> paramMap) throws Exception {

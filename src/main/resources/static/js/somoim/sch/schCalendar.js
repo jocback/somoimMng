@@ -212,7 +212,7 @@ var schCalendar = {
         var schJsonList = schCalendar.parseJson(schList);
         tmpCalList = schJsonList;
 
-        calHtml += '<div class="fc-view fc-listMonth-view fc-list-view card card-primary" style="">';
+        calHtml += '<div class="fc-view fc-listMonth-view fc-list-view card card-primary" style="min-width:290px;">';
         calHtml += '    <div class="fc-scroller" style="overflow: hidden auto; height: '+(window.innerHeight-130)+'px;">';
         calHtml += '        <table class="fc-list-table table">';
         calHtml += '            <tbody>';

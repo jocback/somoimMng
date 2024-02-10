@@ -1,27 +1,33 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-<%--<script src="/lib/bootstrap/js/plugins-init/fullcalendar-init.js"></script>--%>
-<div class="content-body">
-
-    <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-            </ol>
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>일정관리</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">일정관리</li>
+                    <li class="breadcrumb-item active">일정캘린더</li>
+                </ol>
+            </div>
         </div>
-    </div>
-    <!-- row -->
+    </div><!-- /.container-fluid -->
+</section>
 
+<section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <h4>Calendar</h4>
-                        </div>
+                    <div class="card-header">
+                        <h3 class="card-title">일정 캘린더</h3>
+                    </div>
+
+<%--                    <div class="card-body">--%>
+                    <div class="card-body table-responsive p-0">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box m-b-50">
@@ -49,43 +55,6 @@
                                             <div class="fc-clear"></div>
                                         </div>
                                         <div class="fc-view-container" id="div_calGrid">
-                                            <div class="fc-view fc-month-view fc-basic-view">
-                                                <table class="table-bordered">
-                                                    <thead class="fc-head">
-                                                    <tr>
-                                                        <td class="fc-head-container ">
-                                                            <div class="fc-row table-bordered">
-                                                                <table class="table-bordered">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th class="fc-week-number " style="width: 23.5px;"><span>W</span></th>
-                                                                        <th class="fc-sun"><span>Sun</span></th>
-                                                                        <th class="fc-mon"><span>Mon</span></th>
-                                                                        <th class="fc-tue"><span>Tue</span></th>
-                                                                        <th class="fc-wed"><span>Wed</span></th>
-                                                                        <th class="fc-thu"><span>Thu</span></th>
-                                                                        <th class="fc-fri"><span>Fri</span></th>
-                                                                        <th class="fc-sat"><span>Sat</span></th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                </table>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody class="fc-body">
-                                                        <tr>
-                                                            <td class="">
-                                                                <div class="fc-scroller fc-day-grid-container" style="overflow: hidden;">
-                                                                    <div class="fc-day-grid fc-unselectable">
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -93,11 +62,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- /# card -->
             </div>
-            <!-- /# column -->
         </div>
     </div>
-    <!-- #/ container -->
-</div>
+</section>
+
 

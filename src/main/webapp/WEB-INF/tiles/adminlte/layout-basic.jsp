@@ -30,7 +30,7 @@
 <body class="hold-transition sidebar-mini">
 
 
-<div class="wrapper">
+<div class="wrapper ">
     <tiles:insertAttribute name="header"/>
 
     <tiles:insertAttribute name="side"/>
@@ -49,6 +49,6 @@
 <%--<script src="/lib/bootstrap/plugins/moment/moment.min.js"></script>--%>
 <%--<script src="/lib/bootstrap/plugins/fullcalendar/js/fullcalendar.min.js"></script>--%>
 <%--<script src="/lib/bootstrap/js/plugins-init/fullcalendar-init.js"></script>--%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/somoim<tiles:getAsString name="includeJs" />.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/somoim<tiles:getAsString name="includeJs" />.js?111"></script>
 </body>
 </html>

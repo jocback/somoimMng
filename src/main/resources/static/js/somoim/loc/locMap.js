@@ -1,10 +1,36 @@
-var container, options, map
+var container;      // 지도를 담을 영역
+var options;        // 지도 생성에 필요한 옵션
+var map;            // 지도 객체 생성
+var ps;             // 장소 검색 객체
+var infowindow;     // 인포윈도우(장소명 노출)
+
 var locMap = {
     init: function() {
+        locMap.loadMap();
+        locMap.bind();
+    },
+    bind: function() {
 
-        $("#map").css("height", window.innerHeight-157);
+        // 지도 열기
+        $("#btn_search").on('click', function() {
+            $(".modal-content").css('height', window.innerHeight-15);
+            $("#mapModal").show();
+        });
 
-        container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+        // 지도 닫기
+        $("#btn_mapModalClose").on('click', function() {
+            $("#mapModal").hide();
+        });
+
+        // 지명 검색하기
+        $("#btn_searchKeyword").on('click', function() {
+            ps.keywordSearch($("#inp_searchKeyword").val(), locMap.searchPlace);
+        });
+    },
+    loadMap: function() {
+        // $("#map").css("height", window.innerHeight-129.5);
+
+        container = $("#map")[0]; //지도를 담을 영역의 DOM 레퍼런스
         options = { //지도를 생성할 때 필요한 기본 옵션
             center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
             level: 3 //지도의 레벨(확대, 축소 정도)
@@ -12,11 +38,88 @@ var locMap = {
 
         map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
+        // 장소 검색 객체
+        ps = new kakao.maps.services.Places();
+
+        // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+        infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+
+
         container.style.width='100%';
-        container.style.height='800px';
+        container.style.height=window.innerHeight-157+'px';
 
         map.relayout();
-    }
+    },
+
+    // 지도 검색하기
+    searchPlace: function(data, status, pagination) {
+        console.log(data);
+        console.log(status);
+        console.log(pagination);
+        if (status === kakao.maps.services.Status.OK) {
+
+            locMap.drawSearchResult(data);
+
+            // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+            // LatLngBounds 객체에 좌표를 추가합니다
+            var bounds = new kakao.maps.LatLngBounds();
+
+            for (var i=0; i<data.length; i++) {
+                locMap.displayMarker(data[i]);
+                bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+            }
+
+            // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+            map.setBounds(bounds);
+        }
+    },
+    drawSearchResult: function(data) {
+        var resultHtml = '';
+        $.each(data, function(i, v){
+            resultHtml += '<div class="col-sm-12 invoice-col">';
+            resultHtml += '    <address>';
+            resultHtml += '        <strong><a href="javascript:locMap.moveToMap(\''+v.y+'\',\''+v.x+'\');">'+v.place_name+'</a></strong>';
+            resultHtml += '        <span class="text-muted small">'+v.category_name+'</span><br>';
+            if(!common.isEmpty(v.road_address_name)) {
+                resultHtml += '        '+v.road_address_name+'<br>';
+            } else {
+                resultHtml += '        '+v.address_name+'<br>';
+            }
+            resultHtml += '<a href="javascript:locMap.addressDetail(\''+v.place_url+'\')" class="btn btn-outline-dark btn-xs">상세보기</a>';
+            resultHtml += '    </address>';
+            resultHtml += '</div>';
+        });
+        $("#div_searchResult").html(resultHtml);
+    },
+    // 마커 체크
+    displayMarker(place) {
+        // 마커를 생성하고 지도에 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: new kakao.maps.LatLng(place.y, place.x)
+        });
+
+        // 마커에 클릭이벤트를 등록합니다
+        kakao.maps.event.addListener(marker, 'click', function() {
+            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+            infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+            infowindow.open(map, marker);
+            console.log(marker);
+            console.log(place);
+        });
+    },
+    // 지도 이동
+    moveToMap: function(lat, lng) {
+        $("#mapModal").hide();
+        map.setLevel(3);
+        var moveLatLon = new kakao.maps.LatLng(lat, lng);
+        map.panTo(moveLatLon);
+    },
+    // 지명 상세 보기
+    addressDetail: function(url) {
+        window.open(url);
+    },
 }
 
 $(function() {
