@@ -1,8 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!--**********************************
-Content body start
-***********************************-->
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=26faddbaa5c5f513af69537a4117eef7&libraries=services,clusterer"></script>
 <input type="hidden" id="type" value="${type}"/>
 <input type="hidden" id="modSeq" value="${schSeq}"/>
 
@@ -48,25 +47,90 @@ Content body start
                             <input type="text" class="form-control" placeholder="제목" id="schNm">
                         </div>
                     </div>
+
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>날짜</label>
                             <input type="text" class="form-control" placeholder="날짜" id="schDate">
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>시간</label>
                             <input type="text" class="form-control" placeholder="시간" id="schTime" value="1900">
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>장소</label>
                             <input type="text" class="form-control" placeholder="장소" id="schLoc">
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">장소</h3>
+
+                                <div class="card-tools">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-default" id="btn_search">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>순서</th>
+                                        <th>가게명</th>
+                                        <th>주소</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="순서" id="dgree" name="dgree">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="가게명" id="storeName" name="storeName">
+                                        </td>
+                                        <td>
+                                            <div class="input-group input-group">
+                                                <input type="text" class="form-control">
+                                                <span class="input-group-append">
+                                                    <button type="button" class="btn btn-info btn-flat" id="btn_searchAddress">검색</button>
+                                                </span>
+                                            </div>
+<%--                                            <input type="text" class="form-control" placeholder="주소" id="address" name="address">--%>
+<%--                                            <span class="input-group-append">--%>
+<%--                                                <button type="button" class="btn btn-info btn-flat">검색</button>--%>
+<%--                                            </span>--%>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="상세" id="addressDetail" name="addressDetail">
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
                     </div>
                 </div>
                 <div class="row">
@@ -91,6 +155,7 @@ Content body start
                     </div>
                 </div>
 
+
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
@@ -109,3 +174,30 @@ Content body start
     </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+
+
+<div class="modal" id="mapModal">
+    <div class="">
+        <div class="modal-content" style="overflow: auto;">
+            <div class="modal-header">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="장소, 주소, 버스 검색" id="inp_searchKeyword" value="스타벅스 서울대입구">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-default" id="btn_searchKeyword">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="button" class="close" id="btn_mapModalClose"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <!-- info row -->
+                    <div class="row invoice-info" id="div_searchResult">
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

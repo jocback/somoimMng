@@ -18,26 +18,10 @@
   .info .link {color: #5085BB;}
 </style>
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>모임장소</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">모임장소</li>
-                    <li class="breadcrumb-item active">지도보기</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
-
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="input-group col-md-10" style="position: absolute; z-index: 2; justify-content: right">
+            <div class="input-group col-md-12" style="position: absolute; z-index: 2; justify-content: right">
 <%--                <input type="search" class="form-control form-control-lg" placeholder="Type your keywords here">--%>
                 <div class="input-group-append">
                     <button type="button" class="btn btn-lg btn-default" id="btn_search">
@@ -70,6 +54,8 @@
                 <div class="container-fluid">
                     <!-- info row -->
                     <div class="row invoice-info" id="div_searchResult">
+                    </div>
+                    <div class="row invoice-info" id="div_autoCompResult">
                     </div>
                     <!-- /.row -->
                 </div>

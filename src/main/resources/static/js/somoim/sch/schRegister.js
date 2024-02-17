@@ -1,5 +1,5 @@
 var memList = new Array();
-
+var ps;
 var schRegister = {
     // 최조실행
     init: function() {
@@ -8,6 +8,10 @@ var schRegister = {
         if($("#type").val()=='modify') {
             schRegister.selectDetail();
         }
+        schRegister.loadMap();
+    },
+    loadMap: function() {
+        ps = new kakao.maps.services.Places();
     },
     bind: function() {
         $("#auto_member").autocomplete({
@@ -24,6 +28,56 @@ var schRegister = {
                 return false;
             }
         });
+        // 지도 열기
+        $("#btn_search").on('click', function() {
+            $(".modal-content").css('height', window.innerHeight-15);
+            $("#mapModal").show();
+        });
+
+        // 지도 닫기
+        $("#btn_mapModalClose").on('click', function() {
+            $("#mapModal").hide();
+        });
+        // 지명 검색하기
+        $("#btn_searchKeyword").on('click', function() {
+            ps.keywordSearch($("#inp_searchKeyword").val(), schRegister.searchPlace);
+        });
+
+        // 주소 검색
+        $("#btn_searchAddress").on('click', function() {
+            popup.openWindowPopup('/popup/locMapPopup', '', function(data) {
+                console.log(data);
+            })
+        });
+    },
+    // 지도 검색하기
+    searchPlace: function(data, status, pagination) {
+        console.log(data);
+        console.log(status);
+        console.log(pagination);
+        if (status === kakao.maps.services.Status.OK) {
+            schRegister.drawSearchResult(data);
+        }
+    },
+    drawSearchResult: function(data) {
+        var resultHtml = '';
+        $.each(data, function(i, v){
+            resultHtml += '<div class="col-sm-12 invoice-col">';
+            resultHtml += '    <address>';
+            resultHtml += '        <strong><a href="javascript:locMap.moveToMap(\''+v.y+'\',\''+v.x+'\');">'+v.place_name+'</a></strong>';
+            resultHtml += '        <span class="text-muted small">'+v.category_name+'</span><br>';
+            if(!common.isEmpty(v.road_address_name)) {
+                resultHtml += '        '+v.road_address_name+'<br>';
+            } else {
+                resultHtml += '        '+v.address_name+'<br>';
+            }
+            resultHtml += '        '+v.phone+'<br>';
+
+            resultHtml += '<a href="javascript:locMap.addressDetail(\''+v.place_url+'\')" class="btn btn-outline-dark btn-xs">카카오지도</a>';
+            resultHtml += '    </address>';
+            resultHtml += '</div>';
+        });
+        $("#div_searchResult").html(resultHtml);
     },
     // 회원추가
     addMember: function(dat) {

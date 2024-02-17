@@ -9,8 +9,13 @@
         <put-attribute name="footer" value="/WEB-INF/tiles/layouts/footer.jsp"/>
     </definition>
 
-    <definition name="layout-login" template="/WEB-INF/tiles/layouts/layout-login.jsp">
-        <put-attribute name="include" value="/WEB-INF/tiles/layouts/include.jsp"/>
+    <definition name="layout-login" template="/WEB-INF/tiles/adminlte/layout-login.jsp">
+        <put-attribute name="include" value="/WEB-INF/tiles/adminlte/include.jsp"/>
+        <put-attribute name="body" value=""/>
+    </definition>
+
+    <definition name="layout-popup" template="/WEB-INF/tiles/adminlte/layout-popup.jsp">
+        <put-attribute name="include" value="/WEB-INF/tiles/adminlte/include.jsp"/>
         <put-attribute name="body" value=""/>
     </definition>
 
@@ -31,6 +36,11 @@
     <definition name="sample/*" extends="layout-sample">
         <put-attribute name="body" value="/WEB-INF/views/sample/{1}.jsp"/>
         <put-attribute name="includeJs" value="/sample/{1}"/>
+    </definition>
+
+    <definition name="popup/*" extends="layout-popup">
+        <put-attribute name="body" value="/WEB-INF/views/popup/{1}.jsp"/>
+        <put-attribute name="includeJs" value="/popup/{1}"/>
     </definition>
 
     <definition name="*/*" extends="layout-tiles">

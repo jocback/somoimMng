@@ -28,6 +28,9 @@ Scripts
 <script src="/lib/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/lib/adminlte/dist/js/adminlte.min.js"></script>
 
+<!-- 주소 검색 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 
 <%--<script src="/lib/bootstrap/plugins/fullcalendar/js/fullcalendar.min.js"></script>--%>
 
@@ -36,6 +39,7 @@ Scripts
 <script src="/js/common/stringUtil.js"></script>
 <script src="/js/common/paging.js"></script>
 <script src="/js/common/common.js"></script>
+<script src="/js/common/popup.js"></script>
 
 <!-- jQuery -->
 <%--<script src="/lib/jquery/js/jquery-3.6.0.min.js"></script>--%>

@@ -6,16 +6,18 @@ var infowindow;     // 인포윈도우(장소명 노출)
 var overlay;        // 커스텀 overlay
 var clusterer;
 
-var locMap = {
+var locMapPopup = {
     init: function() {
-        locMap.loadMap();
-        locMap.bind();
+        $(".modal-content").css('height', window.innerHeight);
+        $("#mapModal").show();
+        locMapPopup.loadMap();
+        locMapPopup.bind();
     },
     bind: function() {
 
         // 지도 열기
         $("#btn_search").on('click', function() {
-            $(".modal-content").css('height', window.innerHeight-15);
+            $(".modal-content").css('height', window.innerHeight);
             $("#mapModal").show();
         });
 
@@ -26,7 +28,24 @@ var locMap = {
 
         // 지명 검색하기
         $("#btn_searchKeyword").on('click', function() {
-            ps.keywordSearch($("#inp_searchKeyword").val(), locMap.searchPlace);
+            ps.keywordSearch($("#inp_searchKeyword").val(), locMapPopup.searchPlace);
+        });
+
+        $("#inp_searchKeyword").on('keyup', function() {
+            var replaceName = /^[가-힣a-zA-Z\s]+$/;
+            var str = $("#inp_searchKeyword").val();
+            if(str.length>0) {
+                if(str.match(replaceName)) {
+                    var param = {
+                        keyword : encodeURI(str)
+                    }
+                    common.ajax('/loc/getAutoComp', param, function(res) {
+                        console.log(res);
+                        console.log(JSON.parse(res.result));
+                        locMapPopup.drawAutoCompResult(JSON.parse(res.result));
+                    });
+                }
+            }
         });
     },
     loadMap: function() {
@@ -55,7 +74,7 @@ var locMap = {
 
 
         container.style.width='100%';
-        container.style.height=window.innerHeight-157+'px';
+        container.style.height=window.innerHeight+'px';
 
         map.relayout();
     },
@@ -66,14 +85,14 @@ var locMap = {
         console.log(pagination);
         if (status === kakao.maps.services.Status.OK) {
 
-            locMap.drawSearchResult(data);
+            locMapPopup.drawSearchResult(data);
 
             // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
             // LatLngBounds 객체에 좌표를 추가합니다
             var bounds = new kakao.maps.LatLngBounds();
 
             for (var i=0; i<data.length; i++) {
-                locMap.displayMarker(data[i]);
+                locMapPopup.displayMarker(data[i]);
                 bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
             }
 
@@ -82,11 +101,13 @@ var locMap = {
         }
     },
     drawSearchResult: function(data) {
+        $("#div_searchResult").show();
+        $("#div_autoCompResult").hide();
         var resultHtml = '';
         $.each(data, function(i, v){
             resultHtml += '<div class="col-sm-12 invoice-col">';
             resultHtml += '    <address>';
-            resultHtml += '        <strong><a href="javascript:locMap.moveToMap(\''+v.y+'\',\''+v.x+'\');">'+v.place_name+'</a></strong>';
+            resultHtml += '        <strong><a href="javascript:locMapPopup.moveToMap(\''+v.y+'\',\''+v.x+'\');">'+v.place_name+'</a></strong>';
             resultHtml += '        <span class="text-muted small">'+v.category_name+'</span><br>';
             if(!common.isEmpty(v.road_address_name)) {
                 resultHtml += '        '+v.road_address_name+'<br>';
@@ -95,11 +116,29 @@ var locMap = {
             }
             resultHtml += '        '+v.phone+'<br>';
 
-            resultHtml += '<a href="javascript:locMap.addressDetail(\''+v.place_url+'\')" class="btn btn-outline-dark btn-xs">카카오지도</a>';
+            resultHtml += '<a href="javascript:locMapPopup.addressDetail(\''+v.place_url+'\')" class="btn btn-outline-dark btn-xs">상세보기</a>';
             resultHtml += '    </address>';
             resultHtml += '</div>';
         });
         $("#div_searchResult").html(resultHtml);
+    },
+    // 자동완성 목록
+    drawAutoCompResult: function(data) {
+        $("#div_searchResult").hide();
+        $("#div_autoCompResult").show();
+        var resultHtml = '';
+        $.each(data.items, function(i, v){
+            resultHtml += '<div class="col-sm-12 invoice-col">';
+            resultHtml += '    <address>';
+            resultHtml += '        <strong><a href="javascript:locMapPopup.selectAutoComp(\''+v.key+'\');">'+v.key+'</a></strong>';
+            resultHtml += '    </address>';
+            resultHtml += '</div>';
+        });
+        $("#div_autoCompResult").html(resultHtml);
+    },
+    // 자동완성 선택
+    selectAutoComp: function(keyword) {
+        ps.keywordSearch($("#inp_searchKeyword").val(), locMapPopup.searchPlace);
     },
     // 마커 체크
     displayMarker(place) {
@@ -130,7 +169,7 @@ var locMap = {
             content += '    <div class="info">';
             content += '        <div class="title">';
             content += '            '+place.place_name;
-            content += '            <div class="close" onclick="locMap.closeOverlay()" title="닫기"></div>';
+            content += '            <div class="close" onclick="locMapPopup.closeOverlay()" title="닫기"></div>';
             content += '        </div>';
             content += '        <div class="body">';
             content += '            <div class="img">';
@@ -176,5 +215,5 @@ var locMap = {
 }
 
 $(function() {
-    locMap.init();
+    locMapPopup.init();
 });
