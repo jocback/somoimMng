@@ -80,9 +80,7 @@
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
                                         <div class="input-group-append">
-                                            <button type="button" class="btn btn-default" id="btn_search">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                                            <button type="submit" class="btn btn-info" id="btn_addStore">추가</button>
                                         </div>
                                     </div>
                                 </div>
@@ -95,36 +93,31 @@
                                         <th>순서</th>
                                         <th>가게명</th>
                                         <th>주소</th>
-                                        <th>Status</th>
+                                        <th>상세주소</th>
+                                        <th>삭제</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" placeholder="순서" id="dgree" name="dgree">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" placeholder="가게명" id="storeName" name="storeName">
-                                        </td>
-                                        <td>
-                                            <div class="input-group input-group">
-                                                <input type="text" class="form-control">
-                                                <span class="input-group-append">
-                                                    <button type="button" class="btn btn-info btn-flat" id="btn_searchAddress">검색</button>
-                                                </span>
-                                            </div>
-<%--                                            <input type="text" class="form-control" placeholder="주소" id="address" name="address">--%>
-<%--                                            <span class="input-group-append">--%>
-<%--                                                <button type="button" class="btn btn-info btn-flat">검색</button>--%>
-<%--                                            </span>--%>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" placeholder="상세" id="addressDetail" name="addressDetail">
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                    </tr>
+                                    <tbody id="tb_storeList">
+                                        <tr>
+                                            <td>1</td>
+                                            <td><input type="text" class="form-control" placeholder="가게명" name="storeName"></td>
+                                            <td>
+                                                <div class="input-group input-group">
+                                                    <input type="text" class="form-control" name="roadAddressName"/>
+                                                    <span class="input-group-append">
+                                                        <button type="button" class="btn btn-info btn-flat" onclick="schRegister.searchStoreAddress(this);">검색</button>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td><input type="text" class="form-control" placeholder="상세" id="addressDetail" name="addressDetail"></td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-flat" onclick="schRegister.removeStore(this);">삭제</button>
+                                            </td>
+                                            <input type="hidden" name="addressName"/>
+                                            <input type="hidden" name="lat" />
+                                            <input type="hidden" name="lng" />
+                                            <input type="hidden" name="categoryName"/>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

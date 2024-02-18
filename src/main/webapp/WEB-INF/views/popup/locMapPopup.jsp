@@ -41,7 +41,7 @@
         <div class="modal-content" style="overflow: auto;">
             <div class="modal-header">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="장소, 주소, 버스 검색" id="inp_searchKeyword" value="스타벅스 서울대입구">
+                    <input type="text" class="form-control" placeholder="장소, 주소, 버스 검색" id="inp_searchKeyword" >
                     <div class="input-group-append">
                         <button type="button" class="btn btn-default" id="btn_searchKeyword">
                             <i class="fa fa-search"></i>

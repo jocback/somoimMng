@@ -10,7 +10,7 @@ var popup = {
         console.log(url);
         console.log(options);
         console.log(callback);
-        var name = '_blank';
+        var name = '';
         var options;
         popup.callback = undefined;
         if(option!='' && options!=undefined) {
@@ -22,6 +22,6 @@ var popup = {
         if(callback!=undefined) {
             popup.callback = callback;
         }
-        var newWindow = window.open(url, name, options);
+        var newWindow = window.open(url, "", name, options);
     },
 }

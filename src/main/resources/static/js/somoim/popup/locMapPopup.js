@@ -100,6 +100,7 @@ var locMapPopup = {
             map.setBounds(bounds);
         }
     },
+    // 지도 검색결과 출력
     drawSearchResult: function(data) {
         $("#div_searchResult").show();
         $("#div_autoCompResult").hide();
@@ -116,11 +117,33 @@ var locMapPopup = {
             }
             resultHtml += '        '+v.phone+'<br>';
 
-            resultHtml += '<a href="javascript:locMapPopup.addressDetail(\''+v.place_url+'\')" class="btn btn-outline-dark btn-xs">상세보기</a>';
+            resultHtml += '<a href="javascript:locMapPopup.addressDetail(\''+v.place_url+'\')" class="btn btn-outline-dark btn-xs">카카오지도</a>&nbsp;';
+            resultHtml += '<a href="javascript:void(0);" onclick="locMapPopup.selectStore(this)" class="btn btn-info btn-xs">가게 선택하기</a>';
+            resultHtml += '<input type="hidden" name="hidplace_name" value="'+v.place_name+'"/>';
+            resultHtml += '<input type="hidden" name="hidaddress_name" value="'+v.address_name+'"/>';
+            resultHtml += '<input type="hidden" name="hidroad_address_name" value="'+v.road_address_name+'"/>';
+            resultHtml += '<input type="hidden" name="hidcategory_name" value="'+v.category_name+'"/>';
+            resultHtml += '<input type="hidden" name="hidx" value="'+v.x+'"/>';
+            resultHtml += '<input type="hidden" name="hidy" value="'+v.y+'"/>';
             resultHtml += '    </address>';
             resultHtml += '</div>';
         });
         $("#div_searchResult").html(resultHtml);
+    },
+    selectStore: function(el) {
+        // console.log($(el));
+        // console.log($(el).html());
+        // var storeAddress = $(el).parents('address');
+        // console.log($(storeAddress).find('input[type=hidden]'));
+        var addressEl = $(el).parent('address');
+        var hidArr = addressEl.find('input[type=hidden]')
+        var storeParam = {};
+        $.each(hidArr, function(i,v){
+            storeParam[$(v).attr('name').replace("hid","")]=$(v).attr('value');
+        });
+
+        opener.popup.callback(storeParam);
+        window.close();
     },
     // 자동완성 목록
     drawAutoCompResult: function(data) {
@@ -138,6 +161,7 @@ var locMapPopup = {
     },
     // 자동완성 선택
     selectAutoComp: function(keyword) {
+        $("#inp_searchKeyword").val(keyword);
         ps.keywordSearch($("#inp_searchKeyword").val(), locMapPopup.searchPlace);
     },
     // 마커 체크
@@ -164,6 +188,7 @@ var locMapPopup = {
                 overlay.setMap(null);
             }
 
+            console.log(place);
             var content = '';
             content += '<div class="wrap">';
             content += '    <div class="info">';
@@ -209,6 +234,7 @@ var locMapPopup = {
     addressDetail: function(url) {
         window.open(url);
     },
+    // 검색창 닫기
     closeOverlay: function() {
         overlay.setMap(null);
     },
