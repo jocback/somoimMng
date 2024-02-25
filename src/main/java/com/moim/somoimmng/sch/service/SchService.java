@@ -1,5 +1,8 @@
 package com.moim.somoimmng.sch.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.Page;
 import com.moim.somoimmng.sch.mapper.SchMapper;
 import java.text.SimpleDateFormat;
@@ -31,10 +34,11 @@ public class SchService {
      * @param  Map<String, Object>
      * @return int
      */
-    public int insertSmiSche(Map<String, Object> paramMap) {
+    public int insertSmiSche(Map<String, Object> paramMap) throws JsonProcessingException {
 
         List<Map<String, Object>> memList = new ArrayList<Map<String, Object>>();
         String[] seqArr = String.valueOf(paramMap.get("memSeq")).split("\\|");
+        List<Map<String, Object>> storeList = new ObjectMapper().readValue((String)paramMap.get("locList"), new TypeReference<List<Map<String, Object>>>(){});
 
         for(int i=0; i<seqArr.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -47,6 +51,11 @@ public class SchService {
         schMapper.insertSmiSche(paramMap);
         if(seqArr.length>0) {
             schMapper.insertSmiAtnMng(paramMap);
+        }
+        paramMap.put("storeList", storeList);
+        if(storeList.size()>0) {
+            schMapper.deleteSchStore(paramMap);
+            schMapper.insertSchStore(paramMap);
         }
         return 0;
     }
@@ -68,10 +77,11 @@ public class SchService {
      * @param  Map<String, Object>
      * @return int
      */
-    public int modifySmiSche(Map<String, Object> paramMap) {
+    public int modifySmiSche(Map<String, Object> paramMap) throws JsonProcessingException {
 
         List<Map<String, Object>> memList = new ArrayList<Map<String, Object>>();
         String[] seqArr = String.valueOf(paramMap.get("memSeq")).split("\\|");
+        List<Map<String, Object>> storeList = new ObjectMapper().readValue((String)paramMap.get("locList"), new TypeReference<List<Map<String, Object>>>(){});
 
         for(int i=0; i<seqArr.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -84,6 +94,12 @@ public class SchService {
         schMapper.updateSmiSche(paramMap);
         schMapper.deleteSmiAtnMng(paramMap);
         schMapper.insertSmiAtnMng(paramMap);
+
+        paramMap.put("storeList", storeList);
+        if(storeList.size()>0) {
+            schMapper.deleteSchStore(paramMap);
+            schMapper.insertSchStore(paramMap);
+        }
         return 0;
     }
 
@@ -95,6 +111,7 @@ public class SchService {
     public int deleteSmiSche(Map<String, Object> paramMap) {
         schMapper.deleteSmiSche(paramMap);
         schMapper.deleteSmiAtnMng(paramMap);
+        schMapper.deleteSchStore(paramMap);
         return 0;
     }
 
@@ -116,6 +133,16 @@ public class SchService {
     public List<Map<String, Object>> selectCalSchList(Map<String, Object> paramMap) {
         List<Map<String, Object>> schList = schMapper.selectCalSchList(paramMap);
         return schList;
+    }
+
+    /**
+     * @title  소모임장소 조회
+     * @param  List<Map<String, Object>>
+     * @return int
+     */
+    public List<Map<String, Object>> selectSchStoreList(Map<String, Object> paramMap) {
+        List<Map<String, Object>> schStoreList = schMapper.selectSchStoreList(paramMap);
+        return schStoreList;
     }
 
 }

@@ -72,61 +72,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">장소</h3>
-
-                                <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-info" id="btn_addStore">추가</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>순서</th>
-                                        <th>가게명</th>
-                                        <th>주소</th>
-                                        <th>상세주소</th>
-                                        <th>삭제</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="tb_storeList">
-                                        <tr>
-                                            <td>1</td>
-                                            <td><input type="text" class="form-control" placeholder="가게명" name="storeName"></td>
-                                            <td>
-                                                <div class="input-group input-group">
-                                                    <input type="text" class="form-control" name="roadAddressName"/>
-                                                    <span class="input-group-append">
-                                                        <button type="button" class="btn btn-info btn-flat" onclick="schRegister.searchStoreAddress(this);">검색</button>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                            <td><input type="text" class="form-control" placeholder="상세" id="addressDetail" name="addressDetail"></td>
-                                            <td>
-                                                <button type="button" class="btn btn-danger btn-flat" onclick="schRegister.removeStore(this);">삭제</button>
-                                            </td>
-                                            <input type="hidden" name="addressName"/>
-                                            <input type="hidden" name="lat" />
-                                            <input type="hidden" name="lng" />
-                                            <input type="hidden" name="categoryName"/>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>인원</label>
@@ -147,8 +92,64 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">장소</h3>
 
+                                <div class="card-tools">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-info" id="btn_addStore">추가</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <form id="frm_list">
 
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap" style="min-width: 700px;">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 5%;">순서</th>
+                                        <th style="width: 15%;">가게명</th>
+                                        <th style="width: 40%;">주소</th>
+                                        <th style="width: 30%;">상세주소</th>
+                                        <th style="width: 10%;">삭제</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tb_storeList">
+                                        <tr>
+                                            <td>1</td>
+                                            <td><input type="text" class="form-control" placeholder="가게명" name="storeName"></td>
+                                            <td>
+                                                <div class="input-group input-group">
+                                                    <input type="text" class="form-control" name="roadAddressName" />
+                                                    <span class="input-group-append">
+                                                            <button type="button" class="btn btn-info btn-flat" onclick="schRegister.searchStoreAddress(this);">검색</button>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td><input type="text" class="form-control" placeholder="상세" name="addressDetail"></td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-flat" onclick="schRegister.removeStore(this);">삭제</button>
+                                            </td>
+                                            <input type="hidden" name="addressName"/>
+                                            <input type="hidden" name="lat" />
+                                            <input type="hidden" name="lng" />
+                                            <input type="hidden" name="categoryName"/>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            </form>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">

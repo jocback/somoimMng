@@ -1,5 +1,8 @@
 package com.moim.somoimmng.sch.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.moim.somoimmng.sch.service.SchService;
@@ -69,8 +72,6 @@ public class SchController {
     public ModelAndView insertSmiSche(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
         paramMap.put("smiSeq", LoginUtil.getInfoValue("smiSeq"));
-        Object obj = paramMap.get("seqArr");
-        List<String> strList = (List<String>) obj;
         paramMap.put("smiSeq", "1");
         schService.insertSmiSche(paramMap);
 
@@ -158,4 +159,14 @@ public class SchController {
         return mv;
     }
 
+    // 소모임장소 조회
+    @RequestMapping(value="sch/selectSchStoreList", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView selectSchStoreList(@RequestParam Map<String, Object> paramMap) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<Map<String, Object>> schStoreList = schService.selectSchStoreList(paramMap);
+        mv.addObject("schStoreList", schStoreList);
+
+        mv.setViewName("jsonView");
+        return mv;
+    }
 }

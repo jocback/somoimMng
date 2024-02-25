@@ -153,4 +153,63 @@
     </select>
 
 
+    <!-- 소모임장소 등록 -->
+    <insert id="insertSchStore" parameterType="paramMap">
+        INSERT
+        INTO
+        SCH_STORE
+        (
+          SCH_SEQ
+        , STORE_SEQ
+        , CATEGORY_NAME
+        , STORE_NAME
+        , ADDRESS_NAME
+        , ROAD_ADDRESS_NAME
+        , ADDRESS_DETAIL
+        , LNG
+        , LAT
+        )
+        VALUES
+        <foreach collection="storeList" item="item" separator=",">
+            (
+              #{schSeq}
+            , #{item.storeSeq}
+            , #{item.categoryName}
+            , #{item.storeName}
+            , #{item.addressName}
+            , #{item.roadAddressName}
+            , #{item.addressDetail}
+            , #{item.lng}
+            , #{item.lat}
+            )
+        </foreach>
+    </insert>
+
+    <!-- 소모임장소 삭제 -->
+    <delete id="deleteSchStore" parameterType="paramMap">
+        DELETE
+        FROM SCH_STORE
+        WHERE SCH_SEQ = #{schSeq}
+    </delete>
+
+    <!-- 소모임장소 조회 -->
+    <select id="selectSchStoreList" parameterType="paramMap" resultType="camelMap">
+        SELECT
+            SCH_SEQ
+             , STORE_SEQ
+             , CATEGORY_NAME
+             , STORE_NAME
+             , ADDRESS_NAME
+             , ROAD_ADDRESS_NAME
+             , ADDRESS_DETAIL
+             , LNG
+             , LAT
+             , FRST_WRT_DTIM
+             , LAST_CHNG_DTIM
+        FROM
+            SCH_STORE
+        WHERE SCH_SEQ = #{schSeq}
+    </select>
+
+
 </mapper>

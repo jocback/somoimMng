@@ -166,7 +166,7 @@ var locMapPopup = {
     },
     // 마커 체크
     displayMarker(place) {
-        // 마커를 생성하고 지도에 표시합니다
+        // 마커를 생성하고 지도에 표시          합니다
         var marker = new kakao.maps.Marker({
             map: map,
             position: new kakao.maps.LatLng(place.y, place.x)

@@ -37,4 +37,13 @@ public interface SchMapper {
     // 캘린더 일정 조회
     List<Map<String, Object>> selectCalSchList(Map<String, Object> paramMap);
 
+    // 소모임장소 등록
+    int insertSchStore(Map<String, Object> paramMap);
+
+    // 소모임장소 삭제
+    int deleteSchStore(Map<String, Object> paramMap);
+
+    // 소모임장소 조회
+    List<Map<String, Object>> selectSchStoreList(Map<String, Object> paramMap);
+
 }
