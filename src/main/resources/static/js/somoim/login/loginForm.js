@@ -4,9 +4,14 @@ var loginForm = {
     bind: function() {
     },
     signin: function() {
+
+        var hPwd = CryptoJS.SHA512($("#userPw").val());
+        var usrPwd = CryptoJS.AES.encrypt(hPwd.toString(), "somoim");
+        $("#encPw").val(usrPwd);
+
         var param = {
             userId: $("#userId").val(),
-            userPw: $("#userPw").val()
+            userPw: $("#encPw").val()
         };
         common.ajax("/login", param, function(res) {
             console.log('login Return');

@@ -88,12 +88,15 @@ dependencies {
     // common-lang3
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.13.0'
 
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.9'
+
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
     // devtools
     implementation 'org.springframework.boot:spring-boot-devtools:2.7.4'
+
 }
 
 tasks.named('test') {

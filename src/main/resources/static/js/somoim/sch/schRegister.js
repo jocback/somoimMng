@@ -170,18 +170,34 @@ var schRegister = {
         var locArray = new Array();
         var len = storeList.storeName.length;
 
-        for(var i=0; i<len; i++) {
+        if(typeof(storeList.storeName)=='string') {
             var locJson = {
-                storeSeq: i+1,
-                addressDetail: storeList.addressDetail[i],
-                addressName: storeList.addressName[i],
-                categoryName: storeList.categoryName[i],
-                lat: storeList.lat[i],
-                lng: storeList.lng[i],
-                roadAddressName: storeList.roadAddressName[i],
-                storeName: storeList.storeName[i],
+                storeSeq: 1,
+                addressDetail: storeList.addressDetail,
+                addressName: storeList.addressName,
+                categoryName: storeList.categoryName,
+                lat: storeList.lat,
+                lng: storeList.lng,
+                roadAddressName: storeList.roadAddressName,
+                storeName: storeList.storeName,
             };
             locArray.push(locJson);
+        } else {
+            var len = storeList.storeName.length;
+
+            for(var i=0; i<len; i++) {
+                var locJson = {
+                    storeSeq: i+1,
+                    addressDetail: storeList.addressDetail[i],
+                    addressName: storeList.addressName[i],
+                    categoryName: storeList.categoryName[i],
+                    lat: storeList.lat[i],
+                    lng: storeList.lng[i],
+                    roadAddressName: storeList.roadAddressName[i],
+                    storeName: storeList.storeName[i],
+                };
+                locArray.push(locJson);
+            }
         }
 
         var param = {
@@ -197,7 +213,7 @@ var schRegister = {
         console.log(param);
 
         common.ajax('/sch/insertSmiSche', param, function(res) {
-            // location.reload()
+            location.reload()
         });
     },
     // 일정 수정

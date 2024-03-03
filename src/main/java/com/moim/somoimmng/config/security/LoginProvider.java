@@ -2,6 +2,7 @@ package com.moim.somoimmng.config.security;
 
 import com.moim.somoimmng.login.service.LoginService;
 import com.moim.somoimmng.login.vo.UserVO;
+import com.moim.somoimmng.util.EncUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,7 @@ public class LoginProvider implements AuthenticationProvider {
 
         String userId = authentication.getName();
         String userPw = (String) authentication.getCredentials();
+        String decPw = EncUtil.decrypt(userPw, "somoim");
 
 
         Object resultObj = null;
@@ -59,7 +61,7 @@ public class LoginProvider implements AuthenticationProvider {
         }
 
         // 비밀번호 체크
-        if(!userPw.equals(resultUserPw)) {
+        if(!decPw.equals(resultUserPw)) {
             throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
         }
 

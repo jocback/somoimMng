@@ -70,6 +70,17 @@ public class LocController {
         return mv;
     }
 
+    // 소모임장소 조회
+    @RequestMapping(value="loc/selectMapStoreList", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView selectSchStoreList(@RequestParam Map<String, Object> paramMap) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<Map<String, Object>> mapStoreList = locService.selectMapStoreList(paramMap);
+        mv.addObject("mapStoreList", mapStoreList);
+
+        mv.setViewName("jsonView");
+        return mv;
+    }
+
 //    public static void main(String[] args) {
 //        // TODO Auto-generated method stub
 //        try {

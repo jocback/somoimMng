@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
+<input type="hidden" id="encPw" name="encPw"/>
 <div class="login-form-bg h-100">
     <div class="container h-100">
         <div class="row justify-content-center h-100">

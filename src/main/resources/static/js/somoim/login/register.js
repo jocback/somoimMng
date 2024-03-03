@@ -4,9 +4,13 @@ var register = {
     bind: function() {
     },
     join: function() {
+        var hPwd = CryptoJS.SHA512($("#userPw").val());
+        var usrPwd = CryptoJS.AES.encrypt(hPwd.toString(), "somoim");
+        $("#encPw").val(usrPwd);
+
         var param = {
             userId: $("#userId").val(),
-            userPw: $("#userPw").val(),
+            userPw: $("#encPw").val(),
             userNm: $("#userNm").val(),
             age: $("#age").val(),
             gender: $("#gender").val(),

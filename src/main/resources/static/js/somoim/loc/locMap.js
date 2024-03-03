@@ -29,12 +29,13 @@ var locMap = {
             ps.keywordSearch($("#inp_searchKeyword").val(), locMap.searchPlace);
         });
     },
+    // 지도 조회
     loadMap: function() {
         // $("#map").css("height", window.innerHeight-129.5);
 
         container = $("#map")[0]; //지도를 담을 영역의 DOM 레퍼런스
         options = { //지도를 생성할 때 필요한 기본 옵션
-            center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+            center: new kakao.maps.LatLng(37.48025932001686, 126.95089697194955), //지도의 중심좌표.
             level: 3 //지도의 레벨(확대, 축소 정도)
         };
 
@@ -46,18 +47,125 @@ var locMap = {
         // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
         // infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
-        // clusterer = new kakao.maps.MarkerClusterer({
-        //     map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
-        //     averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-        //     minLevel: 10 // 클러스터 할 최소 지도 레벨
-        // });
+        kakao.maps.event.addListener(map, 'dragend', function() {
+            locMap.dragEvent();
+        });
+        kakao.maps.event.addListener(map, 'zoom_changed', function() {
+            locMap.dragEvent();
+        });
 
+        // 클러스터 추가하기
+        clusterer = new kakao.maps.MarkerClusterer({
+            map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+            averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+            minLevel: 10, // 클러스터 할 최소 지도 레벨
+            disableClickZoom: true
+        });
+
+        locMap.addCluster();
 
 
         container.style.width='100%';
         container.style.height=window.innerHeight-157+'px';
 
         map.relayout();
+    },
+    // 지도 이동 이이벤트
+    dragEvent: function() {
+        clusterer.clear();
+        locMap.addCluster();
+
+        // var message = '변경된 지도 중심좌표는 ' + latlng.getLat() + ' 이고, ';
+        // message += '경도는 ' + latlng.getLng() + ' 입니다';
+
+        // console.log(message);
+        // var resultDiv = document.getElementById('result');
+        // resultDiv.innerHTML = message;
+    },
+    // 클러스터 추가하기
+    addCluster: function() {
+
+        var bounds = map.getBounds();
+
+        // 클러스터 DB 조회
+        var param = {
+            bfLat: bounds.getSouthWest().getLat(),
+            bfLng: bounds.getSouthWest().getLng(),
+            afLat: bounds.getNorthEast().getLat(),
+            afLng: bounds.getNorthEast().getLng(),
+        };
+        common.ajax('/loc/selectMapStoreList', param, function(data){
+
+            var markers = $(data.mapStoreList).map(function(i, position) {
+                console.log('position');
+                console.log(position);
+                var marker = new kakao.maps.Marker({
+                    // map: map,
+                    position: new kakao.maps.LatLng(position.lat, position.lng)
+                });
+
+                kakao.maps.event.addListener(marker, 'click', function() {
+                    console.log('click event');
+                    console.log(position);
+
+                    if(overlay!=undefined && overlay.getMap()!=null) {
+                        overlay.setMap(null);
+                    }
+
+                    var content = '';
+                    content += '<div class="wrap">';
+                    content += '    <div class="info">';
+                    content += '        <div class="title">';
+                    content += '            '+position.storeName;
+                    content += '            <div class="close" onclick="locMap.closeOverlay()" title="닫기"></div>';
+                    content += '        </div>';
+                    content += '        <div class="body">';
+                    content += '            <div class="img">';
+                    content += '                <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/thumnail.png" width="73" height="70">';
+                    content += '           </div>';
+                    content += '            <div class="desc">';
+                    content += '                <div class="ellipsis">'+position.roadAddressName+'</div>';
+                    content += '                <div class="jibun ellipsis">'+position.addressName+'</div>';
+                    content += '                <div class="ellipsis">'+position.categoryName+'</div>';
+                    // content += '                <div class="ellipsis">'+position.phone+'</div>';
+                    // content += '                <div><a href="'+position.place_url+'" target="_blank" class="link">상세보기</a></div>';
+                    content += '            </div>';
+                    content += '        </div>';
+                    content += '    </div>';
+                    content += '</div>';
+
+                    overlay = new kakao.maps.CustomOverlay({
+                        content: content,
+                        map: map,
+                        position: marker.getPosition()
+                    });
+                    overlay.setMap(map);
+                });
+
+                return marker;
+
+            });
+            console.log(markers);
+
+            // var marker = new kakao.maps.Marker({
+            //     map: map,
+            //     position: new kakao.maps.LatLng(place.y, place.x)
+            // });
+
+
+            clusterer.addMarkers(markers);
+
+        });
+
+        kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
+
+            alert('cluster click');
+            // 현재 지도 레벨에서 1레벨 확대한 레벨
+            // var level = map.getLevel()-1;
+
+            // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
+            // map.setLevel(level, {anchor: cluster.getCenter()});
+        });
     },
     // 지도 검색하기
     searchPlace: function(data, status, pagination) {
@@ -102,7 +210,8 @@ var locMap = {
         $("#div_searchResult").html(resultHtml);
     },
     // 마커 체크
-    displayMarker(place) {
+
+    displayMarker: function(place) {
         // 마커를 생성하고 지도에 표시합니다
         var marker = new kakao.maps.Marker({
             map: map,
@@ -154,8 +263,6 @@ var locMap = {
             });
             overlay.setMap(map);
         });
-
-
 
 
     },

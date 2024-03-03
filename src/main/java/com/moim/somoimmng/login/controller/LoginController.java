@@ -1,6 +1,7 @@
 package com.moim.somoimmng.login.controller;
 
 import com.moim.somoimmng.login.service.LoginService;
+import com.moim.somoimmng.util.EncUtil;
 import com.moim.somoimmng.util.LoginUtil;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,8 @@ public class LoginController {
     @RequestMapping(value = "login/joinUser", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView joinUser(@RequestParam Map<String, Object> paramMap) throws Exception {
         ModelAndView mv = new ModelAndView();
+        String userPw = (String) paramMap.get("userPw");
+        userPw = EncUtil.decrypt(userPw, "somoim");
         loginService.insertUserMng(paramMap);
         mv.setViewName("jsonView");
         return mv;

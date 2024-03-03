@@ -41,6 +41,7 @@ Scripts
 <script src="/js/common/paging.js"></script>
 <script src="/js/common/common.js"></script>
 <script src="/js/common/popup.js"></script>
+<script src="/js/common/cryptojs.min.js"></script>
 
 <!-- jQuery -->
 <%--<script src="/lib/jquery/js/jquery-3.6.0.min.js"></script>--%>
