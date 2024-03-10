@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.site.somoimmng.sch.mapper.SchMapper">
+
+    <!-- 일정 목록 조회 -->
+    <select id="selectSmiSche" parameterType="paramMap" resultType="camelMap">
+        SELECT SCH_SEQ
+             , SCH_NM
+             , CONCAT(SCH_DATE, SCH_TIME) SCH_DATE
+             , SCH_CNT
+             , SCH_LOC
+        FROM SMI_SCHE ss
+        WHERE SMI_SEQ = IFNULL(#{smiSeq}, 1)
+    </select>
+
+    <!-- 일정 조회 -->
+    <select id="selectSmiScheDetail" parameterType="paramMap" resultType="camelMap">
+        SELECT SCH_SEQ
+             , SCH_NM
+             , SCH_DATE
+             , SCH_TIME
+             , SCH_CNT
+             , SCH_LOC
+        FROM SMI_SCHE ss
+        WHERE SCH_SEQ = #{schSeq}
+    </select>
+
+    <!-- 참여인원 조회 -->
+    <select id="selectAtnMemList" parameterType="paramMap"  resultType="camelMap">
+        SELECT mm.MEM_SEQ
+             , mm.USER_NM
+             , mm.AGE
+             , mm.LOC
+        FROM SMI_ATN_MNG sam
+                 LEFT OUTER JOIN MEM_MNG mm ON sam.MEM_SEQ = mm.MEM_SEQ
+        WHERE sam.SCH_SEQ = #{schSeq}
+        ORDER BY mm.MEM_SEQ
+    </select>
+
+    <!-- 소모임 일정 등록 -->
+    <insert id="insertSmiSche" parameterType="paramMap" useGeneratedKeys="true" keyProperty="schSeq" keyColumn="SCH_SEQ">
+        INSERT
+        INTO
+            SMI_SCHE
+        (
+            SMI_SEQ
+        , SCH_NM
+        , SCH_DATE
+        , SCH_TIME
+        , SCH_CNT
+        , SCH_LOC
+        )
+        VALUES(
+                  IFNULL(#{smiSeq}, 1)
+              , #{schNm}
+              , #{schDate}
+              , #{schTime}
+              , #{schCnt}
+              , #{schLoc}
+              )
+    </insert>
+
+    <!-- 소모임 일정 수정 -->
+    <update id="updateSmiSche" parameterType="paramMap">
+        UPDATE
+            somoim.SMI_SCHE
+        SET
+            SMI_SEQ = #{smiSeq}
+          , SCH_NM = #{schNm}
+          , SCH_DATE = #{schDate}
+          , SCH_TIME = #{schTime}
+          , SCH_CNT = #{schCnt}
+          , SCH_LOC = #{schLoc}
+          , FRST_WRT_DTIM = CURRENT_TIMESTAMP
+          , LAST_CHNG_DTIM = CURRENT_TIMESTAMP
+        WHERE
+            SCH_SEQ = #{schSeq}
+
+    </update>
+
+    <!-- 소모임 일정 삭제 -->
+    <delete id="deleteSmiSche" parameterType="paramMap">
+        DELETE
+        FROM SMI_SCHE
+        WHERE SCH_SEQ = #{schSeq}
+    </delete>
+
+    <!-- 참석회원 등록 -->
+    <insert id="insertSmiAtnMng" parameterType="paramMap">
+        INSERT
+        INTO
+            somoim.SMI_ATN_MNG
+        (
+          MEM_SEQ
+        , SCH_SEQ
+        )
+        VALUES
+        <foreach collection="memList" item="item" separator=",">
+            (
+            #{item.seq}
+            , #{schSeq}
+            )
+        </foreach>
+
+    </insert>
+
+    <!-- 참석회원 삭제 -->
+    <delete id="deleteSmiAtnMng" parameterType="paramMap">
+        DELETE
+        FROM SMI_ATN_MNG
+        WHERE SCH_SEQ = #{schSeq}
+    </delete>
+
+    <!-- 캘린더 날짜 조회 -->
+    <select id="selectMonthList" parameterType="paramMap" resultType="camelMap">
+        SELECT D.DATE_YMD AS CAL_DATE
+             , CAST(SUBSTR(D.DATE_YMD, 7,8) AS UNSIGNED) AS CAL_DAY
+             , DAYS
+        FROM (SELECT A.DATE_YMD
+                   , DAYOFWEEK(A.DATE_YMD) AS DAYS
+              FROM (SELECT DATE_FORMAT(STR_TO_DATE(CONCAT(#{year},'-', LPAD(#{month},2,'0'),'-','01'),'%Y-%m-%d') + INTERVAL (A.A + (10 * B.A)) DAY, '%Y%m%d') AS DATE_YMD
+                    FROM (SELECT 0 AS A
+                          UNION ALL SELECT 1
+                          UNION ALL SELECT 2
+                          UNION ALL SELECT 3
+                          UNION ALL SELECT 4
+                          UNION ALL SELECT 5
+                          UNION ALL SELECT 6
+                          UNION ALL SELECT 7
+                          UNION ALL SELECT 8
+                          UNION ALL SELECT 9) AS A
+                             CROSS JOIN (SELECT 0 AS A
+                                         UNION ALL SELECT 1
+                                         UNION ALL SELECT 2
+                                         UNION ALL SELECT 3) AS B) A
+              WHERE A.DATE_YMD LIKE CONCAT(#{year}, LPAD(#{month},2,'0'), '%')) D
+        GROUP BY D.DATE_YMD
+        ORDER BY D.DATE_YMD
+    </select>
+
+    <!-- 캘린더 일정 조회 -->
+    <select id="selectCalSchList" parameterType="paramMap" resultType="camelMap">
+        SELECT SCH_DATE
+             , count(*) AS SCH_CNT
+             , GROUP_CONCAT(SCH_NM ORDER BY SCH_TIME ASC SEPARATOR '|') AS SCH_NM
+             , GROUP_CONCAT(SCH_SEQ ORDER BY SCH_TIME ASC SEPARATOR '|') AS SCH_SEQ
+             , GROUP_CONCAT(SCH_TIME ORDER BY SCH_TIME ASC SEPARATOR '|') AS SCH_TIME
+        FROM SMI_SCHE ss
+        WHERE sch_date BETWEEN CONCAT(#{year}, #{month}, '01') AND REPLACE(LAST_DAY(CONCAT(#{year}, #{month}, '01')), '-', '')
+        GROUP BY SCH_DATE
+        ORDER BY SCH_DATE
+    </select>
+
+
+    <!-- 소모임장소 등록 -->
+    <insert id="insertSchStore" parameterType="paramMap">
+        INSERT
+        INTO
+        SCH_STORE
+        (
+          SCH_SEQ
+        , STORE_SEQ
+        , CATEGORY_NAME
+        , STORE_NAME
+        , ADDRESS_NAME
+        , ROAD_ADDRESS_NAME
+        , ADDRESS_DETAIL
+        , LNG
+        , LAT
+        )
+        VALUES
+        <foreach collection="storeList" item="item" separator=",">
+            (
+              #{schSeq}
+            , #{item.storeSeq}
+            , #{item.categoryName}
+            , #{item.storeName}
+            , #{item.addressName}
+            , #{item.roadAddressName}
+            , #{item.addressDetail}
+            , #{item.lng}
+            , #{item.lat}
+            )
+        </foreach>
+    </insert>
+
+    <!-- 소모임장소 삭제 -->
+    <delete id="deleteSchStore" parameterType="paramMap">
+        DELETE
+        FROM SCH_STORE
+        WHERE SCH_SEQ = #{schSeq}
+    </delete>
+
+    <!-- 소모임장소 조회 -->
+    <select id="selectSchStoreList" parameterType="paramMap" resultType="camelMap">
+        SELECT
+            SCH_SEQ
+             , STORE_SEQ
+             , CATEGORY_NAME
+             , STORE_NAME
+             , ADDRESS_NAME
+             , ROAD_ADDRESS_NAME
+             , ADDRESS_DETAIL
+             , LNG
+             , LAT
+             , FRST_WRT_DTIM
+             , LAST_CHNG_DTIM
+        FROM
+            SCH_STORE
+        WHERE SCH_SEQ = #{schSeq}
+    </select>
+
+
+</mapper>

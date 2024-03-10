@@ -16,7 +16,7 @@
 
     <typeAliases>
         <typeAlias type="java.util.HashMap" alias="paramMap"/>
-        <typeAlias type="com.moim.somoimmng.util.CamelMap" alias="camelMap"/>
+        <typeAlias type="com.spring.global.util.CamelMap" alias="camelMap"/>
     </typeAliases>
 
     <typeHandlers>

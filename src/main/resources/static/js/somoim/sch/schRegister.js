@@ -150,10 +150,13 @@ var schRegister = {
       memHtml += '</div>';
 
       $("#memList").append(memHtml);
+
+      $("#schCnt").val($("#memList").children('div').length);
     },
     // 멤버 삭제
     removeMember: function(e) {
         $(e).parent('div').remove();
+        $("#schCnt").val($("#memList").children('div').length);
     },
     // 일정 등록
     register: function() {

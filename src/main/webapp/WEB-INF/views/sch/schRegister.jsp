@@ -75,7 +75,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>인원</label>
-                            <input type="text" class="form-control" placeholder="인원" id="schCnt">
+                            <input type="text" class="form-control" placeholder="인원" id="schCnt" readonly value="0">
                         </div>
                     </div>
                     <div class="col-md-6">
