@@ -106,7 +106,7 @@ Sidebar start
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/loc/locMap" class="nav-link"><i class="far fa-circle nav-icon"></i><p>성경보기</p></a>
+                            <a href="/bib/bibView" class="nav-link"><i class="far fa-circle nav-icon"></i><p>성경보기</p></a>
                         </li>
                     </ul>
                 </li>

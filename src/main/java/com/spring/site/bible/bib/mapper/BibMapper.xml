@@ -3,16 +3,25 @@
 
 <mapper namespace="com.spring.site.bible.bib.mapper.BibMapper">
     <!-- 성경조회 -->
-<!--    <select id="selectBibVerse" parameterType="paramMap" resultType="camelMap">-->
-<!--        SELECT cc.CD_NM-->
-<!--        , cbc.BIB_CHPT-->
-<!--        , cbc.BIB_VERS-->
-<!--        , cbc.BIB_MAIN-->
-<!--        FROM CMN_BIB_CNTN cbc-->
-<!--        LEFT JOIN CMN_CMCD cc ON cbc.BIB_WRD_DIV = cc.CD-->
-<!--        WHERE cc.CD_NM = '시편'-->
-<!--        AND CONCAT(LPAD(cbc.BIB_CHPT,'3', '0'), LPAD(cbc.BIB_VERS, '3', '0')) >= CONCAT(LPAD('1','3', '0'), LPAD('1', '3', '0'))-->
-<!--        AND CONCAT(LPAD(cbc.BIB_CHPT,'3', '0'), LPAD(cbc.BIB_VERS, '3', '0')) <= CONCAT(LPAD('2','3', '0'), LPAD('3', '3', '0'))-->
-<!--    </select>-->
+    <select id="selectBibVers" parameterType="paramMap" resultType="camelMap">
+        SELECT cc.CD_NM
+        , cbc.BIB_CHPT
+        , cbc.BIB_VERS
+        , cbc.BIB_MAIN
+        FROM CMN_BIB_CNTN cbc
+        LEFT JOIN CMN_CMCD cc ON cbc.BIB_WRD_DIV = cc.CD
+        WHERE cc.CD_NM = #{mainNm}
+        AND CONCAT(LPAD(cbc.BIB_CHPT,'3', '0'), LPAD(cbc.BIB_VERS, '3', '0')) <![CDATA[>=]]> CONCAT(LPAD(#{stChpt},'3', '0'), LPAD(#{stVers}, '3', '0'))
+        AND CONCAT(LPAD(cbc.BIB_CHPT,'3', '0'), LPAD(cbc.BIB_VERS, '3', '0')) <![CDATA[<=]]> CONCAT(LPAD(#{endChpt},'3', '0'), LPAD(#{endVers}, '3', '0'))
+        ORDER BY cbc.BIB_CHPT*1, cbc.BIB_VERS*1
+    </select>
+
+    <!-- 성경 말씀 조회 -->
+    <select id="selectBibMain" parameterType="paramMap" resultType="camelMap">
+        SELECT GRP_CD_NM
+             , CD_NM
+        FROM CMN_CMCD cc
+        WHERE GRP_CD_ID IN ('BIB_ORD', 'BIB_NEW')
+    </select>
 
 </mapper>

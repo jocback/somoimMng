@@ -47,10 +47,6 @@
                             </div>
                             <div class="row" id="schPaging"></div>
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
