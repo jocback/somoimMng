@@ -129,7 +129,7 @@
                                                     <input type="text" class="form-control" name="roadAddressName" />
                                                     <span class="input-group-append">
                                                             <button type="button" class="btn btn-info btn-flat" onclick="schRegister.searchStoreAddress(this);">검색</button>
-                                                        </span>
+                                                    </span>
                                                 </div>
                                             </td>
                                             <td><input type="text" class="form-control" placeholder="상세" name="addressDetail"></td>

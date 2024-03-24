@@ -90,6 +90,10 @@ dependencies {
 
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.9'
 
+    // jsoup
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.17.1'
+
+
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
