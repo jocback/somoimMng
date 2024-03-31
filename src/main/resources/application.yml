@@ -3,11 +3,25 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+#  somoim:
+#    datasource:
+#      hikari:
+#        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+#        url: jdbc:log4jdbc:mysql://3.35.134.51:3306/somoim?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
+#        username: somoim
+#        password: Admin1234!
   datasource:
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:mysql://localhost:3306/somoim?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
-    username: somoim
-    password: Admin1234!
+    somoim:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mysql://localhost:3306/somoim?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
+      username: somoim
+      password: Admin1234!
+    bible:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mysql://localhost:3306/sarangqt?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
+      username: somoim
+      password: Admin1234!
+
 #  datasource:
 #    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
 #    url: jdbc:log4jdbc:mysql://localhost:3306/somoim?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
