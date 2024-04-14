@@ -79,7 +79,7 @@ public class MemController {
             , @RequestParam(value = "orderBy", defaultValue = "DEFAULT") String orderBy) throws Exception {
         ModelAndView mv = new ModelAndView();
         paramMap.put("smiSeq", LoginUtil.getInfoValue("smiSeq"));
-        orderBy = "MEM_SEQ ASC";
+        orderBy = "MEM_SEQ DESC";
         PageHelper.startPage(pageNum, pageSize, orderBy);
         Page<Map<String, Object>> page = memService.selectMemMng(paramMap);
 

@@ -5,13 +5,30 @@
 
     <!-- 일정 목록 조회 -->
     <select id="selectSmiSche" parameterType="paramMap" resultType="camelMap">
-        SELECT SCH_SEQ
-             , SCH_NM
-             , CONCAT(SCH_DATE, SCH_TIME) SCH_DATE
-             , SCH_CNT
-             , SCH_LOC
+        SELECT ss.SCH_SEQ
+             , ss.SCH_NM
+             , CONCAT(ss.SCH_DATE, ss.SCH_TIME) SCH_DATE
+             , ss.SCH_CNT
+             , ss.SCH_LOC
         FROM SMI_SCHE ss
-        WHERE SMI_SEQ = IFNULL(#{smiSeq}, 1)
+        WHERE ss.SMI_SEQ = IFNULL(#{smiSeq}, 1)
+          <if test='searchWord != null and searchWord != ""'>
+              <if test='searchType == "schNm"'>
+                  AND ss.SCH_NM LIKE CONCAT('%',#{searchWord},'%')
+              </if>
+              <if test='searchType == "userNm"'>
+                  AND ss.SCH_SEQ IN (SELECT sam.SCH_SEQ
+                  FROM SMI_ATN_MNG sam
+                  INNER JOIN MEM_MNG mm ON sam.MEM_SEQ = mm.MEM_SEQ
+                  WHERE mm.SMI_SEQ = IFNULL(#{smiSeq}, 1)
+                  AND mm.USER_NM LIKE CONCAT('%', #{searchWord}, '%'))
+              </if>
+              <if test='searchType == "storeName"'>
+                  AND ss.SCH_SEQ IN (SELECT SCH_SEQ
+                  FROM SCH_STORE ss
+                  WHERE STORE_NAME LIKE CONCAT('%', #{searchWord}, '%'))
+              </if>
+          </if>
     </select>
 
     <!-- 일정 조회 -->

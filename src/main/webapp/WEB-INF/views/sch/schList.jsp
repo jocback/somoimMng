@@ -24,11 +24,40 @@
                     <div class="card-header">
                         <h3 class="card-title">일정목록</h3>
                     </div>
-
                     <div class="card-body table-responsive p-0">
 
                         <div class="dataTables_wrapper dt-bootstrap4">
-                            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
+<%--                            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>--%>
+                            <div class="row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <select class="custom-select mr-sm-2" style="width: 100%;" id="searchType" name="searchType">
+                                                    <option selected value="schNm">일정명</option>
+                                                    <option value="storeName">장소</option>
+                                                    <option value="userNm">참석자</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="search" class="form-control" id="searchWord" name="searchWord">
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-lg btn-default" onclick="schList.selectSchList();">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table class="table table-bordered table-hover dataTable dtr-inline text-nowrap">

@@ -57,7 +57,9 @@ var schList = {
         var param = {
             pageNum: pageNo,
             pagesize: 10,
-        }
+            searchType: $("#searchType").val(),
+            searchWord: $("#searchWord").val(),
+        };
 
         console.log(param);
 
