@@ -178,6 +178,7 @@
         (
           SCH_SEQ
         , STORE_SEQ
+        , PLACE_ID
         , CATEGORY_NAME
         , STORE_NAME
         , ADDRESS_NAME
@@ -191,6 +192,7 @@
             (
               #{schSeq}
             , #{item.storeSeq}
+            , #{item.placeId}
             , #{item.categoryName}
             , #{item.storeName}
             , #{item.addressName}
@@ -214,6 +216,7 @@
         SELECT
             SCH_SEQ
              , STORE_SEQ
+             , PLACE_ID
              , CATEGORY_NAME
              , STORE_NAME
              , ADDRESS_NAME

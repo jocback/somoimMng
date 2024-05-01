@@ -23,12 +23,56 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">회원목록</h3>
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <div class="">
+                                    <button type="button" class="btn btn-info" onclick="memList.goMemRegister();">회원등록</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card-body table-responsive p-0">
 
                         <div class="dataTables_wrapper dt-bootstrap4">
-                            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
+
+                            <div class="row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <select class="custom-select mr-sm-2" style="width: 100%;" id="genderType" name="genderType">
+                                                    <option selected value="">전체</option>
+                                                    <option value="male">남</option>
+                                                    <option value="female">여</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <select class="custom-select mr-sm-2" style="width: 100%;" id="searchType" name="searchType">
+                                                    <option selected value="name">이름</option>
+                                                    <option value="age">나이</option>
+                                                    <option value="locate">지역</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="search" class="form-control" id="searchWord" name="searchWord">
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-lg btn-default" onclick="memList.selectMemList();">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table class="table table-bordered table-hover dataTable dtr-inline text-nowrap">
@@ -59,7 +103,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="memModal">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-fullscreen" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Modal title</h5>
@@ -69,37 +113,44 @@
             <input type="hidden" id="memSeq" name="memSeq" value=""/>
             <div class="modal-body">
                 <div class="container-fluid">
+
                     <div class="row">
-                        <div class="col-3">아이디</div>
-                        <div class="col-9" id="userId"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">이름</div>
-                        <div class="col-9" id="userNm"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">나이</div>
-                        <div class="col-9" id="age"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">가입일</div>
-                        <div class="col-9" id="regDate"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">연장기간</div>
-                        <div class="col-9" id="extdTerm"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">성별</div>
-                        <div class="col-9" id="gender"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">사는지역</div>
-                        <div class="col-9" id="loc"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">메모</div>
-                        <div class="col-9" id="rmrk"></div>
+                        <div class="col-sm-12">
+                            <table class="table table-bordered table-hover dataTable dtr-inline text-nowrap">
+                                <tr>
+                                    <th class="text-center col-3">아이디</th>
+                                    <td class="col-9" id="userId"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center col-3">이름</th>
+                                    <td class="col-9" id="userNm"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center col-3">이름ㄴ나이</th>
+                                    <td class="col-9" id="age"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center col-3">가입일</th>
+                                    <td class="col-9" id="regDate"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center col-3">연장기간</th>
+                                    <td class="col-9" id="extdTerm"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center col-3">성별</th>
+                                    <td class="col-9" id="gender"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center col-3">사는지역</th>
+                                    <td class="col-9" id="loc"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center col-3">메모</th>
+                                    <td class="col-9" id="rmrk"></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

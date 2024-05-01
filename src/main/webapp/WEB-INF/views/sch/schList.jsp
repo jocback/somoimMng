@@ -23,6 +23,13 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">일정목록</h3>
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <div class="">
+                                    <button type="button" class="btn btn-info" onclick="schList.goSchRegister();">일정등록</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body table-responsive p-0">
 
@@ -85,7 +92,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="schModal">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-fullscreen" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Modal title</h5>
@@ -95,24 +102,53 @@
             <input type="hidden" id="schSeq" name="schSeq" value=""/>
             <div class="modal-body">
                 <div class="container-fluid">
+
+
                     <div class="row">
-                        <div class="col-3">제목</div>
-                        <div class="col-9" id="schNm"></div>
+                        <div class="col-sm-12">
+                            <table class="table table-bordered table-hover dataTable dtr-inline text-nowrap">
+                                <tr>
+                                    <th class="text-center col-3">제목</th>
+                                    <td class="col-9" id="schNm"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center col-3">날짜</th>
+                                    <td class="col-9" id="schDate"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center col-3">인원</th>
+                                    <td class="col-9" id="schCnt"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center col-3">장소</th>
+                                    <td class="col-9" id="schLoc"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center col-3">참석자</th>
+                                    <td class="col-9" id="memList"></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-3">날짜</div>
-                        <div class="col-9" id="schDate"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">인원</div>
-                        <div class="col-9" id="schCnt"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">장소</div>
-                        <div class="col-9" id="schLoc"></div>
-                    </div>
-                    <div class="row" id="memList">
-                    </div>
+
+<%--                    <div class="row">--%>
+<%--                        <div class="col-3">제목</div>--%>
+<%--                        <div class="col-9" id="schNm"></div>--%>
+<%--                    </div>--%>
+<%--                    <div class="row">--%>
+<%--                        <div class="col-3">날짜</div>--%>
+<%--                        <div class="col-9" id="schDate"></div>--%>
+<%--                    </div>--%>
+<%--                    <div class="row">--%>
+<%--                        <div class="col-3">인원</div>--%>
+<%--                        <div class="col-9" id="schCnt"></div>--%>
+<%--                    </div>--%>
+<%--                    <div class="row">--%>
+<%--                        <div class="col-3">장소</div>--%>
+<%--                        <div class="col-9" id="schLoc"></div>--%>
+<%--                    </div>--%>
+<%--                    <div class="row" id="memList">--%>
+<%--                    </div>--%>
                 </div>
             </div>
             <div class="modal-footer">

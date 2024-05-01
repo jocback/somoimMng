@@ -6,6 +6,10 @@ var schList = {
     bind: function() {
 
     },
+    // 일정 등록하기
+    goSchRegister: function() {
+        common.goPage('/sch/schRegister');
+    },
     // 일정 수정하기
     schModify: function() {
         var param = {
@@ -28,23 +32,38 @@ var schList = {
             $("#schNm").text(schDetail.schNm);
             $("#schDate").text(dateUtil.getFormat(schDetail.schDate+''+schDetail.schTime, 'yyyy-MM-dd HH:mm'));
             $("#schCnt").text(schDetail.schCnt);
-            $("#schLoc").text(schDetail.schLoc);
+            // $("#schLoc").text(schDetail.schLoc);
 
             $("#schSeq").val(res.schDetail.schSeq);
 
             var memHtml = '';
 
-            memHtml += '<div class="col-3">참여인원</div>';
             // memHtml += '<div class="col-9"></div>';
 
 
             $.each(schDetail.memlist, function(i, v){
                 if(i>0) {
-                    memHtml += '<div class="col-3"></div>';
+                    memHtml += '<br/>';
+                    // memHtml += '<div class="col-3"></div>';
                 }
-                memHtml += '<div class="col-9">'+v.userNm+'/'+v.age+'/'+v.loc+'</div>';
+                // memHtml += '<div class="col-9">'+v.userNm+'/'+v.age+'/'+v.loc+'</div>';
+                memHtml += v.userNm+'/'+v.age+'/'+v.loc;
             });
             $("#memList").html(memHtml);
+
+            common.ajax('/sch/selectSchStoreList', param, function(res) {
+                var storeHtml = '';
+                $.each(res.schStoreList, function(i, v){
+                    if(i>0) {
+                        storeHtml += '<br/>';
+                    }
+                    storeHtml += (i+1)+'차 : '+v.storeName;
+                });
+                $("#schLoc").html(storeHtml);
+                console.log(res);
+            });
+
+
             $("#schModal").modal('show');
 
         });

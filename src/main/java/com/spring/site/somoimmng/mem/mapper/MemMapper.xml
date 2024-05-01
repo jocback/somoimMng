@@ -69,6 +69,23 @@
         FROM
             MEM_MNG
         WHERE SMI_SEQ = IFNULL(#{smiSeq}, 1)
+          <if test='genderType == "male"'>
+              AND GENDER = '남'
+          </if>
+          <if test='genderType == "female"'>
+              AND GENDER = '여'
+          </if>
+          <if test='searchWord != null and searchWord != ""'>
+              <if test='searchType == "name"'>
+                  AND USER_NM LIKE CONCAT('%', #{searchWord},'%')
+              </if>
+              <if test='searchType == "age"'>
+                  AND AGE = #{searchWord}
+              </if>
+              <if test='searchType == "locate"'>
+                  AND LOC LIKE CONCAT('%', #{searchWord}, '%')
+              </if>
+          </if>
           AND DEL_YN = 'N'
     </select>
 

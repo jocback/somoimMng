@@ -140,6 +140,7 @@
                                             <input type="hidden" name="lat" />
                                             <input type="hidden" name="lng" />
                                             <input type="hidden" name="categoryName"/>
+                                            <input type="hidden" name="placeId"/>
                                         </tr>
                                     </tbody>
                                 </table>

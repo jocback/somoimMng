@@ -76,6 +76,7 @@ var schRegister = {
         trHtml += '<input type="hidden" name="lat" />';
         trHtml += '<input type="hidden" name="lng" />';
         trHtml += '<input type="hidden" name="categoryName"/>';
+        trHtml += '<input type="hidden" name="placeId"/>';
         trHtml += '</tr>';
         $("#tb_storeList").append(trHtml);
         schRegister.setStoreSeq();
@@ -108,6 +109,7 @@ var schRegister = {
             $(addTr).find('input[name=categoryName]').val(data.category_name);
             $(addTr).find('input[name=lng]').val(data.x);
             $(addTr).find('input[name=lat]').val(data.y);
+            $(addTr).find('input[name=placeId]').val(data.placeId);
         })
     },
     // 지도 검색하기
@@ -183,6 +185,7 @@ var schRegister = {
                 lng: storeList.lng,
                 roadAddressName: storeList.roadAddressName,
                 storeName: storeList.storeName,
+                placeId: storeList.placeId,
             };
             locArray.push(locJson);
         } else {
@@ -198,6 +201,7 @@ var schRegister = {
                     lng: storeList.lng[i],
                     roadAddressName: storeList.roadAddressName[i],
                     storeName: storeList.storeName[i],
+                    placeId: storeList.placeId[i],
                 };
                 locArray.push(locJson);
             }
@@ -243,6 +247,7 @@ var schRegister = {
                 lng: storeList.lng,
                 roadAddressName: storeList.roadAddressName,
                 storeName: storeList.storeName,
+                placeId: storeList.placeId,
             };
             locArray.push(locJson);
         } else {
@@ -258,6 +263,7 @@ var schRegister = {
                     lng: storeList.lng[i],
                     roadAddressName: storeList.roadAddressName[i],
                     storeName: storeList.storeName[i],
+                    placeId: storeList.placeId[i],
                 };
                 locArray.push(locJson);
             }
@@ -344,6 +350,7 @@ var schRegister = {
             storeHtml += '    <input type="hidden" name="lat" value="'+v.lat+'" />';
             storeHtml += '    <input type="hidden" name="lng" value="'+v.lng+'"/>';
             storeHtml += '    <input type="hidden" name="categoryName" value="'+v.categoryName+'"/>';
+            storeHtml += '    <input type="hidden" name="placeId" value="'+v.placeId+'"/>';
             storeHtml += '</tr>';
         })
 

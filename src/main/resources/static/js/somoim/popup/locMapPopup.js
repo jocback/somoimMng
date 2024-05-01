@@ -12,6 +12,7 @@ var locMapPopup = {
         $("#mapModal").show();
         locMapPopup.loadMap();
         locMapPopup.bind();
+        $("#inp_searchKeyword").focus();
     },
     bind: function() {
 
@@ -102,6 +103,7 @@ var locMapPopup = {
     },
     // 지도 검색결과 출력
     drawSearchResult: function(data) {
+        console.log(data);
         $("#div_searchResult").show();
         $("#div_autoCompResult").hide();
         var resultHtml = '';
@@ -125,6 +127,7 @@ var locMapPopup = {
             resultHtml += '<input type="hidden" name="hidcategory_name" value="'+v.category_name+'"/>';
             resultHtml += '<input type="hidden" name="hidx" value="'+v.x+'"/>';
             resultHtml += '<input type="hidden" name="hidy" value="'+v.y+'"/>';
+            resultHtml += '<input type="hidden" name="hidplaceId" value="'+v.id+'"/>';
             resultHtml += '    </address>';
             resultHtml += '</div>';
         });

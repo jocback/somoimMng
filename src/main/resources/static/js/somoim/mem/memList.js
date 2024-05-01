@@ -7,6 +7,9 @@ var memList = {
     bind: function() {
 
     },
+    goMemRegister: function() {
+      common.goPage('/mem/memRegister');
+    },
     // 멤버 수정하기
     memModify: function() {
         var param = {
@@ -43,6 +46,9 @@ var memList = {
         var param = {
             pageNum: pageNo,
             pageSize: 10,
+            genderType: $("#genderType").val(),
+            searchType: $("#searchType").val(),
+            searchWord: $("#searchWord").val()
         }
 
         console.log(param);

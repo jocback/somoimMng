@@ -10,6 +10,9 @@ CSS
 <link rel="stylesheet" href="/lib/adminlte/plugins/fontawesome-free/css/all.min.css">
 <link rel="stylesheet" href="/lib/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="/lib/adminlte/dist/css/adminlte.css">
+<link rel="stylesheet" href="/lib/custom/css/custom.css">
+
+
 
 <link href="/lib/bootstrap/plugins/fullcalendar/css/fullcalendar.min.css" rel="stylesheet">
 <link href="/lib/jquery/css/jquery-ui-1.12.1.css" rel="stylesheet">

@@ -5,17 +5,15 @@
     <!-- 캘린더 일정 조회 -->
     <select id="selectMapStoreList" parameterType="paramMap" resultType="camelMap">
         SELECT
-            ss2.SCH_SEQ
-             , ss2.STORE_SEQ
-             , ss2.CATEGORY_NAME
-             , ss2.STORE_NAME
-             , ss2.ADDRESS_NAME
-             , ss2.ROAD_ADDRESS_NAME
-             , ss2.ADDRESS_DETAIL
-             , ss2.LNG
-             , ss2.LAT
-             , ss2.FRST_WRT_DTIM
-             , ss2.LAST_CHNG_DTIM
+            DISTINCT
+            ss2.PLACE_ID
+                   , ss2.STORE_SEQ
+                   , ss2.CATEGORY_NAME
+                   , ss2.STORE_NAME
+                   , ss2.ADDRESS_NAME
+                   , ss2.ROAD_ADDRESS_NAME
+                   , ss2.LNG
+                   , ss2.LAT
         FROM SMI_SCHE ss
                  INNER JOIN SCH_STORE ss2
         WHERE ss.SMI_SEQ = 1

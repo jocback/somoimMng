@@ -79,30 +79,4 @@ public class LocController {
         mv.setViewName("jsonView");
         return mv;
     }
-
-//    public static void main(String[] args) {
-//        // TODO Auto-generated method stub
-//        try {
-//            URL u = new URL("https://map.kakao.com/api/dapi/suggest/hub?service=local-suggest&q=%EA%B0%95%EB%82%A8\n");
-//            URLConnection uc = u.openConnection();
-//            try(InputStream raw = uc.getInputStream()){
-//                InputStream buffer = new BufferedInputStream(raw);
-//                Reader reader = new InputStreamReader(buffer);
-//                int c;
-//                String resultStr = "";
-//                while((c=reader.read())!=-1) {
-////                    System.out.print((char)c);
-//                    resultStr += (char)c;
-//                }
-//                System.out.println(resultStr);
-//            }
-//        } catch (MalformedURLException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//
-//    }
 }

@@ -53,7 +53,7 @@
 </section>
 
 <div class="modal" id="mapModal">
-    <div class="">
+    <div class="modal-dialog modal-fullscreen">
         <div class="modal-content" style="overflow: auto;">
             <div class="modal-header">
                 <div class="input-group">
@@ -73,6 +73,42 @@
                     </div>
                     <!-- /.row -->
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="schModal">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="schSeq" name="schSeq" value=""/>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered table-hover dataTable dtr-inline text-nowrap">
+                                <tr>
+                                    <th class="text-center">제목</th>
+                                    <td class="text-center">장소</td>
+                                </tr>
+                                <tbody id="tbody_schList">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="schList.schModify();">수정</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                <%--                    <button type="button" class="btn btn-primary">Save changes</button>--%>
             </div>
         </div>
     </div>
