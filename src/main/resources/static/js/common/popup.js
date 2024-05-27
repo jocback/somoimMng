@@ -44,7 +44,7 @@ var popup = {
 
         if (common.isEmpty(frmData)) {
             var popupFrmHtml = '';
-            popupFrmHtml += '<form action="' + url + '" id="tempPopForm" method="post">';
+            popupFrmHtml += '<form action="' + url + '" id="tempPopForm" method="post" target:"_blank">';
             popupFrmHtml += '</form>';
             $('body').append(popupFrmHtml);
 
@@ -54,7 +54,7 @@ var popup = {
                 // $("#" + frmData).submit();
             } else {
                 var popupFrmHtml = '';
-                popupFrmHtml += '<form action="' + url + '" id="tempPopForm" method="post">';
+                popupFrmHtml += '<form action="' + url + '" id="tempPopForm" method="post" target:"_blank">';
                 $.each(frmData, function (i, v) {
                     popupFrmHtml += '<input type="hidden" name="' + i + '" value="' + v + '" >';
                 });
