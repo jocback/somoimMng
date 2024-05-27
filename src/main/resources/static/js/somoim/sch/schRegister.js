@@ -45,7 +45,7 @@ var schRegister = {
 
         // 주소 검색
         // $("#btn_searchAddress").on('click', function() {
-        //     popup.openWindowPopup('/popup/locMapPopup', '', function(data) {
+        //     popup.openWindowPopup('/popup/loc/locMapPopup', '', function(data) {
         //         console.log(data);
         //     })
         // });
@@ -70,7 +70,7 @@ var schRegister = {
         trHtml += '    </td>';
         trHtml += '    <td><input type="text" class="form-control" placeholder="상세" name="addressDetail"></td>';
         trHtml += '    <td>';
-        trHtml += '        <button type="button" class="btn btn-danger btn-flat" onclick="schRegister.removeStore(this);">삭제</button>';
+        trHtml += '        <button type="button" class="btn btn-danger btn-flat" onclick="schRegister.removeScore(this);">삭제</button>';
         trHtml += '    </td>';
         trHtml += '<input type="hidden" name="addressName"/>';
         trHtml += '<input type="hidden" name="lat" />';
@@ -79,15 +79,15 @@ var schRegister = {
         trHtml += '<input type="hidden" name="placeId"/>';
         trHtml += '</tr>';
         $("#tb_storeList").append(trHtml);
-        schRegister.setStoreSeq();
+        schRegister.setScoreSeq();
     },
     // 가게 삭제
     removeStore: function(el) {
         $(el).parents('tr').remove();
-        schRegister.setStoreSeq();
+        schRegister.setScoreSeq();
     },
     // 순서 채번
-    setStoreSeq: function() {
+    setScoreSeq: function() {
         $.each($("#tb_storeList").find('tr'), function(i,v){
             $(v).find('td').eq(0).text((i+1));
             $(v).find('input[name=storeSeq]').val((i+1));
@@ -96,7 +96,7 @@ var schRegister = {
     // 검색 팝업
     searchStoreAddress: function(el) {
         var addTr = $(el).parents('tr');
-        popup.openWindowPopup('/popup/locMapPopup', '', function(data) {
+        popup.openWindowPopup('/popup/loc/locMapPopup', '', function(data) {
             console.log(data);
             $(addTr).find('input[name=storeName]').val(data.place_name);
             if(!common.isEmpty(data.road_address_name)) {
@@ -110,7 +110,7 @@ var schRegister = {
             $(addTr).find('input[name=lng]').val(data.x);
             $(addTr).find('input[name=lat]').val(data.y);
             $(addTr).find('input[name=placeId]').val(data.placeId);
-        })
+        });
     },
     // 지도 검색하기
     searchPlace: function(data, status, pagination) {

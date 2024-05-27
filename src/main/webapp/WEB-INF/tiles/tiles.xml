@@ -38,9 +38,9 @@
         <put-attribute name="includeJs" value="/sample/{1}"/>
     </definition>
 
-    <definition name="popup/*" extends="layout-popup">
-        <put-attribute name="body" value="/WEB-INF/views/popup/{1}.jsp"/>
-        <put-attribute name="includeJs" value="/popup/{1}"/>
+    <definition name="popup/*/*" extends="layout-popup">
+        <put-attribute name="body" value="/WEB-INF/views/popup/{1}/{2}.jsp"/>
+        <put-attribute name="includeJs" value="/popup/{1}/{2}"/>
     </definition>
 
     <definition name="*/*" extends="layout-tiles">

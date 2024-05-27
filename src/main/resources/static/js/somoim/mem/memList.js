@@ -26,20 +26,31 @@ var memList = {
             memSeq: memSeq
         }
 
-        common.ajax('/mem/selectMemDetail', param, function(res) {
-            console.log(res);
-            var memDetail = res.memDetail;
-            $("#userId").text(memDetail.userId);
-            $("#userNm").text(memDetail.userNm);
-            $("#age").text(memDetail.age);
-            $("#regDate").text(dateUtil.getFormat(memDetail.regDate, 'yyyy-MM-dd'));
-            $("#extdTerm").text(dateUtil.getFormat(memDetail.extdTerm, 'yyyy-MM-dd'));
-            $("#gender").text(memDetail.gender);
-            $("#loc").text(memDetail.loc);
-            $("#rmrk").text(memDetail.rmrk);
-            $("#memModal").modal('show');
-            $("#memSeq").val(memDetail.memSeq);
+        popup.openSubmitPopup('/popup/mem/memDetailPopup', param, '', function(memSeq) {
+            console.log('popupcallback');
+            console.log(memSeq);
+            var param = {
+                memSeq: memSeq,
+                type: 'modify'
+            }
+
+            common.goPage('/mem/memRegister', param);
         });
+
+        // common.ajax('/mem/selectMemDetail', param, function(res) {
+        //     console.log(res);
+        //     var memDetail = res.memDetail;
+        //     $("#userId").text(memDetail.userId);
+        //     $("#userNm").text(memDetail.userNm);
+        //     $("#age").text(memDetail.age);
+        //     $("#regDate").text(dateUtil.getFormat(memDetail.regDate, 'yyyy-MM-dd'));
+        //     $("#extdTerm").text(dateUtil.getFormat(memDetail.extdTerm, 'yyyy-MM-dd'));
+        //     $("#gender").text(memDetail.gender);
+        //     $("#loc").text(memDetail.loc);
+        //     $("#rmrk").text(memDetail.rmrk);
+        //     $("#memModal").modal('show');
+        //     $("#memSeq").val(memDetail.memSeq);
+        // });
     },
     // 멤버리스트 조회
     selectMemList: function(pageNo) {

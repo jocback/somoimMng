@@ -112,6 +112,16 @@ public class MemController {
         return mv;
     }
 
+    // 일정상세팝업
+    @RequestMapping(value="popup/mem/memDetailPopup", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView memDetailPopup(@RequestParam Map<String, Object> paramMap) {
+        ModelAndView mv = new ModelAndView();
 
+        mv.addObject(paramMap);
+        mv.addObject("memSeq", paramMap.get("memSeq"));
+
+        mv.setViewName("popup/mem/memDetailPopup");
+        return mv;
+    }
 
 }

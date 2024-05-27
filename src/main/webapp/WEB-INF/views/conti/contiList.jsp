@@ -1,19 +1,24 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=26faddbaa5c5f513af69537a4117eef7&libraries=services,clusterer"></script>
+<input type="hidden" id="type" value="${type}"/>
+<input type="hidden" id="modSeq" value="${schSeq}"/>
 
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>회원목록</h1>
+                <h1>콘티목록</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">회원관리</li>
-                    <li class="breadcrumb-item active">회원목록</li>
+                    <li class="breadcrumb-item">교회</li>
+                    <li class="breadcrumb-item active">콘티목록</li>
                 </ol>
             </div>
         </div>
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
 
 <section class="content">
@@ -26,7 +31,7 @@
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <div class="">
-                                    <button type="button" class="btn btn-info" onclick="memList.goMemRegister();">회원등록</button>
+                                    <button type="button" class="btn btn-info" onclick="contiList.contiRegister()">콘티 등록</button>
                                 </div>
                             </div>
                         </div>
@@ -39,15 +44,6 @@
                             <div class="row">
                                 <div class="col-md-10 offset-md-1">
                                     <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <select class="custom-select mr-sm-2" style="width: 100%;" id="genderType" name="genderType">
-                                                    <option selected value="">전체</option>
-                                                    <option value="male">남</option>
-                                                    <option value="female">여</option>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <select class="custom-select mr-sm-2" style="width: 100%;" id="searchType" name="searchType">
@@ -78,21 +74,18 @@
                                     <table class="table table-bordered table-hover dataTable dtr-inline text-nowrap">
                                         <thead>
                                         <tr>
-                                            <th>아이디</th>
-                                            <th>이름</th>
-                                            <th>나이</th>
-                                            <th>등록일</th>
-                                            <th>연장일</th>
-                                            <th>성별</th>
-                                            <th>지역</th>
+                                            <th>콘티번호</th>
+                                            <th>콘티명</th>
+                                            <th>콘티날짜</th>
+                                            <th>보기</th>
                                         </tr>
                                         </thead>
-                                        <tbody id="tbody_memList">
+                                        <tbody id="tbody_scoreList">
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div class="row" id="memPaging"></div>
+                            <div class="row" id="scorePaging"></div>
                         </div>
                     </div>
                 </div>
@@ -102,11 +95,11 @@
 </section>
 
 <!-- Modal -->
-<div class="modal fade" id="memModal">
+<div class="modal fade" id="regScoreModal">
     <div class="modal-dialog modal-fullscreen" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">콘티 등록</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
@@ -115,47 +108,24 @@
                 <div class="container-fluid">
 
                     <div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-bordered table-hover dataTable dtr-inline text-nowrap">
-                                <tr>
-                                    <th class="text-center col-3">아이디</th>
-                                    <td class="col-9" id="userId"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center col-3">이름</th>
-                                    <td class="col-9" id="userNm"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center col-3">나이</th>
-                                    <td class="col-9" id="age"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center col-3">가입일</th>
-                                    <td class="col-9" id="regDate"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center col-3">연장기간</th>
-                                    <td class="col-9" id="extdTerm"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center col-3">성별</th>
-                                    <td class="col-9" id="gender"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center col-3">사는지역</th>
-                                    <td class="col-9" id="loc"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center col-3">메모</th>
-                                    <td class="col-9" id="rmrk"></td>
-                                </tr>
-                            </table>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>콘티명</label>
+                                <input type="text" class="form-control" placeholder="번호" id="contiNm">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>콘티날짜</label>
+                                <input type="text" class="form-control" placeholder="제목" id="contiDate">
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="memList.memModify();">수정</button>
+                <button type="button" class="btn btn-primary" onclick="contiList.saveScore();">저장</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <%--                    <button type="button" class="btn btn-primary">Save changes</button>--%>
             </div>

@@ -27,7 +27,7 @@
 
 
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" style="display: none;">
 
 
 <div class="wrapper ">

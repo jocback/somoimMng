@@ -102,11 +102,21 @@ Sidebar start
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>성경<i class="right fas fa-angle-left"></i></p>
+                        <p>교회<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="/bib/bibView" class="nav-link"><i class="far fa-circle nav-icon"></i><p>성경보기</p></a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/conti/contiList" class="nav-link"><i class="far fa-circle nav-icon"></i><p>콘티</p></a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/conti/scoreList" class="nav-link"><i class="far fa-circle nav-icon"></i><p>찬양목록</p></a>
                         </li>
                     </ul>
                 </li>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.site.bible.file.mapper.BibFileMapper">
+    <select id="getFileDetail" parameterType="paramMap" resultType="camelMap">
+        SELECT
+            FILE_SEQ
+             , REL_SEQ
+             , FILE_NM
+             , REAL_FILE_NM
+             , REAL_FILE_PATH
+             , FILE_SIZE
+             , FILE_EXT
+             , FRST_WRTRR_ID
+             , FRST_WRTRR_DTIM
+             , LAST_CHNG_ID
+             , LAST_CHNG_DTIM
+        FROM
+            FILE_MNG
+        WHERE FILE_SEQ = #{fileSeq}
+    </select>
+</mapper>

@@ -34,10 +34,10 @@ public class LocController {
     }
 
     // 회원 등록 페이지
-    @RequestMapping(value="popup/locMapPopup", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value="popup/loc/locMapPopup", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView locMapPopup(@RequestParam Map<String, Object> paramMap) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("popup/locMapPopup");
+        mv.setViewName("popup/loc/locMapPopup");
         return mv;
     }
 

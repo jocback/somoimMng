@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.site.bible.conti.mapper.ContiMapper">
+
+    <!-- 콘티 조회 -->
+    <select id="selectContiMng" parameterType="paramMap" resultType="camelMap">
+        /* ContiMapper.xml.selectContiMng */
+        SELECT CONTI_SEQ
+             , CONTI_NM
+             , CONTI_DATE
+             ,FRST_WRTRR_DTIM
+        FROM CONTI_MNG cm
+    </select>
+
+    <!-- 악보 조회(자동완성) -->
+    <select id="selectScoreAutoCmpt" parameterType="paramMap" resultType="camelMap">
+        /* ContiMapper.xml.selectScoreAutoCmpt */
+        SELECT ps.SCORE_SEQ
+             , ps.SCORE_NO
+             , ps.CODE
+             , fm.FILE_SEQ
+        FROM PRAISE_SCORE ps
+                 INNER JOIN FILE_MNG fm ON ps.SCORE_NO = fm.REL_SEQ
+    </select>
+
+    <!-- 콘티 등록 -->
+    <insert id="insertContiMng" parameterType="paramMap" useGeneratedKeys="true" keyProperty="contiSeq" keyColumn="CONTI_SEQ">
+        /* ContiMapper.xml.insertContiMng */
+        INSERT
+        INTO
+            CONTI_MNG
+        (
+          CONTI_NM
+        , CONTI_DATE
+        , FRST_WRTRR_ID
+        , FRST_WRTRR_DTIM
+        , LAST_CHNG_ID
+        , LAST_CHNG_DTIM
+        )
+        VALUES(
+                #{contiNm}
+              , #{contiDate}
+              , 'admin'
+              , CURRENT_TIMESTAMP
+              , 'admin'
+              , CURRENT_TIMESTAMP
+              )
+    </insert>
+
+    <!-- 콘티 찬양리스트 삭제 -->
+    <delete id="deleteContiPraiseList" parameterType="paramMap">
+        /* ContiMapper.xml.deleteContiPraiseList */
+        DELETE
+        FROM CONTI_PRAISE_LIST cpl
+        WHERE CONTI_SEQ = #{contiSeq}
+    </delete>
+
+    <!-- 콘티 찬양리스트 등록 -->
+    <insert id="insertContiPraiseList" parameterType="paramMap">
+        /* ContiMapper.xml.insertContiPraiseList */
+        INSERT
+        INTO
+            sarangqt.CONTI_PRAISE_LIST
+        (
+          CONTI_SEQ
+        , SCORE_SEQ
+        , FRST_WRTRR_ID
+        , FRST_WRTRR_DTIM
+        , LAST_CHNG_ID
+        , LAST_CHNG_DTIM
+        )
+        VALUES
+        <foreach collection="scoreList" item="item" separator=",">
+            (
+            #{contiSeq}
+            , #{item.scoreSeq}
+            , 'admin'
+            , CURRENT_TIMESTAMP
+            , 'admin'
+            , CURRENT_TIMESTAMP
+            )
+        </foreach>
+    </insert>
+
+    <!-- 악보 조회 -->
+    <select id="selectScore" parameterType="paramMap" resultType="camelMap">
+        /* ContiMapper.xml.selectScore */
+        SELECT ps.SCORE_SEQ
+             , ps.SCORE_NO
+             , ps.SCORE_NM
+             , ps.CODE
+             , fm.REAL_FILE_NM
+        FROM PRAISE_SCORE ps
+                 INNER JOIN FILE_MNG fm ON ps.SCORE_SEQ  = fm.REL_SEQ
+        WHERE 1=1
+        <if test='searchWord != null and searchWord != ""'>
+            AND ps.SCORE_NM LIKE CONCAT('%', #{searchWord}, '%')
+        </if>
+    </select>
+
+    <select id="selectContiScoreList" parameterType="paramMap" resultType="camelMap">
+        SELECT fm.FILE_SEQ
+        FROM CONTI_MNG cm
+                 INNER JOIN CONTI_PRAISE_LIST cpl ON cm.CONTI_SEQ = cpl.CONTI_SEQ
+                 INNER JOIN FILE_MNG fm ON cpl.SCORE_SEQ = fm.REL_SEQ
+        WHERE cm.CONTI_SEQ = #{contiSeq}
+    </select>
+
+    <!-- 악보 등록 -->
+    <insert id="insertPraiseScore" parameterType="paramMap" useGeneratedKeys="true" keyProperty="scoreSeq" keyColumn="SCORE_SEQ">
+        /* ContiMapper.xml.insertPraiseScore */
+        INSERT
+        INTO
+            PRAISE_SCORE
+        (
+          SCORE_NM
+        , SCORE_NO
+        , CODE
+        , FRST_WRTRR_ID
+        , FRST_WRTRR_DTIM
+        , LAST_CHNG_ID
+        , LAST_CHNG_DTIM
+        )
+        VALUES(
+                #{scoreNm}
+              , #{scoreNo}
+              , #{code}
+              , 'admin'
+              , CURRENT_TIMESTAMP
+              , 'admin'
+              , CURRENT_TIMESTAMP
+              )
+    </insert>
+
+    <!-- 파일등록 -->
+    <insert id="insertFileMng" parameterType="paramMap">
+        /* ContiMapper.xml.insertFileMng */
+        INSERT
+        INTO FILE_MNG
+        (
+            REL_SEQ
+        , FILE_NM
+        , REAL_FILE_NM
+        , REAL_FILE_PATH
+        , FILE_SIZE
+        , FILE_EXT
+        , FRST_WRTRR_ID
+        , FRST_WRTRR_DTIM
+        , LAST_CHNG_ID
+        , LAST_CHNG_DTIM
+        )
+        VALUES(
+                #{relSeq}
+              , #{fileNm}
+              , #{realFileNm}
+              , #{realFilePath}
+              , #{fileSize}
+              , #{fileExt}
+              , 'admin'
+              , CURRENT_TIMESTAMP
+              , 'admin'
+              , CURRENT_TIMESTAMP
+              );
+    </insert>
+</mapper>

@@ -11,6 +11,8 @@ CSS
 <link rel="stylesheet" href="/lib/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="/lib/adminlte/dist/css/adminlte.css">
 <link rel="stylesheet" href="/lib/custom/css/custom.css">
+<link rel="stylesheet" href="/lib/swiper/css/swiper.min.css">
+
 
 
 
@@ -31,6 +33,7 @@ Scripts
 
 <script src="/lib/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/lib/adminlte/dist/js/adminlte.min.js"></script>
+<script src="/lib/swiper/js/swiper.min.js"></script>
 
 <!-- 주소 검색 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
