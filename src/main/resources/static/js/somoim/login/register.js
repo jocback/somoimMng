@@ -21,7 +21,8 @@ var register = {
         console.log(param);
 
         common.ajax('/login/joinUser', param, function(res) {
-            // common.goPage('/login/loginForm');
+            alert('회원가입에 성공하였습니다.');
+            common.goPage('/login/loginForm');
         });
 
         // common.ajax("/login", param, function(res) {
