@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface LoginMapper {
 
+    // 아이디 중복체크
+    int getUserDuplicate(Map<String, Object> paramMap);
+
     // 회원등록
     int insertUserMng(Map<String, Object> paramMap);
 

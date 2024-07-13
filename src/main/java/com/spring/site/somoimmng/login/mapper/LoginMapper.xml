@@ -30,6 +30,15 @@
               );
     </insert>
 
+    <select id="getUserDuplicate" parameterType="paramMap" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            USER_MNG
+        WHERE
+            USER_ID = #{userId}
+    </select>
+
     <select id="getUserMng" parameterType="paramMap" resultType="camelMap">
         SELECT
             USER_SEQ

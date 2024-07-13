@@ -1,5 +1,7 @@
 package com.spring.site.somoimmng.login.service;
 
+import com.spring.global.common.exception.CustomException;
+import com.spring.global.common.exception.ErrorCode;
 import com.spring.site.somoimmng.login.mapper.LoginMapper;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,12 @@ public class LoginService {
      * @param  Map<String, Object>
      * @return int
      */
-    public int insertUserMng(Map<String, Object> paramMap) {
+    public int insertUserMng(Map<String, Object> paramMap) throws Exception {
+        if(loginMapper.getUserDuplicate(paramMap)>0) {
+//            throw new Exception("아이디 중복");
+            throw new CustomException(ErrorCode.INVALID_PASSWORD);
+        }
+
         return loginMapper.insertUserMng(paramMap);
     }
 

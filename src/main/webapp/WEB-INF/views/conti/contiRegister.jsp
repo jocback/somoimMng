@@ -78,7 +78,7 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>
-                                                    <div class="input-group input-group">
+                                                    <div class="input-group">
                                                         <input type="text" class="form-control" name="scoreNm" readonly/>
                                                         <span class="input-group-append">
                                                                 <button type="button" class="btn btn-info btn-flat" onclick="contiRegister.searchStore(this);">검색</button>

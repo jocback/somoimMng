@@ -57,7 +57,7 @@ var common = {
             },
             error: function(res) {
                 console.log(res);
-                alert(res.responseText);
+                alert(res.responseJSON.message);
             },
             complete: function () {
                 // $(".loadingDim").hide();
