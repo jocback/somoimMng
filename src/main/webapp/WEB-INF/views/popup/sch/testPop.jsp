@@ -16,7 +16,8 @@
                         <div class="col-sm-12">
                             <table class="table table-bordered table-hover dataTable dtr-inline text-nowrap">
                                 <tr>
-                                    <textarea class="col-9" rows="10" id="resultTxt"></textarea>
+                                    <th class="text-center col-3">Result</th>
+                                    <td class="col-9" id="resultTxt"></td>
                                 </tr>
                             </table>
                         </div>
@@ -24,7 +25,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="schDetailPopup.modify();">수정</button>
+                <button type="button" class="btn btn-primary" onclick="schDetailPopup.openerMessage();">보내기</button>
                 <button type="button" class="btn btn-secondary" onclick="schDetailPopup.close();">닫기</button>
                 <%--                    <button type="button" class="btn btn-primary">Save changes</button>--%>
             </div>

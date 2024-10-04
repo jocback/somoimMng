@@ -20,21 +20,21 @@ var schDetailPopup = {
 $(function() {
     schDetailPopup.init();
 
+    window.addEventListener('message', (event) => {
 
+        console.log("origin : " + event.origin);
+        console.log("data : " + JSON.stringify(event.data));
+
+        if (event && event.data) {
+            console.log("데이터" + event.data.summary);
+            $("#resultTxt").html(JSON.stringify(event));
+            // Hello from parent!
+        }
+
+        // event.source 는 window.opener(팝업을 연 부모)가 된다.
+        // event.data는 부모에서 보낸 데이터인 'Hello'가 된다.
+        //event.source.postMessage('World!', event.origin); // 메시지를 받으면 메시지를 보낸 쪽에 'World!' 데이터를 보낸다.
+    }, false);
 });
 
 
-window.addEventListener('message1', (event) => {
-
-    console.log("origin : " + event.origin);
-    console.log("data : " + JSON.stringify(event.data));
-
-    if (event && event.data && event.data.summary) {
-        console.log("데이터" + event.data.summary);
-        // Hello from parent!
-    }
-
-    // event.source 는 window.opener(팝업을 연 부모)가 된다.
-    // event.data는 부모에서 보낸 데이터인 'Hello'가 된다.
-    //event.source.postMessage('World!', event.origin); // 메시지를 받으면 메시지를 보낸 쪽에 'World!' 데이터를 보낸다.
-}, false);
