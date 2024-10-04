@@ -20,6 +20,10 @@ var schDetailPopup = {
 $(function() {
     schDetailPopup.init();
 
+    if (window.opener) {
+        window.opener.postMessage('Hello from child window!', 'https://192.168.21.92:8080');
+    }
+
     window.addEventListener('message', (event) => {
 
 
