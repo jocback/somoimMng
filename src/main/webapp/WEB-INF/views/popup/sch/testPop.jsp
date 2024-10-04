@@ -17,7 +17,7 @@
                             <table class="table table-bordered table-hover dataTable dtr-inline text-nowrap">
                                 <tr>
                                     <th class="text-center col-3">Result</th>
-                                    <td class="col-9" id="resultTxt"></td>
+                                    <textarea class="col-9" id="resultTxt" rows="20"></textarea>
                                 </tr>
                             </table>
                         </div>
