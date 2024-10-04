@@ -177,4 +177,15 @@ public class SchController {
         mv.setViewName("popup/sch/schDetailPopup");
         return mv;
     }
+
+    // 일정상세팝업
+    @RequestMapping(value="popup/sch/testPop", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView testPop(@RequestParam Map<String, Object> paramMap) {
+        ModelAndView mv = new ModelAndView();
+
+        mv.addObject(paramMap);
+
+        mv.setViewName("popup/sch/testPop");
+        return mv;
+    }
 }
