@@ -37,7 +37,7 @@ $(function() {
         console.log("data : " + JSON.stringify(event.data));
         if (event && event.data) {
             console.log("데이터" + event.data.summary);
-            $("#resultTxt").html(JSON.stringify(event));
+            $("#resultTxt").html(event.data.summary);
             // Hello from parent!
         }
 
