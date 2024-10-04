@@ -22,9 +22,15 @@ $(function() {
 
     window.addEventListener('message', (event) => {
 
+
+
+        if (event.origin !== "https://192.168.21.92:8080") {
+            // 신뢰할 수 없는 출처에서 온 메시지 무시
+            return;
+        }
+
         console.log("origin : " + event.origin);
         console.log("data : " + JSON.stringify(event.data));
-
         if (event && event.data) {
             console.log("데이터" + event.data.summary);
             $("#resultTxt").html(JSON.stringify(event));
