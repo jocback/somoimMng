@@ -1,5 +1,6 @@
 var workspace = {
     init: function() {
+        // $("#addModal").modal('show');
         workspace.selectSomoim();
     },
     bind: function() {
@@ -39,6 +40,7 @@ var workspace = {
     },
     // 소모임 추가 팝업
     lyrAddSomoim: function() {
+        $("#addModal").modal('show');
     },
     // 소모임 생성 팝업
     lyrCreateSomoim: function() {

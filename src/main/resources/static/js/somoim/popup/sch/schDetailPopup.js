@@ -21,7 +21,7 @@ var schDetailPopup = {
             $("#schCnt").text(schDetail.schCnt);
             // $("#schLoc").text(schDetail.schLoc);
 
-            $("#schSeq").val(res.schDetail.schSeq);
+            $("#schSeq").html(res.schDetail.schSeq);
 
             var memHtml = '';
 

@@ -57,3 +57,35 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="addModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">소모임 등록</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="smiNm" class="col-form-label">모임명:</label>
+                    <input type="text" class="form-control" id="srchSmiNm">
+                </div>
+                <div class="form-group">
+                    <label for="centArea" class="col-form-label">모임지역:</label>
+                    <input type="text" class="form-control" id="centArea1">
+                </div>
+                <div class="form-group">
+                    <label for="smiRmrk" class="col-form-label">모임소개:</label>
+                    <textarea class="form-control" id="smiRmrk1"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="workspace.createSomoim();">생성</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <%--                    <button type="button" class="btn btn-primary">Save changes</button>--%>
+            </div>
+        </div>
+    </div>
+</div>

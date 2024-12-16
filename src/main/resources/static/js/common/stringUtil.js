@@ -299,7 +299,62 @@ var stringUtil = {
 	// html 문자 그대로 출력
 	escapeHtml : function(str) {
 		return str.replace(/</gi, '&#60;').replace(/>/gi, '&#62;').replace(/\(/gi, '&#40;').replace(/\)/gi, '&#41;');
+	},
+
+	// string 나누기
+	sepStr : function(str, lineLen, sep) {
+		var strArr = str.split(' ');
+		var rsltArr = new Array();
+		var tempStr = '';
+		var strLen = 0;
+		$.each(strArr, function(i, v) {
+			var vLen = 0;
+			if(i==0) {
+				vLen = stringUtil.getTextLen(v);
+			} else {
+				vLen = stringUtil.getTextLen(v)+1;
+			}
+			if( strLen+vLen > lineLen) {		// 라인 길이 초과할 때
+				rsltArr.push(tempStr+'<br/>');
+				strLen = vLen;
+				tempStr = v;
+			} else {											// 라인 길이 초과 안할 때
+				if(i==0) {
+					tempStr = v;
+					strLen = vLen;
+				} else {
+					tempStr = tempStr+' '+v;
+					strLen = strLen+vLen+1;
+				}
+			}
+
+			debugger;
+			if(strArr.length-1 == i) {
+				rsltArr.push(tempStr+'<br/>');
+			}
+		});
+		console.log(rsltArr);
+
+
+		return '';
+	},
+
+	// 자릿수 계산
+	getTextLen(ls_str) {
+		let count = 0;
+		for (let i = 0; i < ls_str.length; i++) {
+			let char = ls_str.charAt(i);
+			if (/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(char)) {
+				count += 2;
+			}
+			if (/[a-zA-Z0-9~`!@#$%^&*()_+-=,.<>?;:'"{}[\]\s\\\/]/.test(char)) {
+				count += 1;
+			}
+		}
+		return count;
 	}
+
+
 
 
 }
