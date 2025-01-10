@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.site.somoimmng.michelin.mapper.MichelinMapper">
+
+    <!-- 미슐랭 삭제 -->
+    <delete id="deleteMichelin" >
+        delete
+        from michelin_mng
+    </delete>
+
+    <!-- 미슐랭 등록 -->
+    <insert id="insertMichelinList" parameterType="list">
+        INSERT
+        INTO
+            MICHELIN_MNG
+        (
+          MICHELIN_NM
+        , FCLTY_NM
+        , RDNMADR_NM
+        , AREA_NM
+        , CTPRVN_ENG_NM
+        , SIGNGU_ENGL_NM
+        , CTPRVN_JLANG_NM
+        , SIGNGU_JLANG_NM
+        , CTPRVN_SIMCH_CHNLNG_NM
+        , SIGNGU_SIMCH_CHNLNG_NM
+        , SIGNGU_TRACH_CHNLNG_NM
+        , CTPRVN_CD
+        , SIGNGU_CD
+        , FCLTY_LO
+        , FCLTY_LA
+        , HMPG_URL
+        , TEL_NO
+        , REPRSNT_MENU_NM
+        , FOOD_SPND_PRICE
+        , BASE_DE
+        )
+        VALUES
+            <foreach collection="list" item="item" separator=",">
+                (
+                REPLACE(#{item.michelinNm}, '"', ''),
+                REPLACE(#{item.fcltyNm}, '"', ''),
+                REPLACE(#{item.rdnmadrNm}, '"', ''),
+                REPLACE(#{item.areaNm}, '"', ''),
+                REPLACE(#{item.ctprvnEngNm}, '"', ''),
+                REPLACE(#{item.signguEnglNm}, '"', ''),
+                REPLACE(#{item.ctprvnJlangNm}, '"', ''),
+                REPLACE(#{item.signguJlangNm}, '"', ''),
+                REPLACE(#{item.ctprvnSimchChnlngNm}, '"', ''),
+                REPLACE(#{item.signguSimchChnlngNm}, '"', ''),
+                REPLACE(#{item.signguTrachChnlngNm}, '"', ''),
+                REPLACE(#{item.ctprvnCd}, '"', ''),
+                REPLACE(#{item.signguCd}, '"', ''),
+                REPLACE(#{item.fcltyLo}, '"', ''),
+                REPLACE(#{item.fcltyLa}, '"', ''),
+                REPLACE(#{item.hmpgUrl}, '"', ''),
+                REPLACE(#{item.telNo}, '"', ''),
+                REPLACE(#{item.reprsntMenuNm}, '"', ''),
+                REPLACE(#{item.foodSpndPrice}, '"', ''),
+                REPLACE(#{item.baseDe}, '"', '')
+                )
+            </foreach>
+    </insert>
+
+    <!-- 미슐랭 조회 -->
+    <select id="selectMichelinList" parameterType="paramMap" resultType="camelMap">
+        SELECT MICHELIN_SEQ
+             , MICHELIN_NM
+             , FCLTY_NM
+             , RDNMADR_NM
+             , AREA_NM
+             , CTPRVN_ENG_NM
+             , SIGNGU_ENGL_NM
+             , CTPRVN_JLANG_NM
+             , SIGNGU_JLANG_NM
+             , CTPRVN_SIMCH_CHNLNG_NM
+             , SIGNGU_SIMCH_CHNLNG_NM
+             , SIGNGU_TRACH_CHNLNG_NM
+             , CTPRVN_CD
+             , SIGNGU_CD
+             , FCLTY_LO
+             , FCLTY_LA
+             , HMPG_URL
+             , TEL_NO
+             , REPRSNT_MENU_NM
+             , FOOD_SPND_PRICE
+             , BASE_DE
+             , FRST_WRT_DTIM
+             , LAST_CHNG_DTIM
+        FROM MICHELIN_MNG mm
+    </select>
+
+    <!-- 미쉐린 목록 조회 -->
+    <select id="selectMapMichelinList" parameterType="paramMap" resultType="camelMap">
+        SELECT MICHELIN_SEQ
+             , MICHELIN_NM
+             , FCLTY_NM
+             , RDNMADR_NM
+             , AREA_NM
+             , CTPRVN_ENG_NM
+             , SIGNGU_ENGL_NM
+             , CTPRVN_JLANG_NM
+             , SIGNGU_JLANG_NM
+             , CTPRVN_SIMCH_CHNLNG_NM
+             , SIGNGU_SIMCH_CHNLNG_NM
+             , SIGNGU_TRACH_CHNLNG_NM
+             , CTPRVN_CD
+             , SIGNGU_CD
+             , FCLTY_LO
+             , FCLTY_LA
+             , HMPG_URL
+             , TEL_NO
+             , REPRSNT_MENU_NM
+             , FOOD_SPND_PRICE
+             , BASE_DE
+             , FRST_WRT_DTIM
+             , LAST_CHNG_DTIM
+          FROM MICHELIN_MNG mm
+         WHERE 1=1
+           AND FCLTY_LA BETWEEN #{bfLat} AND #{afLat}
+           AND FCLTY_LO BETWEEN #{bfLng} AND #{afLng}
+    </select>
+
+</mapper>

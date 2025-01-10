@@ -61,5 +61,52 @@ public class LandService {
         return resultMap;
     }
 
+    public static void main(String[] args) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Document doc;
+//        String url = (String) paramMap.get("url");
+        String url = "https://www.molit.go.kr/USR/WPGE0201/m_37180/DTL.jsp?page=1&searchCriteria=null";
+
+        try {
+            doc = Jsoup.connect(url).get();
+            Elements dtEl = doc.select("div table tbody tr");
+//            Elements ddEl = doc.select("div dl div dd");
+
+            for(int i=0; i<dtEl.size(); i++) {
+                System.out.println(dtEl.select("td").toString());
+//                String dtStr = String.valueOf(dtEl.eq(i)).replaceAll("<[^>]*>","").replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+//                String ddStr = String.valueOf(ddEl.eq(i)).replaceAll("<[^>]*>","").replaceAll("(\r\n|\r|\n|\n\r)", " ").replaceAll(" ","");
+
+//                if(dtStr.contains("보증금/월세")) {
+//                    resultMap.put("deposit", ddStr);
+//                } if(dtStr.contains("관리비")) {
+//                    resultMap.put("admnCost", ddStr);
+//                } if(dtStr.contains("공급면적")) {
+//                    resultMap.put("supplyArea", ddStr);
+//                } if(dtStr.contains("전용면적")) {
+//                    resultMap.put("exclArea", ddStr);
+//                } if(dtStr.contains("층")) {
+//                    resultMap.put("floor", ddStr);
+//                } if(dtStr.contains("향")) {
+//                    resultMap.put("facing", ddStr);
+//                } if(dtStr.contains("방/욕실")) {
+//                    resultMap.put("room", ddStr);
+//                } if(dtStr.contains("복층여부")) {
+//                    resultMap.put("duplex", ddStr);
+//                } if(dtStr.contains("입주가능일")) {
+//                    resultMap.put("moveInDate", ddStr);
+//                } if(dtStr.contains("매물번호")) {
+//                    resultMap.put("saleNumber", ddStr);
+//                } if(dtStr.contains("매물소개")) {
+//                    resultMap.put("saleIntroduce", ddStr);
+//                }
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+//        return resultMap;
+    }
+
 
 }

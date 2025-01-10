@@ -39,6 +39,9 @@ sourceSets {
                         ,"**/*.woff"
                         ,"**/*.woff2"
                         ,"**/*.ttf"
+                        ,"**/*.json"
+                        ,"**/*.mp4"
+                        ,"**/*.html"
             ]
         }
     }

@@ -131,6 +131,22 @@ Sidebar start
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>미쉐린<i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/michelin/michelinList" class="nav-link"><i class="far fa-circle nav-icon"></i><p>목록</p></a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/michelin/michelinMap" class="nav-link"><i class="far fa-circle nav-icon"></i><p>지도</p></a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
